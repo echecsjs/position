@@ -1,6 +1,8 @@
 {
   "author": "Adrian de la Rosa <adrian@delarosab.me>",
-  "bugs": { "url": "https://github.com/mormubis/position/issues" },
+  "bugs": {
+    "url": "https://github.com/mormubis/position/issues"
+  },
   "description": "Chess position type and board utilities. Foundation for @echecs/fen, @echecs/san, and @echecs/game.",
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -20,7 +22,9 @@
     "typescript-eslint": "^8.57.0",
     "vitest": "^4.1.0"
   },
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -31,13 +35,28 @@
       "types": "./dist/internal/index.d.ts"
     }
   },
-  "files": ["/dist/", "LICENSE", "README.md", "CHANGELOG.md"],
+  "files": [
+    "/dist/",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md"
+  ],
   "homepage": "https://github.com/mormubis/position#readme",
-  "keywords": ["board", "chess", "fen", "no-dependencies", "position", "typescript"],
+  "keywords": [
+    "board",
+    "chess",
+    "fen",
+    "no-dependencies",
+    "position",
+    "typescript"
+  ],
   "license": "MIT",
   "main": "dist/index.js",
   "name": "@echecs/position",
-  "repository": { "type": "git", "url": "https://github.com/mormubis/position.git" },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mormubis/position.git"
+  },
   "scripts": {
     "build": "tsc --project tsconfig.build.json",
     "docs": "typedoc",

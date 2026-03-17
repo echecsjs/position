@@ -21,8 +21,8 @@ describe('indexToSquare', () => {
     expect(indexToSquare(68)).toBe('e4');
   });
   it('round-trips all valid squares', () => {
-    for (const file of ['a','b','c','d','e','f','g','h']) {
-      for (const rank of ['1','2','3','4','5','6','7','8']) {
+    for (const file of ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']) {
+      for (const rank of ['1', '2', '3', '4', '5', '6', '7', '8']) {
         const sq = `${file}${rank}` as Square;
         expect(indexToSquare(squareToIndex(sq))).toBe(sq);
       }

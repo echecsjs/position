@@ -43,7 +43,9 @@ Do NOT use `./internal` in application code — it is an implementation detail.
 
 ## 0x88 Representation
 
-Index formula: `index = (8 - rank) * 16 + file` where file: a=0..h=7, rank: 1-based.
+Index formula: `index = (8 - rank) * 16 + file` where file: a=0..h=7, rank:
+1-based.
+
 - a8=0, b8=1, …, h8=7, a7=16, …, a1=112, h1=119
 - Off-board check: `index & 0x88 !== 0` (one bitwise AND)
 - Array size: 128 (64 valid squares + 64 off-board padding)
