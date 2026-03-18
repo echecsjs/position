@@ -13,6 +13,14 @@ interface CastlingRights {
   wQ: boolean;
 }
 
+interface PositionOptions {
+  castlingRights?: CastlingRights;
+  enPassantSquare?: Square;
+  fullmoveNumber?: number;
+  halfmoveClock?: number;
+  turn?: Color;
+}
+
 interface Move {
   from: Square;
   promotion: PromotionPieceType | undefined;
@@ -31,6 +39,7 @@ export type {
   Move,
   Piece,
   PieceType,
+  PositionOptions,
   PromotionPieceType,
   Rank,
   Square,

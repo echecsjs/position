@@ -14,15 +14,14 @@ import {
 import { squareColor } from './squares.js';
 import { startingBoard } from './starting-board.js';
 
-import type { CastlingRights, Color, File, Piece, Square } from './types.js';
-
-interface PositionOptions {
-  castlingRights?: CastlingRights;
-  enPassantSquare?: Square;
-  fullmoveNumber?: number;
-  halfmoveClock?: number;
-  turn?: Color;
-}
+import type {
+  CastlingRights,
+  Color,
+  File,
+  Piece,
+  PositionOptions,
+  Square,
+} from './types.js';
 
 const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   Pick<PositionOptions, 'enPassantSquare'> = {
@@ -68,6 +67,14 @@ export class Position {
     return this.#halfmoveClock;
   }
 
+  /**
+   * A Zobrist hash of the position as a 16-character hex string.
+   * Computed once and cached. Two positions with the same hash are
+   * considered identical (with negligible collision probability).
+   *
+   * @remarks The hash algorithm and format are not stable across major
+   * versions. Do not persist hashes across version upgrades.
+   */
   get hash(): string {
     if (this.#hash !== undefined) {
       return this.#hash;
@@ -122,7 +129,9 @@ export class Position {
     const allBishops = nonKingEntries.every(([, p]) => p.type === 'b');
     if (allBishops) {
       const first = nonKingEntries[0];
-      if (first === undefined) {return true;}
+      if (first === undefined) {
+        return true;
+      }
       const firstSquareColor = squareColor(first[0]);
       return nonKingEntries.every(
         ([sq]) => squareColor(sq) === firstSquareColor,

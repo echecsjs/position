@@ -5,6 +5,7 @@ export type {
   Move,
   Piece,
   PieceType,
+  PositionOptions,
   PromotionPieceType,
   Rank,
   Square,
