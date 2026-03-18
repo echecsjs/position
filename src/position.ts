@@ -62,6 +62,23 @@ export class Position {
     return this.#halfmoveClock;
   }
 
+  get isInsufficientMaterial(): boolean {
+    const nonKing: Piece[] = [];
+    for (const p of this.#board.values()) {
+      if (p.type !== 'k') nonKing.push(p);
+    }
+
+    // K vs K
+    if (nonKing.length === 0) return true;
+
+    // K vs KB or K vs KN
+    if (nonKing.length === 1) {
+      return nonKing[0]!.type === 'b' || nonKing[0]!.type === 'n';
+    }
+
+    return false;
+  }
+
   get isValid(): boolean {
     let blackKings = 0;
     let whiteKings = 0;

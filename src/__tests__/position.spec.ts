@@ -155,6 +155,47 @@ describe('attackers', () => {
   });
 });
 
+describe('isInsufficientMaterial', () => {
+  it('returns false for starting position', () => {
+    expect(new Position().isInsufficientMaterial).toBe(false);
+  });
+
+  it('returns true for K vs K', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+    ]);
+    expect(new Position(board).isInsufficientMaterial).toBe(true);
+  });
+
+  it('returns true for K vs KB', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['c1', { color: 'w', type: 'b' }],
+    ]);
+    expect(new Position(board).isInsufficientMaterial).toBe(true);
+  });
+
+  it('returns true for K vs KN', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['c1', { color: 'b', type: 'n' }],
+    ]);
+    expect(new Position(board).isInsufficientMaterial).toBe(true);
+  });
+
+  it('returns false for K vs KR', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['a1', { color: 'w', type: 'r' }],
+    ]);
+    expect(new Position(board).isInsufficientMaterial).toBe(false);
+  });
+});
+
 describe('isValid', () => {
   it('returns true for starting position', () => {
     expect(new Position().isValid).toBe(true);
