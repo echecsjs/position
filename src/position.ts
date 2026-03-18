@@ -1,15 +1,19 @@
 import { startingBoard } from './constants.js';
 import {
   ATTACKS,
+  CASTLING_TABLE,
   DIFF_OFFSET,
+  EP_TABLE,
   OFF_BOARD,
   PIECE_MASKS,
+  PIECE_TABLE,
   RAYS,
+  TURN_TABLE,
   boardFromMap,
   squareToIndex,
 } from './internal/index.js';
 
-import type { CastlingRights, Color, Piece, Square } from './types.js';
+import type { CastlingRights, Color, File, Piece, Square } from './types.js';
 
 interface PositionOptions {
   castlingRights?: CastlingRights;
@@ -34,6 +38,7 @@ export class Position {
   readonly #enPassantSquare: Square | undefined;
   readonly #fullmoveNumber: number;
   readonly #halfmoveClock: number;
+  #hash: string | undefined;
   readonly #turn: Color;
 
   constructor(board?: Map<Square, Piece>, options?: PositionOptions) {
@@ -62,14 +67,45 @@ export class Position {
     return this.#halfmoveClock;
   }
 
+  get hash(): string {
+    if (this.#hash !== undefined) {return this.#hash;}
+
+    let h = 0n;
+
+    for (const [sq, p] of this.#board) {
+      h ^= PIECE_TABLE[sq]?.[p.type]?.[p.color] ?? 0n;
+    }
+
+    h ^= TURN_TABLE[this.#turn];
+
+    for (const [right, active] of Object.entries(this.#castlingRights) as [
+      string,
+      boolean,
+    ][]) {
+      if (active) {h ^= CASTLING_TABLE[right] ?? 0n;}
+    }
+
+    if (this.#enPassantSquare !== undefined) {
+      const file = this.#enPassantSquare[0] as File;
+      h ^= EP_TABLE[file];
+    }
+
+    this.#hash = h.toString(16).padStart(16, '0');
+    return this.#hash;
+  }
+
   get isInsufficientMaterial(): boolean {
     const nonKing: Piece[] = [];
     for (const p of this.#board.values()) {
-      if (p.type !== 'k') nonKing.push(p);
+      if (p.type !== 'k') {
+        nonKing.push(p);
+      }
     }
 
     // K vs K
-    if (nonKing.length === 0) return true;
+    if (nonKing.length === 0) {
+      return true;
+    }
 
     // K vs KB or K vs KN
     if (nonKing.length === 1) {
@@ -85,8 +121,11 @@ export class Position {
 
     for (const [square, p] of this.#board) {
       if (p.type === 'k') {
-        if (p.color === 'b') blackKings++;
-        else whiteKings++;
+        if (p.color === 'b') {
+          blackKings++;
+        } else {
+          whiteKings++;
+        }
       }
 
       // No pawns on rank 1 or 8
@@ -95,13 +134,19 @@ export class Position {
       }
     }
 
-    if (blackKings !== 1 || whiteKings !== 1) return false;
+    if (blackKings !== 1 || whiteKings !== 1) {
+      return false;
+    }
 
     // Side not to move must not be in check
     const opponent: Color = this.#turn === 'w' ? 'b' : 'w';
     for (const [square, p] of this.#board) {
-      if (p.type === 'k' && p.color === opponent) {
-        if (this.isAttacked(square, this.#turn)) return false;
+      if (
+        p.type === 'k' &&
+        p.color === opponent &&
+        this.isAttacked(square, this.#turn)
+      ) {
+        return false;
       }
     }
 

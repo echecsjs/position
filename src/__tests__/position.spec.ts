@@ -265,3 +265,33 @@ describe('isCheck', () => {
     expect(pos.isCheck).toBe(false);
   });
 });
+
+describe('hash', () => {
+  it('returns a string', () => {
+    expect(typeof new Position().hash).toBe('string');
+  });
+
+  it('returns the same hash for the same position', () => {
+    expect(new Position().hash).toBe(new Position().hash);
+  });
+
+  it('returns different hashes for different positions', () => {
+    const pos1 = new Position();
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+    ]);
+    const pos2 = new Position(board);
+    expect(pos1.hash).not.toBe(pos2.hash);
+  });
+
+  it('returns different hashes for different turns', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+    ]);
+    const posW = new Position(board, { turn: 'w' });
+    const posB = new Position(board, { turn: 'b' });
+    expect(posW.hash).not.toBe(posB.hash);
+  });
+});
