@@ -57,6 +57,20 @@ export class Position {
     return this.#turn;
   }
 
+  findPiece(piece: Piece): Square[] {
+    const result: Square[] = [];
+    for (const [sq, p] of this.#board) {
+      if (p.color === piece.color && p.type === piece.type) {
+        result.push(sq);
+      }
+    }
+    return result;
+  }
+
+  piece(square: Square): Piece | undefined {
+    return this.#board.get(square);
+  }
+
   pieces(color?: Color): Map<Square, Piece> {
     if (color === undefined) {
       return new Map(this.#board);
