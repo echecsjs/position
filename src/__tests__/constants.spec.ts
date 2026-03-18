@@ -1,21 +1,29 @@
 import { describe, expect, it } from 'vitest';
 
-import { COLORS, EMPTY_BOARD, FILES, PIECE_TYPES, RANKS, SQUARES, STARTING_POSITION  } from '../constants.js';
+import {
+  COLORS,
+  EMPTY_BOARD,
+  FILES,
+  PIECE_TYPES,
+  RANKS,
+  SQUARES,
+  STARTING_POSITION,
+} from '../constants.js';
 
 describe('STARTING_POSITION', () => {
   it('has 32 pieces', () => {
-    expect(STARTING_POSITION.board.size).toBe(32);
+    expect(STARTING_POSITION.pieces().size).toBe(32);
   });
 
   it('has white king on e1', () => {
-    expect(STARTING_POSITION.board.get('e1')).toEqual({
+    expect(STARTING_POSITION.piece('e1')).toEqual({
       color: 'w',
       type: 'k',
     });
   });
 
   it('has black king on e8', () => {
-    expect(STARTING_POSITION.board.get('e8')).toEqual({
+    expect(STARTING_POSITION.piece('e8')).toEqual({
       color: 'b',
       type: 'k',
     });

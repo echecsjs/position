@@ -24,15 +24,6 @@ interface Piece {
   type: PieceType;
 }
 
-interface Position {
-  board: Map<Square, Piece>;
-  castlingRights: CastlingRights;
-  enPassantSquare: Square | undefined;
-  fullmoveNumber: number;
-  halfmoveClock: number;
-  turn: Color;
-}
-
 export type {
   CastlingRights,
   Color,
@@ -40,7 +31,6 @@ export type {
   Move,
   Piece,
   PieceType,
-  Position,
   PromotionPieceType,
   Rank,
   Square,

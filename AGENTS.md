@@ -64,6 +64,15 @@ pnpm lint && pnpm test && pnpm build   # full pre-PR check
 
 ---
 
+## Validation
+
+Input validation is mostly provided by TypeScript's strict type system at compile
+time. There is no runtime validation library — the type signatures enforce
+correct usage. Do not add runtime type-checking guards (e.g. `typeof` checks,
+assertion functions) unless there is an explicit trust boundary.
+
+---
+
 ## Architecture Notes
 
 - All interface fields sorted alphabetically (sort-keys ESLint error).

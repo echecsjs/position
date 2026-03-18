@@ -1,4 +1,3 @@
-import { startingBoard } from './constants.js';
 import {
   ATTACKS,
   CASTLING_TABLE,
@@ -12,6 +11,7 @@ import {
   boardFromMap,
   squareToIndex,
 } from './internal/index.js';
+import { startingBoard } from './starting-board.js';
 
 import type { CastlingRights, Color, File, Piece, Square } from './types.js';
 
@@ -68,7 +68,9 @@ export class Position {
   }
 
   get hash(): string {
-    if (this.#hash !== undefined) {return this.#hash;}
+    if (this.#hash !== undefined) {
+      return this.#hash;
+    }
 
     let h = 0n;
 
@@ -82,7 +84,9 @@ export class Position {
       string,
       boolean,
     ][]) {
-      if (active) {h ^= CASTLING_TABLE[right] ?? 0n;}
+      if (active) {
+        h ^= CASTLING_TABLE[right] ?? 0n;
+      }
     }
 
     if (this.#enPassantSquare !== undefined) {

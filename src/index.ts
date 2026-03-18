@@ -5,7 +5,6 @@ export type {
   Move,
   Piece,
   PieceType,
-  Position,
   PromotionPieceType,
   Rank,
   Square,
@@ -22,6 +21,6 @@ export {
   STARTING_POSITION,
 } from './constants.js';
 
-export { isAttacked, isCheck, piece, pieces } from './queries.js';
+export { Position } from './position.js';
 
 export { squareColor, squareFile, squareRank } from './squares.js';
