@@ -106,3 +106,51 @@ describe('findPiece', () => {
     expect(pos.findPiece({ color: 'w', type: 'q' })).toEqual([]);
   });
 });
+
+describe('isAttacked', () => {
+  it('returns true when a white pawn attacks the square diagonally', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['d3', { color: 'w', type: 'p' }],
+    ]);
+    const pos = new Position(board);
+    expect(pos.isAttacked('e4', 'w')).toBe(true);
+  });
+
+  it('returns false when no piece attacks the square', () => {
+    const board = new Map<Square, Piece>([['e1', { color: 'w', type: 'k' }]]);
+    const pos = new Position(board);
+    expect(pos.isAttacked('e4', 'b')).toBe(false);
+  });
+
+  it('returns true when a knight attacks the square', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['f6', { color: 'b', type: 'n' }],
+    ]);
+    const pos = new Position(board);
+    expect(pos.isAttacked('e4', 'b')).toBe(true);
+    expect(pos.isAttacked('g4', 'b')).toBe(true);
+    expect(pos.isAttacked('a1', 'b')).toBe(false);
+  });
+});
+
+describe('attackers', () => {
+  it('returns squares of pieces attacking the target', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['f6', { color: 'b', type: 'n' }],
+      ['f5', { color: 'b', type: 'b' }],
+    ]);
+    const pos = new Position(board);
+    const atk = pos.attackers('e4', 'b');
+    expect(atk).toContain('f6');
+    expect(atk).toContain('f5');
+  });
+
+  it('returns empty array when no attackers', () => {
+    const board = new Map<Square, Piece>([['e1', { color: 'w', type: 'k' }]]);
+    const pos = new Position(board);
+    expect(pos.attackers('e4', 'b')).toEqual([]);
+  });
+});

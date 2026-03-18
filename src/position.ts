@@ -1,4 +1,13 @@
 import { startingBoard } from './constants.js';
+import {
+  ATTACKS,
+  DIFF_OFFSET,
+  OFF_BOARD,
+  PIECE_MASKS,
+  RAYS,
+  boardFromMap,
+  squareToIndex,
+} from './internal/index.js';
 
 import type { CastlingRights, Color, Piece, Square } from './types.js';
 
@@ -57,6 +66,78 @@ export class Position {
     return this.#turn;
   }
 
+  #isAttackedByPiece(
+    board: (Piece | undefined)[],
+    targetIndex: number,
+    fromIndex: number,
+    p: Piece,
+    by: Color,
+  ): boolean {
+    const diff = targetIndex - fromIndex;
+    const tableIndex = diff + DIFF_OFFSET;
+
+    if (tableIndex < 0 || tableIndex >= 240) {
+      return false;
+    }
+
+    const attackMask = ATTACKS[tableIndex] ?? 0;
+    const pieceMask = PIECE_MASKS[p.type] ?? 0;
+
+    if ((attackMask & pieceMask) === 0) {
+      return false;
+    }
+
+    if (p.type === 'p') {
+      if (by === 'w' && diff > 0) {
+        return false;
+      }
+
+      if (by === 'b' && diff < 0) {
+        return false;
+      }
+    }
+
+    const ray = RAYS[tableIndex] ?? 0;
+
+    if (ray === 0) {
+      return true;
+    }
+
+    let index = fromIndex + ray;
+    while (index !== targetIndex) {
+      if ((index & OFF_BOARD) !== 0) {
+        return false;
+      }
+
+      if (board[index] !== undefined) {
+        return false;
+      }
+
+      index += ray;
+    }
+
+    return true;
+  }
+
+  attackers(square: Square, by: Color): Square[] {
+    const board = boardFromMap(this.#board);
+    const targetIndex = squareToIndex(square);
+    const result: Square[] = [];
+
+    for (const [sq, p] of this.#board) {
+      if (p.color !== by) {
+        continue;
+      }
+
+      const fromIndex = squareToIndex(sq);
+      if (this.#isAttackedByPiece(board, targetIndex, fromIndex, p, by)) {
+        result.push(sq);
+      }
+    }
+
+    return result;
+  }
+
   findPiece(piece: Piece): Square[] {
     const result: Square[] = [];
     for (const [sq, p] of this.#board) {
@@ -65,6 +146,24 @@ export class Position {
       }
     }
     return result;
+  }
+
+  isAttacked(square: Square, by: Color): boolean {
+    const board = boardFromMap(this.#board);
+    const targetIndex = squareToIndex(square);
+
+    for (const [sq, p] of this.#board) {
+      if (p.color !== by) {
+        continue;
+      }
+
+      const fromIndex = squareToIndex(sq);
+      if (this.#isAttackedByPiece(board, targetIndex, fromIndex, p, by)) {
+        return true;
+      }
+    }
+
+    return false;
   }
 
   piece(square: Square): Piece | undefined {
