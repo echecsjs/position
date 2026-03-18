@@ -12,7 +12,15 @@ export type {
   SquareColor,
 } from './types.js';
 
-export { EMPTY_BOARD, STARTING_POSITION } from './constants.js';
+export {
+  COLORS,
+  EMPTY_BOARD,
+  FILES,
+  PIECE_TYPES,
+  RANKS,
+  SQUARES,
+  STARTING_POSITION,
+} from './constants.js';
 
 export { isAttacked, isCheck, piece, pieces } from './queries.js';
 

@@ -1,13 +1,30 @@
-import type { CastlingRights, Piece, Position, Square } from './types.js';
+import type {
+  CastlingRights,
+  Color,
+  File,
+  Piece,
+  PieceType,
+  Position,
+  Rank,
+  Square,
+} from './types.js';
+
+export const COLORS: Color[] = ['b', 'w'];
+export const FILES: File[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
+export const RANKS: Rank[] = ['1', '2', '3', '4', '5', '6', '7', '8'];
+export const PIECE_TYPES: PieceType[] = ['b', 'k', 'n', 'p', 'q', 'r'];
+export const SQUARES: Square[] = FILES.flatMap((f) =>
+  RANKS.toReversed().map((r) => `${f}${r}` as Square),
+);
 
 export const EMPTY_BOARD = new Map<Square, Piece>();
 
 const BACK_RANK_TYPES = ['r', 'n', 'b', 'q', 'k', 'b', 'n', 'r'] as const;
-const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] as const;
+const BACK_RANK_FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] as const;
 
 const startingBoard = new Map<Square, Piece>();
 for (const [index, type] of BACK_RANK_TYPES.entries()) {
-  const file = FILES[index];
+  const file = BACK_RANK_FILES[index];
   if (file === undefined) {
     continue;
   }
