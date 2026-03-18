@@ -27,6 +27,7 @@ export default typescript.config(
       'eqeqeq': 'error',
       'import-x/exports-last': 'error',
       'import-x/first': 'error',
+      'import-x/group-exports': 'error',
       'import-x/newline-after-import': 'error',
       'import-x/no-duplicates': 'error',
       'import-x/order': [

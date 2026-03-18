@@ -22,7 +22,7 @@ const SQUARES_Z: Square[] = FILES_Z.flatMap((f) =>
 );
 
 // Piece table: PIECE_TABLE[square][pieceType][color]
-const PIECE_TABLE_OBJ: Record<
+const PIECE_TABLE: Record<
   Square,
   Partial<Record<PieceType, Record<Color, bigint>>>
 > = Object.fromEntries(
@@ -37,23 +37,20 @@ const PIECE_TABLE_OBJ: Record<
   ]),
 ) as Record<Square, Partial<Record<PieceType, Record<Color, bigint>>>>;
 
-const TURN_TABLE_OBJ: Record<Color, bigint> = {
+const TURN_TABLE: Record<Color, bigint> = {
   b: next(),
   w: next(),
 };
 
-const CASTLING_TABLE_OBJ: Record<string, bigint> = {
+const CASTLING_TABLE: Record<string, bigint> = {
   bK: next(),
   bQ: next(),
   wK: next(),
   wQ: next(),
 };
 
-const EP_TABLE_OBJ: Record<File, bigint> = Object.fromEntries(
+const EP_TABLE: Record<File, bigint> = Object.fromEntries(
   FILES_Z.map((f) => [f, next()]),
 ) as Record<File, bigint>;
 
-export { CASTLING_TABLE_OBJ as CASTLING_TABLE };
-export { EP_TABLE_OBJ as EP_TABLE };
-export { PIECE_TABLE_OBJ as PIECE_TABLE };
-export { TURN_TABLE_OBJ as TURN_TABLE };
+export { CASTLING_TABLE, EP_TABLE, PIECE_TABLE, TURN_TABLE };
