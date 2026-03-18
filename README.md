@@ -64,17 +64,17 @@ The no-argument form creates the standard chess starting position. Pass a custom
 
 ### Getters
 
-| Getter                   | Type                  | Description                                      |
-| ------------------------ | --------------------- | ------------------------------------------------ |
-| `castlingRights`         | `CastlingRights`      | Which castling moves remain available            |
-| `enPassantSquare`        | `Square \| undefined` | En passant target square, if any                 |
-| `fullmoveNumber`         | `number`              | Fullmove counter (increments after Black's move) |
-| `halfmoveClock`          | `number`              | Halfmove clock for the fifty-move rule           |
-| `hash`                   | `string`              | Zobrist hash string for position identity        |
-| `isCheck`                | `boolean`             | Whether the side to move is in check             |
-| `isInsufficientMaterial` | `boolean`             | Whether neither side has mating material         |
-| `isValid`                | `boolean`             | Whether the position is legally reachable        |
-| `turn`                   | `Color`               | Side to move (`'w'` or `'b'`)                    |
+| Getter                   | Type                  | Description                                                                                                                      |
+| ------------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `castlingRights`         | `CastlingRights`      | Which castling moves remain available                                                                                            |
+| `enPassantSquare`        | `Square \| undefined` | En passant target square, if any                                                                                                 |
+| `fullmoveNumber`         | `number`              | Fullmove counter (increments after Black's move)                                                                                 |
+| `halfmoveClock`          | `number`              | Halfmove clock for the fifty-move rule                                                                                           |
+| `hash`                   | `string`              | Zobrist hash string for position identity                                                                                        |
+| `isCheck`                | `boolean`             | Whether the side to move is in check                                                                                             |
+| `isInsufficientMaterial` | `boolean`             | Whether the position is a FIDE draw by insufficient material (K vs K, K+B vs K, K+N vs K, or K+B vs K+B with same-color bishops) |
+| `isValid`                | `boolean`             | Whether the position is legally reachable                                                                                        |
+| `turn`                   | `Color`               | Side to move (`'w'` or `'b'`)                                                                                                    |
 
 ### Methods
 
@@ -124,12 +124,35 @@ pos.pieces('w'); // 16 white pieces
 
 ```typescript
 import {
-  COLORS, // ['w', 'b']
+  COLORS, // ['b', 'w']
   FILES, // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
   RANKS, // ['1', '2', '3', '4', '5', '6', '7', '8']
-  PIECE_TYPES, // ['p', 'n', 'b', 'r', 'q', 'k']
-  SQUARES, // all 64 square names, a1–h8
-  EMPTY_BOARD, // Map<Square, Piece> with no pieces
-  STARTING_POSITION, // Map<Square, Piece> for the standard starting position
+  PIECE_TYPES, // ['b', 'k', 'n', 'p', 'q', 'r']
+  SQUARES, // all 64 squares, a8–h1 (rank 8 to rank 1)
+  EMPTY_BOARD, // empty Map<Square, Piece>
+  STARTING_POSITION, // Position instance for the standard starting position
 } from '@echecs/position';
 ```
+
+### Types
+
+All types are exported for use in consuming code and companion packages.
+
+```typescript
+import type {
+  CastlingRights, // { bK: boolean; bQ: boolean; wK: boolean; wQ: boolean }
+  Color, // 'w' | 'b'
+  File, // 'a' | 'b' | ... | 'h'
+  Move, // { from: Square; to: Square; promotion: PromotionPieceType | undefined }
+  Piece, // { color: Color; type: PieceType }
+  PieceType, // 'b' | 'k' | 'n' | 'p' | 'q' | 'r'
+  PositionOptions, // options accepted by the Position constructor
+  PromotionPieceType, // 'b' | 'n' | 'q' | 'r'
+  Rank, // '1' | '2' | ... | '8'
+  Square, // 'a1' | 'a2' | ... | 'h8'
+  SquareColor, // 'light' | 'dark'
+} from '@echecs/position';
+```
+
+`Move` and `PromotionPieceType` are exported for use by companion packages
+(`@echecs/san`, `@echecs/game`) that build on this foundational type.
