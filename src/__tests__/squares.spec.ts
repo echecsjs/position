@@ -30,4 +30,17 @@ describe('squareColor', () => {
     expect(squareColor('b1')).toBe('l');
     expect(squareColor('h1')).toBe('l');
   });
+
+  // Ported from chess.js squareColor test suite (adapted: 'light'→'l', 'dark'→'d')
+  it('returns l for known light squares', () => {
+    expect(squareColor('a8')).toBe('l');
+    expect(squareColor('h1')).toBe('l');
+    expect(squareColor('e4')).toBe('l');
+  });
+
+  it('returns d for known dark squares', () => {
+    expect(squareColor('a1')).toBe('d');
+    expect(squareColor('h8')).toBe('d');
+    expect(squareColor('d4')).toBe('d');
+  });
 });

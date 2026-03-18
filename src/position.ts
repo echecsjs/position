@@ -11,6 +11,7 @@ import {
   boardFromMap,
   squareToIndex,
 } from './internal/index.js';
+import { squareColor } from './squares.js';
 import { startingBoard } from './starting-board.js';
 
 import type { CastlingRights, Color, File, Piece, Square } from './types.js';
@@ -99,22 +100,33 @@ export class Position {
   }
 
   get isInsufficientMaterial(): boolean {
-    const nonKing: Piece[] = [];
-    for (const p of this.#board.values()) {
+    const nonKingEntries: [Square, Piece][] = [];
+    for (const [sq, p] of this.#board) {
       if (p.type !== 'k') {
-        nonKing.push(p);
+        nonKingEntries.push([sq, p]);
       }
     }
 
     // K vs K
-    if (nonKing.length === 0) {
+    if (nonKingEntries.length === 0) {
       return true;
     }
 
     // K vs KB or K vs KN
-    if (nonKing.length === 1) {
-      const [sole] = nonKing;
+    if (nonKingEntries.length === 1) {
+      const sole = nonKingEntries[0]?.[1];
       return sole?.type === 'b' || sole?.type === 'n';
+    }
+
+    // KB vs KB (any number) — all non-king pieces must be bishops on the same square color
+    const allBishops = nonKingEntries.every(([, p]) => p.type === 'b');
+    if (allBishops) {
+      const first = nonKingEntries[0];
+      if (first === undefined) {return true;}
+      const firstSquareColor = squareColor(first[0]);
+      return nonKingEntries.every(
+        ([sq]) => squareColor(sq) === firstSquareColor,
+      );
     }
 
     return false;
