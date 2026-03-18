@@ -155,6 +155,51 @@ describe('attackers', () => {
   });
 });
 
+describe('isValid', () => {
+  it('returns true for starting position', () => {
+    expect(new Position().isValid).toBe(true);
+  });
+
+  it('returns false when white king is missing', () => {
+    const board = new Map<Square, Piece>([['e8', { color: 'b', type: 'k' }]]);
+    expect(new Position(board).isValid).toBe(false);
+  });
+
+  it('returns false when black king is missing', () => {
+    const board = new Map<Square, Piece>([['e1', { color: 'w', type: 'k' }]]);
+    expect(new Position(board).isValid).toBe(false);
+  });
+
+  it('returns false when a pawn is on rank 1', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['a1', { color: 'w', type: 'p' }],
+    ]);
+    expect(new Position(board).isValid).toBe(false);
+  });
+
+  it('returns false when a pawn is on rank 8', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['a8', { color: 'b', type: 'p' }],
+    ]);
+    expect(new Position(board).isValid).toBe(false);
+  });
+
+  it('returns false when the side not to move is in check', () => {
+    const board = new Map<Square, Piece>([
+      ['e1', { color: 'w', type: 'k' }],
+      ['e8', { color: 'b', type: 'k' }],
+      ['e2', { color: 'w', type: 'r' }],
+    ]);
+    // It is white's turn, but black king is in check from white rook — invalid
+    const pos = new Position(board, { turn: 'w' });
+    expect(pos.isValid).toBe(false);
+  });
+});
+
 describe('isCheck', () => {
   it('returns false for starting position', () => {
     expect(new Position().isCheck).toBe(false);

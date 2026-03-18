@@ -62,6 +62,35 @@ export class Position {
     return this.#halfmoveClock;
   }
 
+  get isValid(): boolean {
+    let blackKings = 0;
+    let whiteKings = 0;
+
+    for (const [square, p] of this.#board) {
+      if (p.type === 'k') {
+        if (p.color === 'b') blackKings++;
+        else whiteKings++;
+      }
+
+      // No pawns on rank 1 or 8
+      if (p.type === 'p' && (square[1] === '1' || square[1] === '8')) {
+        return false;
+      }
+    }
+
+    if (blackKings !== 1 || whiteKings !== 1) return false;
+
+    // Side not to move must not be in check
+    const opponent: Color = this.#turn === 'w' ? 'b' : 'w';
+    for (const [square, p] of this.#board) {
+      if (p.type === 'k' && p.color === opponent) {
+        if (this.isAttacked(square, this.#turn)) return false;
+      }
+    }
+
+    return true;
+  }
+
   get isCheck(): boolean {
     for (const [square, p] of this.#board) {
       if (p.type === 'k' && p.color === this.#turn) {
