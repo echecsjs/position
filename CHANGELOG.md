@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.0.1] - 2026-03-19
+
+### Changed
+
+- Extracted primitive constants (`COLORS`, `FILES`, `RANKS`, `PIECE_TYPES`,
+  `SQUARES`) into `src/primitives.ts` to eliminate duplication in
+  `src/internal/zobrist.ts`. No API or behavior change.
+
 ## [1.0.0] - 2026-03-19
 
 ### Added
