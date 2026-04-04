@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3] - 2026-04-04
+
+### Fixed
+
+- Added `@preventExpand` JSDoc tag to `Square` type alias so downstream TypeDoc
+  (0.28+) renders it as a reference instead of expanding the 64-member union.
+
 ## [1.0.2] - 2026-03-19
 
 ### Fixed
