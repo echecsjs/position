@@ -3,6 +3,7 @@ type File = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h';
 type PieceType = 'b' | 'k' | 'n' | 'p' | 'q' | 'r';
 type PromotionPieceType = 'b' | 'n' | 'q' | 'r';
 type Rank = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
+/** @preventExpand */
 type Square = `${File}${Rank}`;
 type SquareColor = 'dark' | 'light';
 

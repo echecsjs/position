@@ -4,8 +4,6 @@ Last updated: 2026-04-04
 
 ## Low
 
-- [ ] `Square` type expansion in TypeDoc — the template literal type
-      `` `${File}${Rank}` `` is eagerly resolved by TypeScript into a 64-member
-      union, making generated docs in downstream packages (e.g. `@echecs/game`)
-      hard to read. Needs a fix at the type definition (e.g. `@preventExpand`
-      tag or an opaque type alias).
+- [x] `Square` type expansion in TypeDoc — fixed with `@preventExpand` JSDoc tag
+      on the `Square` type alias. Downstream TypeDoc (0.28+) will now render
+      `Square` as a reference instead of expanding the 64-member union.
