@@ -26,17 +26,27 @@ import { Position, STARTING_POSITION } from '@echecs/position';
 // Starting position
 const pos = new Position();
 
-console.log(pos.turn); // 'w'
+console.log(pos.turn); // 'white'
 console.log(pos.fullmoveNumber); // 1
 console.log(pos.isCheck); // false
 
 // Query the board
-const piece = pos.piece('e1'); // { color: 'w', type: 'k' }
-const whites = pos.pieces('w'); // Map<Square, Piece> of all white pieces
+const piece = pos.piece('e1'); // { color: 'white', type: 'king' }
+const whites = pos.pieces('white'); // Map<Square, Piece> of all white pieces
 
 // Attack queries
-const attackers = pos.attackers('e5', 'b'); // squares of black pieces attacking e5
-const attacked = pos.isAttacked('f7', 'w'); // true if white attacks f7
+const attackers = pos.attackers('e5', 'black'); // squares of black pieces attacking e5
+const attacked = pos.isAttacked('f7', 'white'); // true if white attacks f7
+
+// Derive a new position
+const next = pos.derive({
+  changes: [
+    ['e2', undefined],
+    ['e4', { color: 'white', type: 'pawn' }],
+  ],
+  turn: 'black',
+  enPassantSquare: 'e3',
+});
 ```
 
 ## API
@@ -48,13 +58,7 @@ Full API reference is available at https://mormubis.github.io/position/
 ```ts
 new Position()
 new Position(board: Map<Square, Piece>)
-new Position(board: Map<Square, Piece>, options?: {
-  castlingRights?: CastlingRights
-  enPassantSquare?: Square
-  fullmoveNumber?: number
-  halfmoveClock?: number
-  turn?: Color
-})
+new Position(board: Map<Square, Piece>, options?: PositionOptions)
 ```
 
 The no-argument form creates the standard chess starting position. Pass a custom
@@ -62,17 +66,17 @@ The no-argument form creates the standard chess starting position. Pass a custom
 
 ### Getters
 
-| Getter                   | Type                  | Description                                                                                                                      |
-| ------------------------ | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `castlingRights`         | `CastlingRights`      | Which castling moves remain available                                                                                            |
-| `enPassantSquare`        | `Square \| undefined` | En passant target square, if any                                                                                                 |
-| `fullmoveNumber`         | `number`              | Fullmove counter (increments after Black's move)                                                                                 |
-| `halfmoveClock`          | `number`              | Halfmove clock for the fifty-move rule                                                                                           |
-| `hash`                   | `string`              | Zobrist hash string for position identity                                                                                        |
-| `isCheck`                | `boolean`             | Whether the side to move is in check                                                                                             |
-| `isInsufficientMaterial` | `boolean`             | Whether the position is a FIDE draw by insufficient material (K vs K, K+B vs K, K+N vs K, or K+B vs K+B with same-color bishops) |
-| `isValid`                | `boolean`             | Whether the position is legally reachable                                                                                        |
-| `turn`                   | `Color`               | Side to move (`'w'` or `'b'`)                                                                                                    |
+| Getter                   | Type                           | Description                                                     |
+| ------------------------ | ------------------------------ | --------------------------------------------------------------- |
+| `castlingRights`         | `CastlingRights`               | Which castling moves remain available                           |
+| `enPassantSquare`        | `EnPassantSquare \| undefined` | En passant target square (rank 3 or 6), if any                  |
+| `fullmoveNumber`         | `number`                       | Game turn counter — increments after each black move            |
+| `halfmoveClock`          | `number`                       | Half-moves since last pawn advance or capture (fifty-move rule) |
+| `hash`                   | `string`                       | Zobrist hash string for position identity                       |
+| `isCheck`                | `boolean`                      | Whether the side to move is in check                            |
+| `isInsufficientMaterial` | `boolean`                      | Whether the position is a FIDE draw by insufficient material    |
+| `isValid`                | `boolean`                      | Whether the position is legally reachable                       |
+| `turn`                   | `Color`                        | Side to move (`'white'` or `'black'`)                           |
 
 ### Methods
 
@@ -81,7 +85,7 @@ The no-argument form creates the standard chess starting position. Pass a custom
 Returns all squares occupied by pieces of `color` that attack `square`.
 
 ```typescript
-pos.attackers('e5', 'b'); // e.g. ['d7', 'f6']
+pos.attackers('e5', 'black'); // e.g. ['d7', 'f6']
 ```
 
 #### `derive(changes?): Position`
@@ -109,7 +113,7 @@ const clone = pos.derive();
 Returns `true` if any piece of `color` attacks `square`.
 
 ```typescript
-pos.isAttacked('f3', 'w'); // true if white attacks f3
+pos.isAttacked('f3', 'white'); // true if white attacks f3
 ```
 
 #### `piece(square): Piece | undefined`
@@ -117,7 +121,7 @@ pos.isAttacked('f3', 'w'); // true if white attacks f3
 Returns the piece on `square`, or `undefined` if the square is empty.
 
 ```typescript
-pos.piece('e1'); // { color: 'w', type: 'k' }
+pos.piece('e1'); // { color: 'white', type: 'king' }
 pos.piece('e5'); // undefined (empty in starting position)
 ```
 
@@ -127,22 +131,17 @@ Returns a map of all pieces, optionally filtered by `color`.
 
 ```typescript
 pos.pieces(); // all 32 pieces in starting position
-pos.pieces('w'); // 16 white pieces
+pos.pieces('white'); // 16 white pieces
 ```
 
 ### Constants
 
 ```typescript
-import {
-  COLORS, // ['b', 'w']
-  FILES, // ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h']
-  RANKS, // ['1', '2', '3', '4', '5', '6', '7', '8']
-  PIECE_TYPES, // ['b', 'k', 'n', 'p', 'q', 'r']
-  SQUARES, // all 64 squares, a8–h1 (rank 8 to rank 1)
-  EMPTY_BOARD, // empty Map<Square, Piece>
-  STARTING_POSITION, // Position instance for the standard starting position
-} from '@echecs/position';
+import { STARTING_POSITION } from '@echecs/position';
 ```
+
+`STARTING_POSITION` is a `Position` instance for the standard chess starting
+position. Equivalent to `new Position()`.
 
 ### Types
 
@@ -150,20 +149,17 @@ All types are exported for use in consuming code and companion packages.
 
 ```typescript
 import type {
-  CastlingRights, // { bK: boolean; bQ: boolean; wK: boolean; wQ: boolean }
-  Color, // 'w' | 'b'
+  CastlingRights, // { black: SideCastlingRights; white: SideCastlingRights }
+  Color, // 'black' | 'white'
   DeriveOptions, // options accepted by Position.derive()
+  EnPassantSquare, // en passant target square (rank 3 or 6 only)
   File, // 'a' | 'b' | ... | 'h'
-  Move, // { from: Square; to: Square; promotion: PromotionPieceType | undefined }
   Piece, // { color: Color; type: PieceType }
-  PieceType, // 'b' | 'k' | 'n' | 'p' | 'q' | 'r'
+  PieceType, // 'bishop' | 'king' | 'knight' | 'pawn' | 'queen' | 'rook'
   PositionOptions, // options accepted by the Position constructor
-  PromotionPieceType, // 'b' | 'n' | 'q' | 'r'
   Rank, // '1' | '2' | ... | '8'
+  SideCastlingRights, // { king: boolean; queen: boolean }
   Square, // 'a1' | 'a2' | ... | 'h8'
-  SquareColor, // 'light' | 'dark'
+  SquareColor, // 'dark' | 'light'
 } from '@echecs/position';
 ```
-
-`Move` and `PromotionPieceType` are exported for use by companion packages
-(`@echecs/san`, `@echecs/game`) that build on this foundational type.

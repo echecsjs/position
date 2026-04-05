@@ -146,7 +146,7 @@
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
           </h2>
-          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Position</span><span class="hl-1">, </span><span class="hl-4">STARTING_POSITION</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Starting position</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">pos</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">();</span><br/><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">turn</span><span class="hl-1">); </span><span class="hl-5">// &#39;w&#39;</span><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">fullmoveNumber</span><span class="hl-1">); </span><span class="hl-5">// 1</span><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">isCheck</span><span class="hl-1">); </span><span class="hl-5">// false</span><br/><br/><span class="hl-5">// Query the board</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">piece</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e1&#39;</span><span class="hl-1">); </span><span class="hl-5">// { color: &#39;w&#39;, type: &#39;k&#39; }</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">whites</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(</span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">); </span><span class="hl-5">// Map&lt;Square, Piece&gt; of all white pieces</span><br/><br/><span class="hl-5">// Find all squares a piece occupies</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">whiteKing</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">findPiece</span><span class="hl-1">({ </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">, </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-2">&#39;k&#39;</span><span class="hl-1"> }); </span><span class="hl-5">// [&#39;e1&#39;]</span><br/><br/><span class="hl-5">// Attack queries</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">attackers</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">attackers</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;b&#39;</span><span class="hl-1">); </span><span class="hl-5">// squares of black pieces attacking e5</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">attacked</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">isAttacked</span><span class="hl-1">(</span><span class="hl-2">&#39;f7&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">); </span><span class="hl-5">// true if white attacks f7</span>
+          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">Position</span><span class="hl-1">, </span><span class="hl-4">STARTING_POSITION</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Starting position</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">pos</span><span class="hl-1"> = </span><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">();</span><br/><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">turn</span><span class="hl-1">); </span><span class="hl-5">// &#39;white&#39;</span><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">fullmoveNumber</span><span class="hl-1">); </span><span class="hl-5">// 1</span><br/><span class="hl-4">console</span><span class="hl-1">.</span><span class="hl-0">log</span><span class="hl-1">(</span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-4">isCheck</span><span class="hl-1">); </span><span class="hl-5">// false</span><br/><br/><span class="hl-5">// Query the board</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">piece</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e1&#39;</span><span class="hl-1">); </span><span class="hl-5">// { color: &#39;white&#39;, type: &#39;king&#39; }</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">whites</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(</span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">); </span><span class="hl-5">// Map&lt;Square, Piece&gt; of all white pieces</span><br/><br/><span class="hl-5">// Attack queries</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">attackers</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">attackers</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;black&#39;</span><span class="hl-1">); </span><span class="hl-5">// squares of black pieces attacking e5</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">attacked</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">isAttacked</span><span class="hl-1">(</span><span class="hl-2">&#39;f7&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">); </span><span class="hl-5">// true if white attacks f7</span><br/><br/><span class="hl-5">// Derive a new position</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-7">next</span><span class="hl-1"> = </span><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">derive</span><span class="hl-1">({</span><br/><span class="hl-1">  </span><span class="hl-4">changes:</span><span class="hl-1"> [</span><br/><span class="hl-1">    [</span><span class="hl-2">&#39;e2&#39;</span><span class="hl-1">, </span><span class="hl-6">undefined</span><span class="hl-1">],</span><br/><span class="hl-1">    [</span><span class="hl-2">&#39;e4&#39;</span><span class="hl-1">, { </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">, </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-2">&#39;pawn&#39;</span><span class="hl-1"> }],</span><br/><span class="hl-1">  ],</span><br/><span class="hl-1">  </span><span class="hl-4">turn:</span><span class="hl-1"> </span><span class="hl-2">&#39;black&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">  </span><span class="hl-4">enPassantSquare:</span><span class="hl-1"> </span><span class="hl-2">&#39;e3&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">});</span>
 </code><button type="button">Copy</button></pre>
 
           <h2 id="api" class="tsd-anchor-link">
@@ -170,7 +170,7 @@
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
           </h3>
-          <pre><code class="ts"><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">()</span><br/><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">(</span><span class="hl-4">board</span><span class="hl-1">: </span><span class="hl-4">Map</span><span class="hl-1">&lt;</span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-4">Piece</span><span class="hl-1">&gt;)</span><br/><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">(</span><span class="hl-4">board</span><span class="hl-1">: </span><span class="hl-4">Map</span><span class="hl-1">&lt;</span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-4">Piece</span><span class="hl-1">&gt;, </span><span class="hl-4">options</span><span class="hl-1">?: {</span><br/><span class="hl-1">  castlingRights?</span><span class="hl-4">:</span><span class="hl-1"> </span><span class="hl-4">CastlingRights</span><br/><span class="hl-1">  </span><span class="hl-4">enPassantSquare</span><span class="hl-1">?: </span><span class="hl-4">Square</span><br/><span class="hl-1">  </span><span class="hl-4">fullmoveNumber</span><span class="hl-1">?: </span><span class="hl-4">number</span><br/><span class="hl-1">  </span><span class="hl-4">halfmoveClock</span><span class="hl-1">?: </span><span class="hl-4">number</span><br/><span class="hl-1">  </span><span class="hl-4">turn</span><span class="hl-1">?: </span><span class="hl-4">Color</span><br/><span class="hl-1">})</span>
+          <pre><code class="ts"><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">()</span><br/><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">(</span><span class="hl-4">board</span><span class="hl-1">: </span><span class="hl-4">Map</span><span class="hl-1">&lt;</span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-4">Piece</span><span class="hl-1">&gt;)</span><br/><span class="hl-6">new</span><span class="hl-1"> </span><span class="hl-0">Position</span><span class="hl-1">(</span><span class="hl-4">board</span><span class="hl-1">: </span><span class="hl-4">Map</span><span class="hl-1">&lt;</span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-4">Piece</span><span class="hl-1">&gt;, </span><span class="hl-4">options</span><span class="hl-1">?: </span><span class="hl-4">PositionOptions</span><span class="hl-1">)</span>
 </code><button type="button">Copy</button></pre>
 
           <p>
@@ -203,18 +203,21 @@
               </tr>
               <tr>
                 <td><code>enPassantSquare</code></td>
-                <td><code>Square | undefined</code></td>
-                <td>En passant target square, if any</td>
+                <td><code>EnPassantSquare | undefined</code></td>
+                <td>En passant target square (rank 3 or 6), if any</td>
               </tr>
               <tr>
                 <td><code>fullmoveNumber</code></td>
                 <td><code>number</code></td>
-                <td>Fullmove counter (increments after Black's move)</td>
+                <td>Game turn counter — increments after each black move</td>
               </tr>
               <tr>
                 <td><code>halfmoveClock</code></td>
                 <td><code>number</code></td>
-                <td>Halfmove clock for the fifty-move rule</td>
+                <td>
+                  Half-moves since last pawn advance or capture (fifty-move
+                  rule)
+                </td>
               </tr>
               <tr>
                 <td><code>hash</code></td>
@@ -231,8 +234,6 @@
                 <td><code>boolean</code></td>
                 <td>
                   Whether the position is a FIDE draw by insufficient material
-                  (K vs K, K+B vs K, K+N vs K, or K+B vs K+B with same-color
-                  bishops)
                 </td>
               </tr>
               <tr>
@@ -243,7 +244,9 @@
               <tr>
                 <td><code>turn</code></td>
                 <td><code>Color</code></td>
-                <td>Side to move (<code>'w'</code> or <code>'b'</code>)</td>
+                <td>
+                  Side to move (<code>'white'</code> or <code>'black'</code>)
+                </td>
               </tr>
             </tbody>
           </table>
@@ -267,7 +270,7 @@
             Returns all squares occupied by pieces of <code>color</code> that
             attack <code>square</code>.
           </p>
-          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">attackers</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;b&#39;</span><span class="hl-1">); </span><span class="hl-5">// e.g. [&#39;d7&#39;, &#39;f6&#39;]</span>
+          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">attackers</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;black&#39;</span><span class="hl-1">); </span><span class="hl-5">// e.g. [&#39;d7&#39;, &#39;f6&#39;]</span>
 </code><button type="button">Copy</button></pre>
 
           <h4 id="_-1" class="tsd-anchor-link">
@@ -286,19 +289,8 @@
 </code><button type="button">Copy</button></pre>
 
           <h4 id="_-2" class="tsd-anchor-link">
-            <code>findPiece(piece): Square[]</code
-            ><a href="#_-2" aria-label="Permalink" class="tsd-anchor-icon"
-              ><svg viewBox="0 0 24 24" aria-hidden="true">
-                <use href="assets/icons.svg#icon-anchor"></use></svg
-            ></a>
-          </h4>
-          <p>Returns all squares occupied by the given piece.</p>
-          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">findPiece</span><span class="hl-1">({ </span><span class="hl-4">color:</span><span class="hl-1"> </span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">, </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-2">&#39;q&#39;</span><span class="hl-1"> }); </span><span class="hl-5">// [&#39;d1&#39;]</span>
-</code><button type="button">Copy</button></pre>
-
-          <h4 id="_-3" class="tsd-anchor-link">
             <code>isAttacked(square, color): boolean</code
-            ><a href="#_-3" aria-label="Permalink" class="tsd-anchor-icon"
+            ><a href="#_-2" aria-label="Permalink" class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
@@ -307,12 +299,12 @@
             Returns <code>true</code> if any piece of <code>color</code> attacks
             <code>square</code>.
           </p>
-          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">isAttacked</span><span class="hl-1">(</span><span class="hl-2">&#39;f3&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">); </span><span class="hl-5">// true if white attacks f3</span>
+          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">isAttacked</span><span class="hl-1">(</span><span class="hl-2">&#39;f3&#39;</span><span class="hl-1">, </span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">); </span><span class="hl-5">// true if white attacks f3</span>
 </code><button type="button">Copy</button></pre>
 
-          <h4 id="_-4" class="tsd-anchor-link">
+          <h4 id="_-3" class="tsd-anchor-link">
             <code>piece(square): Piece | undefined</code
-            ><a href="#_-4" aria-label="Permalink" class="tsd-anchor-icon"
+            ><a href="#_-3" aria-label="Permalink" class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
@@ -321,12 +313,12 @@
             Returns the piece on <code>square</code>, or
             <code>undefined</code> if the square is empty.
           </p>
-          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e1&#39;</span><span class="hl-1">); </span><span class="hl-5">// { color: &#39;w&#39;, type: &#39;k&#39; }</span><br/><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">); </span><span class="hl-5">// undefined (empty in starting position)</span>
+          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e1&#39;</span><span class="hl-1">); </span><span class="hl-5">// { color: &#39;white&#39;, type: &#39;king&#39; }</span><br/><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">piece</span><span class="hl-1">(</span><span class="hl-2">&#39;e5&#39;</span><span class="hl-1">); </span><span class="hl-5">// undefined (empty in starting position)</span>
 </code><button type="button">Copy</button></pre>
 
-          <h4 id="_-5" class="tsd-anchor-link">
+          <h4 id="_-4" class="tsd-anchor-link">
             <code>pieces(color?): Map&lt;Square, Piece&gt;</code
-            ><a href="#_-5" aria-label="Permalink" class="tsd-anchor-icon"
+            ><a href="#_-4" aria-label="Permalink" class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
@@ -335,7 +327,7 @@
             Returns a map of all pieces, optionally filtered by
             <code>color</code>.
           </p>
-          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(); </span><span class="hl-5">// all 32 pieces in starting position</span><br/><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(</span><span class="hl-2">&#39;w&#39;</span><span class="hl-1">); </span><span class="hl-5">// 16 white pieces</span>
+          <pre><code class="typescript"><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(); </span><span class="hl-5">// all 32 pieces in starting position</span><br/><span class="hl-4">pos</span><span class="hl-1">.</span><span class="hl-0">pieces</span><span class="hl-1">(</span><span class="hl-2">&#39;white&#39;</span><span class="hl-1">); </span><span class="hl-5">// 16 white pieces</span>
 </code><button type="button">Copy</button></pre>
 
           <h3 id="constants" class="tsd-anchor-link">
@@ -347,9 +339,14 @@
                 <use href="assets/icons.svg#icon-anchor"></use></svg
             ></a>
           </h3>
-          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">COLORS</span><span class="hl-1">, </span><span class="hl-5">// [&#39;b&#39;, &#39;w&#39;]</span><br/><span class="hl-1">  </span><span class="hl-4">FILES</span><span class="hl-1">, </span><span class="hl-5">// [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;, &#39;f&#39;, &#39;g&#39;, &#39;h&#39;]</span><br/><span class="hl-1">  </span><span class="hl-4">RANKS</span><span class="hl-1">, </span><span class="hl-5">// [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;, &#39;6&#39;, &#39;7&#39;, &#39;8&#39;]</span><br/><span class="hl-1">  </span><span class="hl-4">PIECE_TYPES</span><span class="hl-1">, </span><span class="hl-5">// [&#39;b&#39;, &#39;k&#39;, &#39;n&#39;, &#39;p&#39;, &#39;q&#39;, &#39;r&#39;]</span><br/><span class="hl-1">  </span><span class="hl-4">SQUARES</span><span class="hl-1">, </span><span class="hl-5">// all 64 squares, a8–h1 (rank 8 to rank 1)</span><br/><span class="hl-1">  </span><span class="hl-4">EMPTY_BOARD</span><span class="hl-1">, </span><span class="hl-5">// empty Map&lt;Square, Piece&gt;</span><br/><span class="hl-1">  </span><span class="hl-4">STARTING_POSITION</span><span class="hl-1">, </span><span class="hl-5">// Position instance for the standard starting position</span><br/><span class="hl-1">} </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span>
+          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-4">STARTING_POSITION</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span>
 </code><button type="button">Copy</button></pre>
 
+          <p>
+            <code>STARTING_POSITION</code> is a <code>Position</code> instance
+            for the standard chess starting position. Equivalent to
+            <code>new Position()</code>.
+          </p>
           <h3 id="types" class="tsd-anchor-link">
             Types<a href="#types" aria-label="Permalink" class="tsd-anchor-icon"
               ><svg viewBox="0 0 24 24" aria-hidden="true">
@@ -360,14 +357,8 @@
             All types are exported for use in consuming code and companion
             packages.
           </p>
-          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> </span><span class="hl-3">type</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">CastlingRights</span><span class="hl-1">, </span><span class="hl-5">// { bK: boolean; bQ: boolean; wK: boolean; wQ: boolean }</span><br/><span class="hl-1">  </span><span class="hl-4">Color</span><span class="hl-1">, </span><span class="hl-5">// &#39;w&#39; | &#39;b&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">DeriveOptions</span><span class="hl-1">, </span><span class="hl-5">// options accepted by Position.derive()</span><br/><span class="hl-1">  </span><span class="hl-4">File</span><span class="hl-1">, </span><span class="hl-5">// &#39;a&#39; | &#39;b&#39; | ... | &#39;h&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">Move</span><span class="hl-1">, </span><span class="hl-5">// { from: Square; to: Square; promotion: PromotionPieceType | undefined }</span><br/><span class="hl-1">  </span><span class="hl-4">Piece</span><span class="hl-1">, </span><span class="hl-5">// { color: Color; type: PieceType }</span><br/><span class="hl-1">  </span><span class="hl-4">PieceType</span><span class="hl-1">, </span><span class="hl-5">// &#39;b&#39; | &#39;k&#39; | &#39;n&#39; | &#39;p&#39; | &#39;q&#39; | &#39;r&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">PositionOptions</span><span class="hl-1">, </span><span class="hl-5">// options accepted by the Position constructor</span><br/><span class="hl-1">  </span><span class="hl-4">PromotionPieceType</span><span class="hl-1">, </span><span class="hl-5">// &#39;b&#39; | &#39;n&#39; | &#39;q&#39; | &#39;r&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">Rank</span><span class="hl-1">, </span><span class="hl-5">// &#39;1&#39; | &#39;2&#39; | ... | &#39;8&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-5">// &#39;a1&#39; | &#39;a2&#39; | ... | &#39;h8&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">SquareColor</span><span class="hl-1">, </span><span class="hl-5">// &#39;light&#39; | &#39;dark&#39;</span><br/><span class="hl-1">} </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span>
+          <pre><code class="typescript"><span class="hl-3">import</span><span class="hl-1"> </span><span class="hl-3">type</span><span class="hl-1"> {</span><br/><span class="hl-1">  </span><span class="hl-4">CastlingRights</span><span class="hl-1">, </span><span class="hl-5">// { black: SideCastlingRights; white: SideCastlingRights }</span><br/><span class="hl-1">  </span><span class="hl-4">Color</span><span class="hl-1">, </span><span class="hl-5">// &#39;black&#39; | &#39;white&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">DeriveOptions</span><span class="hl-1">, </span><span class="hl-5">// options accepted by Position.derive()</span><br/><span class="hl-1">  </span><span class="hl-4">EnPassantSquare</span><span class="hl-1">, </span><span class="hl-5">// en passant target square (rank 3 or 6 only)</span><br/><span class="hl-1">  </span><span class="hl-4">File</span><span class="hl-1">, </span><span class="hl-5">// &#39;a&#39; | &#39;b&#39; | ... | &#39;h&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">Piece</span><span class="hl-1">, </span><span class="hl-5">// { color: Color; type: PieceType }</span><br/><span class="hl-1">  </span><span class="hl-4">PieceType</span><span class="hl-1">, </span><span class="hl-5">// &#39;bishop&#39; | &#39;king&#39; | &#39;knight&#39; | &#39;pawn&#39; | &#39;queen&#39; | &#39;rook&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">PositionOptions</span><span class="hl-1">, </span><span class="hl-5">// options accepted by the Position constructor</span><br/><span class="hl-1">  </span><span class="hl-4">Rank</span><span class="hl-1">, </span><span class="hl-5">// &#39;1&#39; | &#39;2&#39; | ... | &#39;8&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">SideCastlingRights</span><span class="hl-1">, </span><span class="hl-5">// { king: boolean; queen: boolean }</span><br/><span class="hl-1">  </span><span class="hl-4">Square</span><span class="hl-1">, </span><span class="hl-5">// &#39;a1&#39; | &#39;a2&#39; | ... | &#39;h8&#39;</span><br/><span class="hl-1">  </span><span class="hl-4">SquareColor</span><span class="hl-1">, </span><span class="hl-5">// &#39;dark&#39; | &#39;light&#39;</span><br/><span class="hl-1">} </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-2">&#39;@echecs/position&#39;</span><span class="hl-1">;</span>
 </code><button type="button">Copy</button></pre>
-
-          <p>
-            <code>Move</code> and <code>PromotionPieceType</code> are exported
-            for use by companion packages (<code>@echecs/san</code>,
-            <code>@echecs/game</code>) that build on this foundational type.
-          </p>
         </div>
       </div>
       <div class="col-sidebar">
@@ -554,9 +545,6 @@
                         </li>
                         <li>
                           <a href="#_-4"><span></span></a>
-                        </li>
-                        <li>
-                          <a href="#_-5"><span></span></a>
                         </li>
                       </ul>
                     </li>

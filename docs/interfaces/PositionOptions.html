@@ -172,7 +172,7 @@
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L58"
+                href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L58"
                 >types.ts:58</a
               >
             </li>
@@ -294,7 +294,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L60"
+                      href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L60"
                       >types.ts:60</a
                     >
                   </li>
@@ -330,7 +330,7 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L62"
+                      href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L62"
                       >types.ts:62</a
                     >
                   </li>
@@ -356,8 +356,9 @@
               </div>
               <div class="tsd-comment tsd-typography">
                 <p>
-                  Fullmove counter. Increments after black's move. Defaults to
-                  <code>1</code>.
+                  Game turn counter — starts at <code>1</code> and increments
+                  after each black move. After <code>1. e4 e5 2. Nf3</code> the
+                  fullmove number is <code>2</code>. Defaults to <code>1</code>.
                 </p>
               </div>
               <aside class="tsd-sources">
@@ -365,8 +366,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L64"
-                      >types.ts:64</a
+                      href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L67"
+                      >types.ts:67</a
                     >
                   </li>
                 </ul>
@@ -391,8 +392,10 @@
               </div>
               <div class="tsd-comment tsd-typography">
                 <p>
-                  Halfmove clock for the fifty-move rule. Defaults to
-                  <code>0</code>.
+                  Number of half-moves since the last pawn advance or capture.
+                  Resets to <code>0</code> on every pawn move or capture. When
+                  it reaches <code>100</code> (50 full moves per side) either
+                  player may claim a draw. Defaults to <code>0</code>.
                 </p>
               </div>
               <aside class="tsd-sources">
@@ -400,8 +403,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L66"
-                      >types.ts:66</a
+                      href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L73"
+                      >types.ts:73</a
                     >
                   </li>
                 </ul>
@@ -432,8 +435,8 @@
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/3255506e9a74ba02f0256401c1b8c0d0fcfb2a9a/src/types.ts#L68"
-                      >types.ts:68</a
+                      href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/types.ts#L75"
+                      >types.ts:75</a
                     >
                   </li>
                 </ul>

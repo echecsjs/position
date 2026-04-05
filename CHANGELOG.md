@@ -1,5 +1,42 @@
 # Changelog
 
+## [2.0.0] - 2026-04-05
+
+### Added
+
+- `Position.derive()` method — returns a new position with changes applied,
+  without mutating the original. Accepts piece changes as `[square, piece]`
+  tuples and optional position option overrides.
+- `DeriveOptions` type exported for use with `derive()`.
+- `EnPassantSquare` type — restricts en passant target squares to rank 3 and
+  rank 6 only.
+- `SideCastlingRights` type — `{ king: boolean; queen: boolean }`.
+- TypeDoc plugin to collapse expanded `Square` and `EnPassantSquare` unions in
+  generated docs.
+- JSDoc comments on all public API members.
+
+### Changed
+
+- `Color` values changed from `'b'`/`'w'` to `'black'`/`'white'`.
+- `PieceType` values changed from single letters to full words: `'bishop'`,
+  `'king'`, `'knight'`, `'pawn'`, `'queen'`, `'rook'`.
+- `CastlingRights` restructured from flat `{ bK, bQ, wK, wQ }` to nested
+  `{ black: { king, queen }, white: { king, queen } }`.
+- `PositionOptions.enPassantSquare` now uses `EnPassantSquare` (rank 3/6 only)
+  instead of `Square`.
+- TypeDoc docs script renamed to `docs:build` to avoid conflict with pnpm
+  built-in `docs` command.
+
+### Removed
+
+- `Move` and `PromotionPieceType` types — consumers should define their own.
+- `findPiece()` method — redundant with `pieces()` filtering.
+- `COLORS`, `FILES`, `RANKS`, `PIECE_TYPES`, `SQUARES`, `EMPTY_BOARD` constants
+  from public API (still used internally).
+- `squareColor`, `squareFile`, `squareRank` functions from public API.
+- `./internal` export condition — `@echecs/game` should migrate to
+  `Position.derive()`.
+
 ## [1.0.3] - 2026-04-04
 
 ### Fixed
