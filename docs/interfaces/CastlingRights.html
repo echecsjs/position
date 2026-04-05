@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>Piece | @echecs/position</title>
+    <title>CastlingRights | @echecs/position</title>
     <meta name="description" content="Documentation for @echecs/position" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -84,37 +84,42 @@
       <div class="col-content">
         <div class="tsd-page-title">
           <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="../modules/index.html">index</a></li>
-            <li><a href="" aria-current="page">Piece</a></li>
+            <li><a href="" aria-current="page">CastlingRights</a></li>
           </ul>
-          <h1>Interface Piece</h1>
+          <h1>Interface CastlingRights</h1>
         </div>
         <section class="tsd-panel tsd-comment">
           <div class="tsd-comment tsd-typography">
-            <p>A chess piece — color and type.</p>
+            <p>Which castling moves remain available for each side.</p>
           </div>
         </section>
         <div class="tsd-signature">
           <span class="tsd-signature-keyword">interface</span>
-          <span class="tsd-kind-interface">Piece</span>
+          <span class="tsd-kind-interface">CastlingRights</span>
           <span class="tsd-signature-symbol">{</span><br />    <a
             class="tsd-kind-property"
-            href="#color"
-            >color</a
+            href="#bk"
+            >bK</a
           ><span class="tsd-signature-symbol">:</span>
-          <a
-            href="../types/index.Color.html"
-            class="tsd-signature-type tsd-kind-type-alias"
-            >Color</a
+          <span class="tsd-signature-type">boolean</span
           ><span class="tsd-signature-symbol">;</span><br />    <a
             class="tsd-kind-property"
-            href="#type"
-            >type</a
+            href="#bq"
+            >bQ</a
           ><span class="tsd-signature-symbol">:</span>
-          <a
-            href="../types/index.PieceType.html"
-            class="tsd-signature-type tsd-kind-type-alias"
-            >PieceType</a
+          <span class="tsd-signature-type">boolean</span
+          ><span class="tsd-signature-symbol">;</span><br />    <a
+            class="tsd-kind-property"
+            href="#wk"
+            >wK</a
+          ><span class="tsd-signature-symbol">:</span>
+          <span class="tsd-signature-type">boolean</span
+          ><span class="tsd-signature-symbol">;</span><br />    <a
+            class="tsd-kind-property"
+            href="#wq"
+            >wQ</a
+          ><span class="tsd-signature-symbol">:</span>
+          <span class="tsd-signature-type">boolean</span
           ><span class="tsd-signature-symbol">;</span><br /><span
             class="tsd-signature-symbol"
             >}</span
@@ -125,8 +130,8 @@
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L78"
-                >types.ts:78</a
+                href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L27"
+                >types.ts:27</a
               >
             </li>
           </ul>
@@ -150,23 +155,41 @@
                 <section class="tsd-index-section">
                   <h3 class="tsd-index-heading">Properties</h3>
                   <div class="tsd-index-list">
-                    <a href="#color" class="tsd-index-link"
+                    <a href="#bk" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
                         aria-label="Property"
                       >
                         <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>color</span></a
+                      ><span>b<wbr />K</span></a
                     >
-                    <a href="#type" class="tsd-index-link"
+                    <a href="#bq" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
                         aria-label="Property"
                       >
                         <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>type</span></a
+                      ><span>b<wbr />Q</span></a
+                    >
+                    <a href="#wk" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Property"
+                      >
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>w<wbr />K</span></a
+                    >
+                    <a href="#wq" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Property"
+                      >
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>w<wbr />Q</span></a
                     >
                   </div>
                 </section>
@@ -189,64 +212,112 @@
           </summary>
           <section>
             <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="color">
-                <span>color</span
-                ><a href="#color" aria-label="Permalink" class="tsd-anchor-icon"
+              <h3 class="tsd-anchor-link" id="bk">
+                <span>b<wbr />K</span
+                ><a href="#bk" aria-label="Permalink" class="tsd-anchor-icon"
                   ><svg viewBox="0 0 24 24" aria-hidden="true">
                     <use href="../assets/icons.svg#icon-anchor"></use></svg
                 ></a>
               </h3>
               <div class="tsd-signature">
-                <span class="tsd-kind-property">color</span
+                <span class="tsd-kind-property">bK</span
                 ><span class="tsd-signature-symbol">:</span>
-                <a
-                  href="../types/index.Color.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >Color</a
-                >
+                <span class="tsd-signature-type">boolean</span>
               </div>
               <div class="tsd-comment tsd-typography">
-                <p>The piece's color.</p>
+                <p>Black can castle kingside.</p>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L80"
-                      >types.ts:80</a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L29"
+                      >types.ts:29</a
                     >
                   </li>
                 </ul>
               </aside>
             </section>
             <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="type">
-                <span>type</span
-                ><a href="#type" aria-label="Permalink" class="tsd-anchor-icon"
+              <h3 class="tsd-anchor-link" id="bq">
+                <span>b<wbr />Q</span
+                ><a href="#bq" aria-label="Permalink" class="tsd-anchor-icon"
                   ><svg viewBox="0 0 24 24" aria-hidden="true">
                     <use href="../assets/icons.svg#icon-anchor"></use></svg
                 ></a>
               </h3>
               <div class="tsd-signature">
-                <span class="tsd-kind-property">type</span
+                <span class="tsd-kind-property">bQ</span
                 ><span class="tsd-signature-symbol">:</span>
-                <a
-                  href="../types/index.PieceType.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >PieceType</a
-                >
+                <span class="tsd-signature-type">boolean</span>
               </div>
               <div class="tsd-comment tsd-typography">
-                <p>The piece's type.</p>
+                <p>Black can castle queenside.</p>
               </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L82"
-                      >types.ts:82</a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L31"
+                      >types.ts:31</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="wk">
+                <span>w<wbr />K</span
+                ><a href="#wk" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">wK</span
+                ><span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">boolean</span>
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>White can castle kingside.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L33"
+                      >types.ts:33</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="wq">
+                <span>w<wbr />Q</span
+                ><a href="#wq" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">wQ</span
+                ><span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">boolean</span>
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>White can castle queenside.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L35"
+                      >types.ts:35</a
                     >
                   </li>
                 </ul>
@@ -415,22 +486,38 @@
                   >Properties
                 </summary>
                 <div>
-                  <a href="#color"
+                  <a href="#bk"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
                       aria-label="Property"
                     >
                       <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>color</span></a
-                  ><a href="#type"
+                    ><span>b<wbr />K</span></a
+                  ><a href="#bq"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
                       aria-label="Property"
                     >
                       <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>type</span></a
+                    ><span>b<wbr />Q</span></a
+                  ><a href="#wk"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>w<wbr />K</span></a
+                  ><a href="#wq"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>w<wbr />Q</span></a
                   >
                 </div>
               </details>

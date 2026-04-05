@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>DeriveOptions | @echecs/position</title>
+    <title>Move | @echecs/position</title>
     <meta name="description" content="Documentation for @echecs/position" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -84,190 +84,23 @@
       <div class="col-content">
         <div class="tsd-page-title">
           <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="../modules/index.html">index</a></li>
-            <li><a href="" aria-current="page">DeriveOptions</a></li>
+            <li><a href="" aria-current="page">Move</a></li>
           </ul>
-          <h1>Interface DeriveOptions</h1>
+          <h1>Interface Move</h1>
         </div>
         <section class="tsd-panel tsd-comment">
           <div class="tsd-comment tsd-typography">
-            <p>
-              Options accepted by
-              <a
-                href="../classes/index.Position.html#derive"
-                class="tsd-kind-method"
-                >Position.derive</a
-              >. Extends
-              <a href="index.PositionOptions.html" class="tsd-kind-interface"
-                >PositionOptions</a
-              >
-              with a <code>board</code> field for applying piece changes.
-            </p>
+            <p>A chess move — origin, destination, and optional promotion.</p>
           </div>
         </section>
         <div class="tsd-signature">
           <span class="tsd-signature-keyword">interface</span>
-          <span class="tsd-kind-interface">DeriveOptions</span>
+          <span class="tsd-kind-interface">Move</span>
           <span class="tsd-signature-symbol">{</span><br />    <a
             class="tsd-kind-property"
-            href="#board"
-            >board</a
-          ><span class="tsd-signature-symbol">?:</span>
-          <span class="tsd-signature-symbol">[</span><br />        <span
-            class="tsd-signature-symbol"
-            >|</span
-          >
-          <span class="tsd-signature-type">&quot;b1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;b8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;a8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;c8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;d8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;e8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;f8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;g8&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h1&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h2&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h3&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h4&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h5&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h6&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h7&quot;</span
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">&quot;h8&quot;</span
-          ><span class="tsd-signature-symbol">,</span><br />        <a
-            href="index.Piece.html"
-            class="tsd-signature-type tsd-kind-interface"
-            >Piece</a
-          ><br />        <span class="tsd-signature-symbol">|</span>
-          <span class="tsd-signature-type">undefined</span
-          ><span class="tsd-signature-symbol">,</span><br />    <span
-            class="tsd-signature-symbol"
-            >]</span
-          ><span class="tsd-signature-symbol">[]</span
-          ><span class="tsd-signature-symbol">;</span><br />    <a
-            class="tsd-kind-property"
-            href="#castlingrights"
-            >castlingRights</a
-          ><span class="tsd-signature-symbol">?:</span>
-          <a
-            href="index.CastlingRights.html"
-            class="tsd-signature-type tsd-kind-interface"
-            >CastlingRights</a
-          ><span class="tsd-signature-symbol">;</span><br />    <a
-            class="tsd-kind-property"
-            href="#enpassantsquare"
-            >enPassantSquare</a
-          ><span class="tsd-signature-symbol">?:</span><br />        <span
+            href="#from"
+            >from</a
+          ><span class="tsd-signature-symbol">:</span><br />        <span
             class="tsd-signature-symbol"
             >|</span
           >
@@ -400,58 +233,162 @@
           <span class="tsd-signature-type">&quot;h8&quot;</span
           ><span class="tsd-signature-symbol">;</span><br />    <a
             class="tsd-kind-property"
-            href="#fullmovenumber"
-            >fullmoveNumber</a
-          ><span class="tsd-signature-symbol">?:</span>
-          <span class="tsd-signature-type">number</span
-          ><span class="tsd-signature-symbol">;</span><br />    <a
-            class="tsd-kind-property"
-            href="#halfmoveclock"
-            >halfmoveClock</a
-          ><span class="tsd-signature-symbol">?:</span>
-          <span class="tsd-signature-type">number</span
-          ><span class="tsd-signature-symbol">;</span><br />    <a
-            class="tsd-kind-property"
-            href="#turn"
-            >turn</a
-          ><span class="tsd-signature-symbol">?:</span>
+            href="#promotion"
+            >promotion</a
+          ><span class="tsd-signature-symbol">:</span>
           <a
-            href="../types/index.Color.html"
+            href="../types/PromotionPieceType.html"
             class="tsd-signature-type tsd-kind-type-alias"
-            >Color</a
+            >PromotionPieceType</a
+          ><br />    <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">undefined</span
+          ><span class="tsd-signature-symbol">;</span><br />    <a
+            class="tsd-kind-property"
+            href="#to"
+            >to</a
+          ><span class="tsd-signature-symbol">:</span><br />        <span
+            class="tsd-signature-symbol"
+            >|</span
+          >
+          <span class="tsd-signature-type">&quot;b1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;b8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;a8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;c8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;d8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;e8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;f8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;g8&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h1&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h2&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h3&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h4&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h5&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h6&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h7&quot;</span
+          ><br />        <span class="tsd-signature-symbol">|</span>
+          <span class="tsd-signature-type">&quot;h8&quot;</span
           ><span class="tsd-signature-symbol">;</span><br /><span
             class="tsd-signature-symbol"
             >}</span
           >
         </div>
-        <section class="tsd-panel tsd-hierarchy" data-refl="9">
-          <h4>
-            Hierarchy (<a href="../hierarchy.html#index.DeriveOptions"
-              >View Summary</a
-            >)
-          </h4>
-          <ul class="tsd-hierarchy">
-            <li class="tsd-hierarchy-item">
-              <a
-                href="index.PositionOptions.html"
-                class="tsd-signature-type tsd-kind-interface"
-                >PositionOptions</a
-              >
-              <ul class="tsd-hierarchy">
-                <li class="tsd-hierarchy-item">
-                  <span class="tsd-hierarchy-target">DeriveOptions</span>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </section>
         <aside class="tsd-sources">
           <ul>
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L42"
-                >types.ts:42</a
+                href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L68"
+                >types.ts:68</a
               >
             </li>
           </ul>
@@ -475,67 +412,32 @@
                 <section class="tsd-index-section">
                   <h3 class="tsd-index-heading">Properties</h3>
                   <div class="tsd-index-list">
-                    <a href="#board" class="tsd-index-link"
+                    <a href="#from" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
                         aria-label="Property"
                       >
                         <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>board?</span></a
+                      ><span>from</span></a
                     >
-                    <a
-                      href="#castlingrights"
-                      class="tsd-index-link tsd-is-inherited"
+                    <a href="#promotion" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
                         aria-label="Property"
                       >
                         <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>castling<wbr />Rights?</span></a
+                      ><span>promotion</span></a
                     >
-                    <a
-                      href="#enpassantsquare"
-                      class="tsd-index-link tsd-is-inherited"
+                    <a href="#to" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
                         aria-label="Property"
                       >
                         <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>en<wbr />Passant<wbr />Square?</span></a
-                    >
-                    <a
-                      href="#fullmovenumber"
-                      class="tsd-index-link tsd-is-inherited"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Property"
-                      >
-                        <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>fullmove<wbr />Number?</span></a
-                    >
-                    <a
-                      href="#halfmoveclock"
-                      class="tsd-index-link tsd-is-inherited"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Property"
-                      >
-                        <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>halfmove<wbr />Clock?</span></a
-                    >
-                    <a href="#turn" class="tsd-index-link tsd-is-inherited"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Property"
-                      >
-                        <use href="../assets/icons.svg#icon-1024"></use></svg
-                      ><span>turn?</span></a
+                      ><span>to</span></a
                     >
                   </div>
                 </section>
@@ -558,238 +460,16 @@
           </summary>
           <section>
             <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="board">
-                <code class="tsd-tag">Optional</code><span>board</span
-                ><a href="#board" aria-label="Permalink" class="tsd-anchor-icon"
+              <h3 class="tsd-anchor-link" id="from">
+                <span>from</span
+                ><a href="#from" aria-label="Permalink" class="tsd-anchor-icon"
                   ><svg viewBox="0 0 24 24" aria-hidden="true">
                     <use href="../assets/icons.svg#icon-anchor"></use></svg
                 ></a>
               </h3>
               <div class="tsd-signature">
-                <span class="tsd-kind-property">board</span
-                ><span class="tsd-signature-symbol">?:</span>
-                <span class="tsd-signature-symbol">[</span><br />    <span
-                  class="tsd-signature-symbol"
-                  >|</span
-                >
-                <span class="tsd-signature-type">&quot;b1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;b8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;a8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;c8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;d8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;e8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;f8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;g8&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h1&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h2&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h3&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h4&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h5&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h6&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h7&quot;</span
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">&quot;h8&quot;</span
-                ><span class="tsd-signature-symbol">,</span><br />    <a
-                  href="index.Piece.html"
-                  class="tsd-signature-type tsd-kind-interface"
-                  >Piece</a
-                ><br />    <span class="tsd-signature-symbol">|</span>
-                <span class="tsd-signature-type">undefined</span
-                ><span class="tsd-signature-symbol">,</span><br /><span
-                  class="tsd-signature-symbol"
-                  >]</span
-                ><span class="tsd-signature-symbol">[]</span>
-              </div>
-              <div class="tsd-comment tsd-typography">
-                <p>
-                  Board changes as <code>[square, piece]</code> tuples. Set
-                  piece to <code>undefined</code> to clear a square. Only
-                  changed squares need to be listed.
-                </p>
-              </div>
-              <aside class="tsd-sources">
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L47"
-                      >types.ts:47</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section class="tsd-panel tsd-member tsd-is-inherited">
-              <h3 class="tsd-anchor-link" id="castlingrights">
-                <code class="tsd-tag">Optional</code
-                ><span>castling<wbr />Rights</span
-                ><a
-                  href="#castlingrights"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature">
-                <span class="tsd-kind-property">castlingRights</span
-                ><span class="tsd-signature-symbol">?:</span>
-                <a
-                  href="index.CastlingRights.html"
-                  class="tsd-signature-type tsd-kind-interface"
-                  >CastlingRights</a
-                >
-              </div>
-              <div class="tsd-comment tsd-typography">
-                <p>
-                  Castling availability. Defaults to all four castling moves
-                  available.
-                </p>
-              </div>
-              <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="index.PositionOptions.html">PositionOptions</a>.<a
-                    href="index.PositionOptions.html#castlingrights"
-                    >castlingRights</a
-                  >
-                </p>
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L56"
-                      >types.ts:56</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section class="tsd-panel tsd-member tsd-is-inherited">
-              <h3 class="tsd-anchor-link" id="enpassantsquare">
-                <code class="tsd-tag">Optional</code
-                ><span>en<wbr />Passant<wbr />Square</span
-                ><a
-                  href="#enpassantsquare"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature">
-                <span class="tsd-kind-property">enPassantSquare</span
-                ><span class="tsd-signature-symbol">?:</span><br />    <span
+                <span class="tsd-kind-property">from</span
+                ><span class="tsd-signature-symbol">:</span><br />    <span
                   class="tsd-signature-symbol"
                   >|</span
                 >
@@ -922,33 +602,25 @@
                 <span class="tsd-signature-type">&quot;h8&quot;</span>
               </div>
               <div class="tsd-comment tsd-typography">
-                <p>En passant target square, if any.</p>
+                <p>Square the piece moves from.</p>
               </div>
               <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="index.PositionOptions.html">PositionOptions</a>.<a
-                    href="index.PositionOptions.html#enpassantsquare"
-                    >enPassantSquare</a
-                  >
-                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L58"
-                      >types.ts:58</a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L70"
+                      >types.ts:70</a
                     >
                   </li>
                 </ul>
               </aside>
             </section>
-            <section class="tsd-panel tsd-member tsd-is-inherited">
-              <h3 class="tsd-anchor-link" id="fullmovenumber">
-                <code class="tsd-tag">Optional</code
-                ><span>fullmove<wbr />Number</span
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="promotion">
+                <span>promotion</span
                 ><a
-                  href="#fullmovenumber"
+                  href="#promotion"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg viewBox="0 0 24 24" aria-hidden="true">
@@ -956,111 +628,186 @@
                 ></a>
               </h3>
               <div class="tsd-signature">
-                <span class="tsd-kind-property">fullmoveNumber</span
-                ><span class="tsd-signature-symbol">?:</span>
-                <span class="tsd-signature-type">number</span>
-              </div>
-              <div class="tsd-comment tsd-typography">
-                <p>
-                  Fullmove counter. Increments after black's move. Defaults to
-                  <code>1</code>.
-                </p>
-              </div>
-              <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="index.PositionOptions.html">PositionOptions</a>.<a
-                    href="index.PositionOptions.html#fullmovenumber"
-                    >fullmoveNumber</a
-                  >
-                </p>
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L60"
-                      >types.ts:60</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section class="tsd-panel tsd-member tsd-is-inherited">
-              <h3 class="tsd-anchor-link" id="halfmoveclock">
-                <code class="tsd-tag">Optional</code
-                ><span>halfmove<wbr />Clock</span
-                ><a
-                  href="#halfmoveclock"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature">
-                <span class="tsd-kind-property">halfmoveClock</span
-                ><span class="tsd-signature-symbol">?:</span>
-                <span class="tsd-signature-type">number</span>
-              </div>
-              <div class="tsd-comment tsd-typography">
-                <p>
-                  Halfmove clock for the fifty-move rule. Defaults to
-                  <code>0</code>.
-                </p>
-              </div>
-              <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="index.PositionOptions.html">PositionOptions</a>.<a
-                    href="index.PositionOptions.html#halfmoveclock"
-                    >halfmoveClock</a
-                  >
-                </p>
-                <ul>
-                  <li>
-                    Defined in
-                    <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L62"
-                      >types.ts:62</a
-                    >
-                  </li>
-                </ul>
-              </aside>
-            </section>
-            <section class="tsd-panel tsd-member tsd-is-inherited">
-              <h3 class="tsd-anchor-link" id="turn">
-                <code class="tsd-tag">Optional</code><span>turn</span
-                ><a href="#turn" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <div class="tsd-signature">
-                <span class="tsd-kind-property">turn</span
-                ><span class="tsd-signature-symbol">?:</span>
+                <span class="tsd-kind-property">promotion</span
+                ><span class="tsd-signature-symbol">:</span>
                 <a
-                  href="../types/index.Color.html"
+                  href="../types/PromotionPieceType.html"
                   class="tsd-signature-type tsd-kind-type-alias"
-                  >Color</a
+                  >PromotionPieceType</a
                 >
+                <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">undefined</span>
               </div>
               <div class="tsd-comment tsd-typography">
-                <p>Side to move. Defaults to <code>'w'</code>.</p>
+                <p>
+                  Promotion piece type, or <code>undefined</code> if not a
+                  promotion.
+                </p>
               </div>
               <aside class="tsd-sources">
-                <p>
-                  Inherited from
-                  <a href="index.PositionOptions.html">PositionOptions</a>.<a
-                    href="index.PositionOptions.html#turn"
-                    >turn</a
-                  >
-                </p>
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L64"
-                      >types.ts:64</a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L72"
+                      >types.ts:72</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="to">
+                <span>to</span
+                ><a href="#to" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">to</span
+                ><span class="tsd-signature-symbol">:</span><br />    <span
+                  class="tsd-signature-symbol"
+                  >|</span
+                >
+                <span class="tsd-signature-type">&quot;b1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;b8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;a8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;c8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;d8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;e8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;f8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;g8&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h1&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h2&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h3&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h4&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h5&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h6&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h7&quot;</span
+                ><br />    <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">&quot;h8&quot;</span>
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>Square the piece moves to.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/ea4f637f4e257d7cf8d6cdf48cb63cdd02bf9e0c/src/types.ts#L74"
+                      >types.ts:74</a
                     >
                   </li>
                 </ul>
@@ -1229,54 +976,30 @@
                   >Properties
                 </summary>
                 <div>
-                  <a href="#board"
+                  <a href="#from"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
                       aria-label="Property"
                     >
                       <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>board</span></a
-                  ><a href="#castlingrights" class="tsd-is-inherited"
+                    ><span>from</span></a
+                  ><a href="#promotion"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
                       aria-label="Property"
                     >
                       <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>castling<wbr />Rights</span></a
-                  ><a href="#enpassantsquare" class="tsd-is-inherited"
+                    ><span>promotion</span></a
+                  ><a href="#to"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
                       aria-label="Property"
                     >
                       <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>en<wbr />Passant<wbr />Square</span></a
-                  ><a href="#fullmovenumber" class="tsd-is-inherited"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Property"
-                    >
-                      <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>fullmove<wbr />Number</span></a
-                  ><a href="#halfmoveclock" class="tsd-is-inherited"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Property"
-                    >
-                      <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>halfmove<wbr />Clock</span></a
-                  ><a href="#turn" class="tsd-is-inherited"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Property"
-                    >
-                      <use href="../assets/icons.svg#icon-1024"></use></svg
-                    ><span>turn</span></a
+                    ><span>to</span></a
                   >
                 </div>
               </details>
