@@ -27,10 +27,8 @@ describe('STARTING_POSITION', () => {
 
   it('has all castling rights', () => {
     expect(STARTING_POSITION.castlingRights).toEqual({
-      bK: true,
-      bQ: true,
-      wK: true,
-      wQ: true,
+      black: { king: true, queen: true },
+      white: { king: true, queen: true },
     });
   });
 

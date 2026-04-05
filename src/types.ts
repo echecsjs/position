@@ -23,16 +23,20 @@ type Square = `${File}${Rank}`;
 /** Square color on the board — `'dark'` or `'light'`. */
 type SquareColor = 'dark' | 'light';
 
+/** Castling availability for one side. */
+interface SideCastlingRights {
+  /** Can castle kingside. */
+  king: boolean;
+  /** Can castle queenside. */
+  queen: boolean;
+}
+
 /** Which castling moves remain available for each side. */
 interface CastlingRights {
-  /** Black can castle kingside. */
-  bK: boolean;
-  /** Black can castle queenside. */
-  bQ: boolean;
-  /** White can castle kingside. */
-  wK: boolean;
-  /** White can castle queenside. */
-  wQ: boolean;
+  /** Black's castling rights. */
+  black: SideCastlingRights;
+  /** White's castling rights. */
+  white: SideCastlingRights;
 }
 
 /**

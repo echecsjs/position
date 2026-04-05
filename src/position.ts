@@ -27,7 +27,10 @@ import type {
 
 const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   Pick<PositionOptions, 'enPassantSquare'> = {
-  castlingRights: { bK: true, bQ: true, wK: true, wQ: true },
+  castlingRights: {
+    black: { king: true, queen: true },
+    white: { king: true, queen: true },
+  },
   enPassantSquare: undefined,
   fullmoveNumber: 1,
   halfmoveClock: 0,
@@ -107,12 +110,17 @@ export class Position {
 
     h ^= TURN_TABLE[this.#turn];
 
-    for (const [right, active] of Object.entries(this.#castlingRights) as [
+    for (const [color, sides] of Object.entries(this.#castlingRights) as [
       string,
-      boolean,
+      { king: boolean; queen: boolean },
     ][]) {
-      if (active) {
-        h ^= CASTLING_TABLE[right] ?? 0n;
+      for (const [side, active] of Object.entries(sides) as [
+        string,
+        boolean,
+      ][]) {
+        if (active) {
+          h ^= CASTLING_TABLE[`${color}.${side}`] ?? 0n;
+        }
       }
     }
 

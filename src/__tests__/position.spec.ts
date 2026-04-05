@@ -11,10 +11,8 @@ describe('Position constructor', () => {
     expect(pos.halfmoveClock).toBe(0);
     expect(pos.fullmoveNumber).toBe(1);
     expect(pos.castlingRights).toEqual({
-      bK: true,
-      bQ: true,
-      wK: true,
-      wQ: true,
+      black: { king: true, queen: true },
+      white: { king: true, queen: true },
     });
     expect(pos.enPassantSquare).toBeUndefined();
   });
@@ -43,17 +41,18 @@ describe('Position constructor', () => {
       turn: 'black',
       halfmoveClock: 5,
       fullmoveNumber: 10,
-      castlingRights: { bK: false, bQ: false, wK: false, wQ: false },
+      castlingRights: {
+        black: { king: false, queen: false },
+        white: { king: false, queen: false },
+      },
       enPassantSquare: 'e3',
     });
     expect(pos.turn).toBe('black');
     expect(pos.halfmoveClock).toBe(5);
     expect(pos.fullmoveNumber).toBe(10);
     expect(pos.castlingRights).toEqual({
-      bK: false,
-      bQ: false,
-      wK: false,
-      wQ: false,
+      black: { king: false, queen: false },
+      white: { king: false, queen: false },
     });
     expect(pos.enPassantSquare).toBe('e3');
   });
@@ -703,7 +702,10 @@ describe('derive', () => {
 
   it('overrides castling rights', () => {
     const pos = new Position();
-    const rights = { bK: false, bQ: false, wK: false, wQ: false };
+    const rights = {
+      black: { king: false, queen: false },
+      white: { king: false, queen: false },
+    };
     const derived = pos.derive({ castlingRights: rights });
     expect(derived.castlingRights).toEqual(rights);
   });

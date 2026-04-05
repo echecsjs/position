@@ -37,10 +37,10 @@ const TURN_TABLE: Record<Color, bigint> = {
 };
 
 const CASTLING_TABLE: Record<string, bigint> = {
-  bK: next(),
-  bQ: next(),
-  wK: next(),
-  wQ: next(),
+  'black.king': next(),
+  'black.queen': next(),
+  'white.king': next(),
+  'white.queen': next(),
 };
 
 const EP_TABLE: Record<File, bigint> = Object.fromEntries(
