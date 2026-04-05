@@ -649,3 +649,130 @@ describe('hash', () => {
     expect(posW.hash).not.toBe(posB.hash);
   });
 });
+
+describe('derive', () => {
+  it('returns a clone when called with no arguments', () => {
+    const pos = new Position();
+    const clone = pos.derive();
+    expect(clone).not.toBe(pos);
+    expect(clone.turn).toBe(pos.turn);
+    expect(clone.halfmoveClock).toBe(pos.halfmoveClock);
+    expect(clone.fullmoveNumber).toBe(pos.fullmoveNumber);
+    expect(clone.castlingRights).toEqual(pos.castlingRights);
+    expect(clone.enPassantSquare).toBe(pos.enPassantSquare);
+    expect(clone.pieces()).toEqual(pos.pieces());
+  });
+
+  it('applies board changes', () => {
+    const pos = new Position();
+    const derived = pos.derive({
+      board: [
+        ['e2', undefined],
+        ['e4', { color: 'w', type: 'p' }],
+      ],
+    });
+    expect(derived.piece('e2')).toBeUndefined();
+    expect(derived.piece('e4')).toEqual({ color: 'w', type: 'p' });
+  });
+
+  it('does not modify the original position', () => {
+    const pos = new Position();
+    pos.derive({
+      board: [['e2', undefined]],
+    });
+    expect(pos.piece('e2')).toEqual({ color: 'w', type: 'p' });
+  });
+
+  it('overrides turn', () => {
+    const pos = new Position();
+    const derived = pos.derive({ turn: 'b' });
+    expect(derived.turn).toBe('b');
+    expect(pos.turn).toBe('w');
+  });
+
+  it('overrides castling rights', () => {
+    const pos = new Position();
+    const rights = { bK: false, bQ: false, wK: false, wQ: false };
+    const derived = pos.derive({ castlingRights: rights });
+    expect(derived.castlingRights).toEqual(rights);
+  });
+
+  it('sets en passant square', () => {
+    const pos = new Position();
+    const derived = pos.derive({ enPassantSquare: 'e3' });
+    expect(derived.enPassantSquare).toBe('e3');
+  });
+
+  it('clears en passant square with undefined', () => {
+    const pos = new Position(undefined, { enPassantSquare: 'e3' });
+    const derived = pos.derive({ enPassantSquare: undefined });
+    expect(derived.enPassantSquare).toBeUndefined();
+  });
+
+  it('overrides halfmove clock and fullmove number', () => {
+    const pos = new Position();
+    const derived = pos.derive({ halfmoveClock: 5, fullmoveNumber: 10 });
+    expect(derived.halfmoveClock).toBe(5);
+    expect(derived.fullmoveNumber).toBe(10);
+  });
+
+  it('applies board and options together', () => {
+    const pos = new Position();
+    const derived = pos.derive({
+      board: [
+        ['e2', undefined],
+        ['e4', { color: 'w', type: 'p' }],
+      ],
+      turn: 'b',
+      halfmoveClock: 0,
+      fullmoveNumber: 1,
+      enPassantSquare: 'e3',
+    });
+    expect(derived.piece('e2')).toBeUndefined();
+    expect(derived.piece('e4')).toEqual({ color: 'w', type: 'p' });
+    expect(derived.turn).toBe('b');
+    expect(derived.enPassantSquare).toBe('e3');
+  });
+
+  it('last tuple wins when multiple target the same square', () => {
+    const pos = new Position();
+    const derived = pos.derive({
+      board: [
+        ['e4', { color: 'w', type: 'p' }],
+        ['e4', { color: 'b', type: 'q' }],
+      ],
+    });
+    expect(derived.piece('e4')).toEqual({ color: 'b', type: 'q' });
+  });
+
+  it('supports chained derive calls', () => {
+    const pos = new Position();
+    const derived = pos
+      .derive({ board: [['e2', undefined]], turn: 'b' })
+      .derive({ board: [['e4', { color: 'w', type: 'p' }]] });
+    expect(derived.piece('e2')).toBeUndefined();
+    expect(derived.piece('e4')).toEqual({ color: 'w', type: 'p' });
+    expect(derived.turn).toBe('b');
+  });
+
+  it('produces correct Zobrist hash', () => {
+    const pos = new Position();
+    const derived = pos.derive({
+      board: [
+        ['e2', undefined],
+        ['e4', { color: 'w', type: 'p' }],
+      ],
+      turn: 'b',
+      enPassantSquare: 'e3',
+    });
+    // reconstruct same position via constructor
+    const board = new Map(pos.pieces());
+    board.delete('e2');
+    board.set('e4', { color: 'w', type: 'p' });
+    const expected = new Position(board, {
+      turn: 'b',
+      enPassantSquare: 'e3',
+    });
+    expect(derived.hash).toBe(expected.hash);
+  });
+});

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>DIFF_OFFSET | @echecs/position</title>
+    <title>Piece | @echecs/position</title>
     <meta name="description" content="Documentation for @echecs/position" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -84,27 +84,176 @@
       <div class="col-content">
         <div class="tsd-page-title">
           <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="../modules/internal.html">internal</a></li>
-            <li><a href="" aria-current="page">DIFF_OFFSET</a></li>
+            <li><a href="../modules/index.html">index</a></li>
+            <li><a href="" aria-current="page">Piece</a></li>
           </ul>
-          <h1>Variable DIFF_OFFSET<code class="tsd-tag">Const</code></h1>
+          <h1>Interface Piece</h1>
         </div>
+        <section class="tsd-panel tsd-comment">
+          <div class="tsd-comment tsd-typography">
+            <p>A chess piece — color and type.</p>
+          </div>
+        </section>
         <div class="tsd-signature">
-          <span class="tsd-kind-variable">DIFF_OFFSET</span
+          <span class="tsd-signature-keyword">interface</span>
+          <span class="tsd-kind-interface">Piece</span>
+          <span class="tsd-signature-symbol">{</span><br />    <a
+            class="tsd-kind-property"
+            href="#color"
+            >color</a
           ><span class="tsd-signature-symbol">:</span>
-          <span class="tsd-signature-type">119</span>
+          <a
+            href="../types/index.Color.html"
+            class="tsd-signature-type tsd-kind-type-alias"
+            >Color</a
+          ><span class="tsd-signature-symbol">;</span><br />    <a
+            class="tsd-kind-property"
+            href="#type"
+            >type</a
+          ><span class="tsd-signature-symbol">:</span>
+          <a
+            href="../types/index.PieceType.html"
+            class="tsd-signature-type tsd-kind-type-alias"
+            >PieceType</a
+          ><span class="tsd-signature-symbol">;</span><br /><span
+            class="tsd-signature-symbol"
+            >}</span
+          >
         </div>
         <aside class="tsd-sources">
           <ul>
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/internal/tables.ts#L39"
-                >internal/tables.ts:39</a
+                href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L78"
+                >types.ts:78</a
               >
             </li>
           </ul>
         </aside>
+        <section class="tsd-panel-group tsd-index-group">
+          <section class="tsd-panel tsd-index-panel">
+            <details class="tsd-index-content tsd-accordion" open>
+              <summary class="tsd-accordion-summary tsd-index-summary">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  aria-hidden="true"
+                >
+                  <use href="../assets/icons.svg#icon-chevronDown"></use>
+                </svg>
+                <h5 class="tsd-index-heading uppercase">Index</h5>
+              </summary>
+              <div class="tsd-accordion-details">
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Properties</h3>
+                  <div class="tsd-index-list">
+                    <a href="#color" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Property"
+                      >
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>color</span></a
+                    >
+                    <a href="#type" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Property"
+                      >
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>type</span></a
+                    >
+                  </div>
+                </section>
+              </div>
+            </details>
+          </section>
+        </section>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Properties">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Properties</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="color">
+                <span>color</span
+                ><a href="#color" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">color</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../types/index.Color.html"
+                  class="tsd-signature-type tsd-kind-type-alias"
+                  >Color</a
+                >
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>The piece's color.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L80"
+                      >types.ts:80</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="type">
+                <span>type</span
+                ><a href="#type" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">type</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../types/index.PieceType.html"
+                  class="tsd-signature-type tsd-kind-type-alias"
+                  >PieceType</a
+                >
+              </div>
+              <div class="tsd-comment tsd-typography">
+                <p>The piece's type.</p>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/types.ts#L82"
+                      >types.ts:82</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+          </section>
+        </details>
       </div>
       <div class="col-sidebar">
         <div class="page-menu">
@@ -236,6 +385,57 @@
               </div>
             </details>
           </div>
+          <details open class="tsd-accordion tsd-page-navigation">
+            <summary class="tsd-accordion-summary">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                aria-hidden="true"
+              >
+                <use href="../assets/icons.svg#icon-chevronDown"></use>
+              </svg>
+              <h3>On This Page</h3>
+            </summary>
+            <div class="tsd-accordion-details">
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary
+                  class="tsd-accordion-summary"
+                  data-key="section-Properties"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Properties
+                </summary>
+                <div>
+                  <a href="#color"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>color</span></a
+                  ><a href="#type"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>type</span></a
+                  >
+                </div>
+              </details>
+            </div>
+          </details>
         </div>
         <div class="site-menu">
           <nav class="tsd-navigation">

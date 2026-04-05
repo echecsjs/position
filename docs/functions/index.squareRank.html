@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>squareToIndex | @echecs/position</title>
+    <title>squareRank | @echecs/position</title>
     <meta name="description" content="Documentation for @echecs/position" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -84,16 +84,16 @@
       <div class="col-content">
         <div class="tsd-page-title">
           <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="../modules/internal.html">internal</a></li>
-            <li><a href="" aria-current="page">squareToIndex</a></li>
+            <li><a href="../modules/index.html">index</a></li>
+            <li><a href="" aria-current="page">squareRank</a></li>
           </ul>
-          <h1>Function squareToIndex</h1>
+          <h1>Function squareRank</h1>
         </div>
         <section class="tsd-panel">
           <ul class="tsd-signatures">
             <li class="">
-              <div class="tsd-signature tsd-anchor-link" id="squaretoindex">
-                <span class="tsd-kind-call-signature">squareToIndex</span
+              <div class="tsd-signature tsd-anchor-link" id="squarerank">
+                <span class="tsd-kind-call-signature">squareRank</span
                 ><span class="tsd-signature-symbol">(</span><br />    <span
                   class="tsd-kind-parameter"
                   >square</span
@@ -232,9 +232,12 @@
                   class="tsd-signature-symbol"
                   >)</span
                 ><span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">number</span
+                <a
+                  href="../types/index.Rank.html"
+                  class="tsd-signature-type tsd-kind-type-alias"
+                  >Rank</a
                 ><a
-                  href="#squaretoindex"
+                  href="#squarerank"
                   aria-label="Permalink"
                   class="tsd-anchor-icon"
                   ><svg viewBox="0 0 24 24" aria-hidden="true">
@@ -242,6 +245,9 @@
                 ></a>
               </div>
               <div class="tsd-description">
+                <div class="tsd-comment tsd-typography">
+                  <p>Returns the rank of a square.</p>
+                </div>
                 <div class="tsd-parameters">
                   <h4 class="tsd-parameters-title">Parameters</h4>
                   <ul class="tsd-parameter-list">
@@ -379,19 +385,27 @@
                           >&quot;h8&quot;</span
                         ></span
                       >
+                      <div class="tsd-comment tsd-typography">
+                        <p>The square to query.</p>
+                      </div>
                     </li>
                   </ul>
                 </div>
                 <h4 class="tsd-returns-title">
-                  Returns <span class="tsd-signature-type">number</span>
+                  Returns
+                  <a
+                    href="../types/index.Rank.html"
+                    class="tsd-signature-type tsd-kind-type-alias"
+                    >Rank</a
+                  >
                 </h4>
                 <aside class="tsd-sources">
                   <ul>
                     <li>
                       Defined in
                       <a
-                        href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/internal/board.ts#L5"
-                        >internal/board.ts:5</a
+                        href="https://github.com/mormubis/position/blob/205aa22cc0a4a03850150ac6995147d73ed49025/src/squares.ts#L17"
+                        >squares.ts:17</a
                       >
                     </li>
                   </ul>

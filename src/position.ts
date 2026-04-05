@@ -17,6 +17,7 @@ import { startingBoard } from './starting-board.js';
 import type {
   CastlingRights,
   Color,
+  DeriveOptions,
   File,
   Piece,
   PositionOptions,
@@ -32,6 +33,13 @@ const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   turn: 'w',
 };
 
+/**
+ * An immutable chess position — board state, turn, castling rights,
+ * en passant square, and move counters.
+ *
+ * Query the position with getters and methods. Produce new positions
+ * with {@link Position.derive | derive}.
+ */
 export class Position {
   readonly #board: Map<Square, Piece>;
   readonly #castlingRights: CastlingRights;
@@ -41,6 +49,12 @@ export class Position {
   #hash: string | undefined;
   readonly #turn: Color;
 
+  /**
+   * Creates a new position.
+   *
+   * @param board - Piece placement. Defaults to the standard starting position.
+   * @param options - Turn, castling rights, en passant, and move counters.
+   */
   constructor(board?: Map<Square, Piece>, options?: PositionOptions) {
     this.#board = new Map(board ?? startingBoard);
     const options_ = { ...DEFAULT_OPTIONS, ...options };
@@ -51,18 +65,22 @@ export class Position {
     this.#turn = options_.turn;
   }
 
+  /** Which castling moves remain available. */
   get castlingRights(): CastlingRights {
     return this.#castlingRights;
   }
 
+  /** En passant target square, or `undefined` if none. */
   get enPassantSquare(): Square | undefined {
     return this.#enPassantSquare;
   }
 
+  /** Fullmove counter — increments after black's move. */
   get fullmoveNumber(): number {
     return this.#fullmoveNumber;
   }
 
+  /** Halfmove clock for the fifty-move rule. */
   get halfmoveClock(): number {
     return this.#halfmoveClock;
   }
@@ -106,6 +124,10 @@ export class Position {
     return this.#hash;
   }
 
+  /**
+   * Whether the position is a draw by insufficient material (FIDE rules):
+   * K vs K, K+B vs K, K+N vs K, or K+B vs K+B with same-color bishops.
+   */
   get isInsufficientMaterial(): boolean {
     const nonKingEntries: [Square, Piece][] = [];
     for (const [sq, p] of this.#board) {
@@ -141,6 +163,10 @@ export class Position {
     return false;
   }
 
+  /**
+   * Whether the position is legally reachable: exactly one king per side,
+   * no pawns on ranks 1 or 8, and the side not to move is not in check.
+   */
   get isValid(): boolean {
     let blackKings = 0;
     let whiteKings = 0;
@@ -179,6 +205,7 @@ export class Position {
     return true;
   }
 
+  /** Whether the side to move is in check. */
   get isCheck(): boolean {
     for (const [square, p] of this.#board) {
       if (p.type === 'k' && p.color === this.#turn) {
@@ -189,6 +216,7 @@ export class Position {
     return false;
   }
 
+  /** Side to move — `'w'` or `'b'`. */
   get turn(): Color {
     return this.#turn;
   }
@@ -246,6 +274,45 @@ export class Position {
     return true;
   }
 
+  /**
+   * Returns a new position with the given changes applied. Fields not
+   * provided are carried over from the source. Calling with no argument
+   * returns a clone.
+   *
+   * @param changes - Board deltas and option overrides to apply.
+   */
+  derive(changes?: DeriveOptions): Position {
+    const board = new Map(this.#board);
+
+    if (changes?.board) {
+      for (const [square, piece] of changes.board) {
+        if (piece === undefined) {
+          board.delete(square);
+        } else {
+          board.set(square, piece);
+        }
+      }
+    }
+
+    return new Position(board, {
+      castlingRights: changes?.castlingRights ?? this.#castlingRights,
+      enPassantSquare:
+        'enPassantSquare' in (changes ?? {})
+          ? changes?.enPassantSquare
+          : this.#enPassantSquare,
+      fullmoveNumber: changes?.fullmoveNumber ?? this.#fullmoveNumber,
+      halfmoveClock: changes?.halfmoveClock ?? this.#halfmoveClock,
+      turn: changes?.turn ?? this.#turn,
+    });
+  }
+
+  /**
+   * Returns all squares occupied by pieces of the given color that
+   * attack the target square.
+   *
+   * @param square - The target square.
+   * @param by - The attacking color.
+   */
   attackers(square: Square, by: Color): Square[] {
     const board = boardFromMap(this.#board);
     const targetIndex = squareToIndex(square);
@@ -265,6 +332,11 @@ export class Position {
     return result;
   }
 
+  /**
+   * Returns all squares occupied by the given piece.
+   *
+   * @param piece - The piece to find (color and type).
+   */
   findPiece(piece: Piece): Square[] {
     const result: Square[] = [];
     for (const [sq, p] of this.#board) {
@@ -275,6 +347,12 @@ export class Position {
     return result;
   }
 
+  /**
+   * Returns `true` if any piece of the given color attacks the target square.
+   *
+   * @param square - The target square.
+   * @param by - The attacking color.
+   */
   isAttacked(square: Square, by: Color): boolean {
     const board = boardFromMap(this.#board);
     const targetIndex = squareToIndex(square);
@@ -293,10 +371,20 @@ export class Position {
     return false;
   }
 
+  /**
+   * Returns the piece on the given square, or `undefined` if empty.
+   *
+   * @param square - The square to query.
+   */
   piece(square: Square): Piece | undefined {
     return this.#board.get(square);
   }
 
+  /**
+   * Returns a map of all pieces on the board, optionally filtered by color.
+   *
+   * @param color - If provided, only pieces of this color are returned.
+   */
   pieces(color?: Color): Map<Square, Piece> {
     if (color === undefined) {
       return new Map(this.#board);

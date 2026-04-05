@@ -87,6 +87,26 @@ Returns all squares occupied by pieces of `color` that attack `square`.
 pos.attackers('e5', 'b'); // e.g. ['d7', 'f6']
 ```
 
+#### `derive(changes?): Position`
+
+Returns a new `Position` with the given changes applied. The original is not
+modified. Fields not provided are carried over from the source.
+
+```typescript
+// move e2 pawn to e4
+const next = pos.derive({
+  board: [
+    ['e2', undefined],
+    ['e4', { color: 'w', type: 'p' }],
+  ],
+  turn: 'b',
+  enPassantSquare: 'e3',
+});
+
+// clone
+const clone = pos.derive();
+```
+
 #### `findPiece(piece): Square[]`
 
 Returns all squares occupied by the given piece.
@@ -143,6 +163,7 @@ All types are exported for use in consuming code and companion packages.
 import type {
   CastlingRights, // { bK: boolean; bQ: boolean; wK: boolean; wQ: boolean }
   Color, // 'w' | 'b'
+  DeriveOptions, // options accepted by Position.derive()
   File, // 'a' | 'b' | ... | 'h'
   Move, // { from: Square; to: Square; promotion: PromotionPieceType | undefined }
   Piece, // { color: Color; type: PieceType }

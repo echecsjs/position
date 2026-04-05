@@ -1,6 +1,7 @@
 export type {
   CastlingRights,
   Color,
+  DeriveOptions,
   File,
   Move,
   Piece,

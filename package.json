@@ -61,7 +61,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "tsdown",
-    "docs": "typedoc",
+    "docs": "typedoc src/index.ts src/internal/index.ts --out docs",
     "format": "pnpm run format:ci --write",
     "format:ci": "prettier -l \"**/*.+(css|js|json|jsx|md|mjs|mts|ts|tsx|yml|yaml)\"",
     "lint": "pnpm run lint:style && pnpm run lint:types",
