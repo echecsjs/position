@@ -16,6 +16,10 @@
 
 ### Changed
 
+- `new Position()` now creates an empty board. Pass `STARTING_POSITION` for the
+  standard chess starting position: `new Position(STARTING_POSITION)`.
+- `STARTING_POSITION` is now a `Map<Square, Piece>` (the starting board map)
+  instead of a `Position` instance.
 - `isCheck` reimplemented using reverse-lookup approach (from king, look outward
   for attackers) instead of iterating all enemy pieces.
 - `isValid` reimplemented using the same reverse-lookup attack detection.

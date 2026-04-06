@@ -21,10 +21,10 @@ npm install @echecs/position
 ## Quick Start
 
 ```typescript
-import { Position, STARTING_POSITION } from '@echecs/position';
+import { Position, STARTING_POSITION, KNIGHT_MOVES } from '@echecs/position';
 
 // Starting position
-const pos = new Position();
+const pos = new Position(STARTING_POSITION);
 
 console.log(pos.turn); // 'white'
 console.log(pos.fullmoveNumber); // 1
@@ -35,8 +35,6 @@ const piece = pos.piece('e1'); // { color: 'white', type: 'king' }
 const whites = pos.pieces('white'); // Map<Square, Piece> of all white pieces
 
 // Board queries
-import { KNIGHT_MOVES } from '@echecs/position';
-
 const reachable = pos.reach('e4', KNIGHT_MOVES[0]!); // squares the knight can reach
 
 // Derive a new position
@@ -62,8 +60,9 @@ new Position(board: Map<Square, Piece>)
 new Position(board: Map<Square, Piece>, options?: PositionOptions)
 ```
 
-The no-argument form creates the standard chess starting position. Pass a custom
-`board` map and optional `options` to construct any arbitrary position.
+The no-argument form creates an empty position with default options. Pass
+`STARTING_POSITION` for the standard chess opening. Pass any custom `board` map
+and optional `options` to construct an arbitrary position.
 
 ### Getters
 
@@ -139,8 +138,12 @@ pos.pieces('white'); // 16 white pieces
 import { STARTING_POSITION } from '@echecs/position';
 ```
 
-`STARTING_POSITION` is a `Position` instance for the standard chess starting
-position. Equivalent to `new Position()`.
+`STARTING_POSITION` is a `Map<Square, Piece>` with the 32 pieces in their
+standard starting squares. Pass it to the `Position` constructor:
+
+```typescript
+const pos = new Position(STARTING_POSITION);
+```
 
 ### Move Constants
 

@@ -8,6 +8,7 @@ import {
   ROOK_MOVES,
 } from '../moves.js';
 import { Position } from '../position.js';
+import { startingBoard } from '../starting-board.js';
 
 import type { Piece, Square } from '../types.js';
 
@@ -42,7 +43,7 @@ describe('reach', () => {
 
     it('returns occupied square (does not filter by occupancy)', () => {
       // Use starting position where e2 has a pawn
-      const start = new Position();
+      const start = new Position(startingBoard);
       const squares = start.reach('e1', KING_MOVES[1]!);
       // offset -16: e1 (index 112) - 16 = 96 → e2 (has white pawn)
       expect(squares).toEqual(['e2']);

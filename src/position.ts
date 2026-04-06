@@ -7,7 +7,6 @@ import {
   ROOK_MOVES,
 } from './moves.js';
 import { squareColor } from './squares.js';
-import { startingBoard } from './starting-board.js';
 import {
   CASTLING_TABLE,
   EP_TABLE,
@@ -68,11 +67,11 @@ export class Position {
   /**
    * Creates a new position.
    *
-   * @param board - Piece placement. Defaults to the standard starting position.
+   * @param board - Piece placement. Defaults to an empty board.
    * @param options - Turn, castling rights, en passant, and move counters.
    */
   constructor(board?: Map<Square, Piece>, options?: PositionOptions) {
-    this.#board = new Map(board ?? startingBoard);
+    this.#board = new Map(board);
     const options_ = { ...DEFAULT_OPTIONS, ...options };
     this.#castlingRights = options_.castlingRights;
     this.#enPassantSquare = options_.enPassantSquare;

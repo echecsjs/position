@@ -1,24 +1,21 @@
 import { describe, expect, it } from 'vitest';
 
 import { Position } from '../position.js';
+import { startingBoard } from '../starting-board.js';
 
 import type { Piece, Square } from '../types.js';
 
 describe('Position constructor', () => {
-  it('defaults to starting position with no args', () => {
+  it('defaults to empty board with no args', () => {
     const pos = new Position();
     expect(pos.turn).toBe('white');
     expect(pos.halfmoveClock).toBe(0);
     expect(pos.fullmoveNumber).toBe(1);
-    expect(pos.castlingRights).toEqual({
-      black: { king: true, queen: true },
-      white: { king: true, queen: true },
-    });
-    expect(pos.enPassantSquare).toBeUndefined();
+    expect(pos.pieces().size).toBe(0);
   });
 
   it('starting position has 32 pieces', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.pieces().size).toBe(32);
   });
 
@@ -60,36 +57,36 @@ describe('Position constructor', () => {
 
 describe('piece', () => {
   it('returns piece on occupied square', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.piece('e1')).toEqual({ color: 'white', type: 'king' });
   });
 
   it('returns undefined for empty square', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.piece('e4')).toBeUndefined();
   });
 });
 
 describe('pieces', () => {
   it('returns all 32 pieces when no color filter', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.pieces().size).toBe(32);
   });
 
   it('returns 16 white pieces', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.pieces('white').size).toBe(16);
   });
 
   it('returns 16 black pieces', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     expect(pos.pieces('black').size).toBe(16);
   });
 });
 
 describe('isInsufficientMaterial', () => {
   it('returns false for starting position', () => {
-    expect(new Position().isInsufficientMaterial).toBe(false);
+    expect(new Position(startingBoard).isInsufficientMaterial).toBe(false);
   });
 
   it('returns true for K vs K', () => {
@@ -190,7 +187,7 @@ describe('isInsufficientMaterial', () => {
 
 describe('isValid', () => {
   it('returns true for starting position', () => {
-    expect(new Position().isValid).toBe(true);
+    expect(new Position(startingBoard).isValid).toBe(true);
   });
 
   it('returns false when white king is missing', () => {
@@ -239,7 +236,7 @@ describe('isValid', () => {
 
 describe('isCheck', () => {
   it('returns false for starting position', () => {
-    expect(new Position().isCheck).toBe(false);
+    expect(new Position(startingBoard).isCheck).toBe(false);
   });
 
   it('returns true when king is attacked by a rook on same file', () => {
@@ -352,7 +349,7 @@ describe('hash', () => {
 
 describe('derive', () => {
   it('returns a clone when called with no arguments', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const clone = pos.derive();
     expect(clone).not.toBe(pos);
     expect(clone.turn).toBe(pos.turn);
@@ -364,7 +361,7 @@ describe('derive', () => {
   });
 
   it('applies board changes', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({
       changes: [
         ['e2', undefined],
@@ -376,7 +373,7 @@ describe('derive', () => {
   });
 
   it('does not modify the original position', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     pos.derive({
       changes: [['e2', undefined]],
     });
@@ -384,14 +381,14 @@ describe('derive', () => {
   });
 
   it('overrides turn', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({ turn: 'black' });
     expect(derived.turn).toBe('black');
     expect(pos.turn).toBe('white');
   });
 
   it('overrides castling rights', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const rights = {
       black: { king: false, queen: false },
       white: { king: false, queen: false },
@@ -401,7 +398,7 @@ describe('derive', () => {
   });
 
   it('sets en passant square', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({ enPassantSquare: 'e3' });
     expect(derived.enPassantSquare).toBe('e3');
   });
@@ -413,14 +410,14 @@ describe('derive', () => {
   });
 
   it('overrides halfmove clock and fullmove number', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({ halfmoveClock: 5, fullmoveNumber: 10 });
     expect(derived.halfmoveClock).toBe(5);
     expect(derived.fullmoveNumber).toBe(10);
   });
 
   it('applies board and options together', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({
       changes: [
         ['e2', undefined],
@@ -438,7 +435,7 @@ describe('derive', () => {
   });
 
   it('last tuple wins when multiple target the same square', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({
       changes: [
         ['e4', { color: 'white', type: 'pawn' }],
@@ -449,7 +446,7 @@ describe('derive', () => {
   });
 
   it('supports chained derive calls', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos
       .derive({ changes: [['e2', undefined]], turn: 'black' })
       .derive({ changes: [['e4', { color: 'white', type: 'pawn' }]] });
@@ -459,7 +456,7 @@ describe('derive', () => {
   });
 
   it('produces correct Zobrist hash', () => {
-    const pos = new Position();
+    const pos = new Position(startingBoard);
     const derived = pos.derive({
       changes: [
         ['e2', undefined],
