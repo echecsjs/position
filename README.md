@@ -64,19 +64,24 @@ The no-argument form creates an empty position with default options. Pass
 `STARTING_POSITION` for the standard chess opening. Pass any custom `board` map
 and optional `options` to construct an arbitrary position.
 
+### Properties
+
+| Property          | Type                           | Description                                                     |
+| ----------------- | ------------------------------ | --------------------------------------------------------------- |
+| `castlingRights`  | `CastlingRights`               | Which castling moves remain available                           |
+| `enPassantSquare` | `EnPassantSquare \| undefined` | En passant target square (rank 3 or 6), if any                  |
+| `fullmoveNumber`  | `number`                       | Game turn counter — increments after each black move            |
+| `halfmoveClock`   | `number`                       | Half-moves since last pawn advance or capture (fifty-move rule) |
+| `turn`            | `Color`                        | Side to move (`'white'` or `'black'`)                           |
+
 ### Getters
 
-| Getter                   | Type                           | Description                                                     |
-| ------------------------ | ------------------------------ | --------------------------------------------------------------- |
-| `castlingRights`         | `CastlingRights`               | Which castling moves remain available                           |
-| `enPassantSquare`        | `EnPassantSquare \| undefined` | En passant target square (rank 3 or 6), if any                  |
-| `fullmoveNumber`         | `number`                       | Game turn counter — increments after each black move            |
-| `halfmoveClock`          | `number`                       | Half-moves since last pawn advance or capture (fifty-move rule) |
-| `hash`                   | `string`                       | Zobrist hash string for position identity                       |
-| `isCheck`                | `boolean`                      | Whether the side to move is in check                            |
-| `isInsufficientMaterial` | `boolean`                      | Whether the position is a FIDE draw by insufficient material    |
-| `isValid`                | `boolean`                      | Whether the position is legally reachable                       |
-| `turn`                   | `Color`                        | Side to move (`'white'` or `'black'`)                           |
+| Getter                   | Type      | Description                                                  |
+| ------------------------ | --------- | ------------------------------------------------------------ |
+| `hash`                   | `string`  | Zobrist hash string for position identity                    |
+| `isCheck`                | `boolean` | Whether the side to move is in check                         |
+| `isInsufficientMaterial` | `boolean` | Whether the position is a FIDE draw by insufficient material |
+| `isValid`                | `boolean` | Whether the position is legally reachable                    |
 
 ### Methods
 

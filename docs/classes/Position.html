@@ -88,25 +88,13 @@
           </ul>
           <h1>Class Position</h1>
         </div>
-        <section class="tsd-panel tsd-comment">
-          <div class="tsd-comment tsd-typography">
-            <p>
-              An immutable chess position — board state, turn, castling rights,
-              en passant square, and move counters.
-            </p>
-            <p>
-              Query the position with getters and methods. Produce new positions
-              with <a href="#derive" class="tsd-kind-method">derive</a>.
-            </p>
-          </div>
-        </section>
         <aside class="tsd-sources">
           <ul>
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L47"
-                >position.ts:47</a
+                href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L52"
+                >position.ts:52</a
               >
             </li>
           </ul>
@@ -142,44 +130,58 @@
                   </div>
                 </section>
                 <section class="tsd-index-section">
-                  <h3 class="tsd-index-heading">Accessors</h3>
+                  <h3 class="tsd-index-heading">Properties</h3>
                   <div class="tsd-index-list">
                     <a href="#castlingrights" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
-                        aria-label="Accessor"
+                        aria-label="Property"
                       >
-                        <use href="../assets/icons.svg#icon-262144"></use></svg
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
                       ><span>castling<wbr />Rights</span></a
                     >
                     <a href="#enpassantsquare" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
-                        aria-label="Accessor"
+                        aria-label="Property"
                       >
-                        <use href="../assets/icons.svg#icon-262144"></use></svg
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
                       ><span>en<wbr />Passant<wbr />Square</span></a
                     >
                     <a href="#fullmovenumber" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
-                        aria-label="Accessor"
+                        aria-label="Property"
                       >
-                        <use href="../assets/icons.svg#icon-262144"></use></svg
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
                       ><span>fullmove<wbr />Number</span></a
                     >
                     <a href="#halfmoveclock" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
                         viewBox="0 0 24 24"
-                        aria-label="Accessor"
+                        aria-label="Property"
                       >
-                        <use href="../assets/icons.svg#icon-262144"></use></svg
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
                       ><span>halfmove<wbr />Clock</span></a
                     >
+                    <a href="#turn" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Property"
+                      >
+                        <use href="../assets/icons.svg#icon-1024"></use></svg
+                      ><span>turn</span></a
+                    >
+                  </div>
+                </section>
+                <section class="tsd-index-section">
+                  <h3 class="tsd-index-heading">Accessors</h3>
+                  <div class="tsd-index-list">
                     <a href="#hash" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
@@ -216,29 +218,11 @@
                         <use href="../assets/icons.svg#icon-262144"></use></svg
                       ><span>is<wbr />Valid</span></a
                     >
-                    <a href="#turn" class="tsd-index-link"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Accessor"
-                      >
-                        <use href="../assets/icons.svg#icon-262144"></use></svg
-                      ><span>turn</span></a
-                    >
                   </div>
                 </section>
                 <section class="tsd-index-section">
                   <h3 class="tsd-index-heading">Methods</h3>
                   <div class="tsd-index-list">
-                    <a href="#attackers" class="tsd-index-link"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Method"
-                      >
-                        <use href="../assets/icons.svg#icon-2048"></use></svg
-                      ><span>attackers</span></a
-                    >
                     <a href="#derive" class="tsd-index-link"
                       ><svg
                         class="tsd-kind-icon"
@@ -247,15 +231,6 @@
                       >
                         <use href="../assets/icons.svg#icon-2048"></use></svg
                       ><span>derive</span></a
-                    >
-                    <a href="#isattacked" class="tsd-index-link"
-                      ><svg
-                        class="tsd-kind-icon"
-                        viewBox="0 0 24 24"
-                        aria-label="Method"
-                      >
-                        <use href="../assets/icons.svg#icon-2048"></use></svg
-                      ><span>is<wbr />Attacked</span></a
                     >
                     <a href="#piece" class="tsd-index-link"
                       ><svg
@@ -274,6 +249,15 @@
                       >
                         <use href="../assets/icons.svg#icon-2048"></use></svg
                       ><span>pieces</span></a
+                    >
+                    <a href="#reach" class="tsd-index-link"
+                      ><svg
+                        class="tsd-kind-icon"
+                        viewBox="0 0 24 24"
+                        aria-label="Method"
+                      >
+                        <use href="../assets/icons.svg#icon-2048"></use></svg
+                      ><span>reach</span></a
                     >
                   </div>
                 </section>
@@ -352,9 +336,6 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>Creates a new position.</p>
-                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -377,12 +358,6 @@
                               >&gt;</span
                             ></span
                           >
-                          <div class="tsd-comment tsd-typography">
-                            <p>
-                              Piece placement. Defaults to the standard starting
-                              position.
-                            </p>
-                          </div>
                         </li>
                         <li>
                           <span
@@ -394,12 +369,6 @@
                               >PositionOptions</a
                             ></span
                           >
-                          <div class="tsd-comment tsd-typography">
-                            <p>
-                              Turn, castling rights, en passant, and move
-                              counters.
-                            </p>
-                          </div>
                         </li>
                       </ul>
                     </div>
@@ -414,8 +383,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L62"
-                            >position.ts:62</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L63"
+                            >position.ts:63</a
                           >
                         </li>
                       </ul>
@@ -423,6 +392,177 @@
                   </div>
                 </li>
               </ul>
+            </section>
+          </section>
+        </details>
+        <details class="tsd-panel-group tsd-member-group tsd-accordion" open>
+          <summary class="tsd-accordion-summary" data-key="section-Properties">
+            <svg
+              width="20"
+              height="20"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden="true"
+            >
+              <use href="../assets/icons.svg#icon-chevronDown"></use>
+            </svg>
+            <h2>Properties</h2>
+          </summary>
+          <section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="castlingrights">
+                <code class="tsd-tag">Readonly</code
+                ><span>castling<wbr />Rights</span
+                ><a
+                  href="#castlingrights"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">castlingRights</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../interfaces/CastlingRights.html"
+                  class="tsd-signature-type tsd-kind-interface"
+                  >CastlingRights</a
+                >
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L53"
+                      >position.ts:53</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="enpassantsquare">
+                <code class="tsd-tag">Readonly</code
+                ><span>en<wbr />Passant<wbr />Square</span
+                ><a
+                  href="#enpassantsquare"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">enPassantSquare</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../types/EnPassantSquare.html"
+                  class="tsd-signature-type tsd-kind-type-alias"
+                  >EnPassantSquare</a
+                >
+                <span class="tsd-signature-symbol">|</span>
+                <span class="tsd-signature-type">undefined</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L54"
+                      >position.ts:54</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="fullmovenumber">
+                <code class="tsd-tag">Readonly</code
+                ><span>fullmove<wbr />Number</span
+                ><a
+                  href="#fullmovenumber"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">fullmoveNumber</span
+                ><span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">number</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L55"
+                      >position.ts:55</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="halfmoveclock">
+                <code class="tsd-tag">Readonly</code
+                ><span>halfmove<wbr />Clock</span
+                ><a
+                  href="#halfmoveclock"
+                  aria-label="Permalink"
+                  class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">halfmoveClock</span
+                ><span class="tsd-signature-symbol">:</span>
+                <span class="tsd-signature-type">number</span>
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L56"
+                      >position.ts:56</a
+                    >
+                  </li>
+                </ul>
+              </aside>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="turn">
+                <code class="tsd-tag">Readonly</code><span>turn</span
+                ><a href="#turn" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <div class="tsd-signature">
+                <span class="tsd-kind-property">turn</span
+                ><span class="tsd-signature-symbol">:</span>
+                <a
+                  href="../types/Color.html"
+                  class="tsd-signature-type tsd-kind-type-alias"
+                  >Color</a
+                >
+              </div>
+              <aside class="tsd-sources">
+                <ul>
+                  <li>
+                    Defined in
+                    <a
+                      href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L57"
+                      >position.ts:57</a
+                    >
+                  </li>
+                </ul>
+              </aside>
             </section>
           </section>
         </details>
@@ -441,209 +581,6 @@
           </summary>
           <section>
             <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="castlingrights">
-                <span>castling<wbr />Rights</span
-                ><a
-                  href="#castlingrights"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li>
-                  <div class="tsd-signature" id="castlingrightscastlingrights">
-                    <span class="tsd-signature-keyword">get</span>
-                    <span class="tsd-kind-get-signature">castlingRights</span
-                    ><span class="tsd-signature-symbol">()</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../interfaces/CastlingRights.html"
-                      class="tsd-signature-type tsd-kind-interface"
-                      >CastlingRights</a
-                    >
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>Which castling moves remain available.</p>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns
-                      <a
-                        href="../interfaces/CastlingRights.html"
-                        class="tsd-signature-type tsd-kind-interface"
-                        >CastlingRights</a
-                      >
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L73"
-                            >position.ts:73</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="enpassantsquare">
-                <span>en<wbr />Passant<wbr />Square</span
-                ><a
-                  href="#enpassantsquare"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li>
-                  <div
-                    class="tsd-signature"
-                    id="enpassantsquareenpassantsquare"
-                  >
-                    <span class="tsd-signature-keyword">get</span>
-                    <span class="tsd-kind-get-signature">enPassantSquare</span
-                    ><span class="tsd-signature-symbol">()</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/EnPassantSquare.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >EnPassantSquare</a
-                    >
-                    <span class="tsd-signature-symbol">|</span>
-                    <span class="tsd-signature-type">undefined</span>
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        En passant target square, or <code>undefined</code> if
-                        none.
-                      </p>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns
-                      <a
-                        href="../types/EnPassantSquare.html"
-                        class="tsd-signature-type tsd-kind-type-alias"
-                        >EnPassantSquare</a
-                      >
-                      <span class="tsd-signature-symbol">|</span>
-                      <span class="tsd-signature-type">undefined</span>
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L78"
-                            >position.ts:78</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="fullmovenumber">
-                <span>fullmove<wbr />Number</span
-                ><a
-                  href="#fullmovenumber"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li>
-                  <div class="tsd-signature" id="fullmovenumberfullmovenumber">
-                    <span class="tsd-signature-keyword">get</span>
-                    <span class="tsd-kind-get-signature">fullmoveNumber</span
-                    ><span class="tsd-signature-symbol">()</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <span class="tsd-signature-type">number</span>
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Game turn counter — starts at <code>1</code> and
-                        increments after each black move.
-                      </p>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns <span class="tsd-signature-type">number</span>
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L85"
-                            >position.ts:85</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="halfmoveclock">
-                <span>halfmove<wbr />Clock</span
-                ><a
-                  href="#halfmoveclock"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li>
-                  <div class="tsd-signature" id="halfmoveclockhalfmoveclock">
-                    <span class="tsd-signature-keyword">get</span>
-                    <span class="tsd-kind-get-signature">halfmoveClock</span
-                    ><span class="tsd-signature-symbol">()</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <span class="tsd-signature-type">number</span>
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Number of half-moves since the last pawn advance or
-                        capture. Resets on every pawn move or capture. A draw
-                        can be claimed when it reaches <code>100</code>.
-                      </p>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns <span class="tsd-signature-type">number</span>
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L93"
-                            >position.ts:93</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
               <h3 class="tsd-anchor-link" id="hash">
                 <span>hash</span
                 ><a href="#hash" aria-label="Permalink" class="tsd-anchor-icon"
@@ -661,44 +598,16 @@
                     <span class="tsd-signature-type">string</span>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        A Zobrist hash of the position as a 16-character hex
-                        string. Computed once and cached. Two positions with the
-                        same hash are considered identical (with negligible
-                        collision probability).
-                      </p>
-                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">string</span>
                     </h4>
-                    <div class="tsd-comment tsd-typography">
-                      <div class="tsd-tag-remarks">
-                        <h4 class="tsd-anchor-link" id="remarks">
-                          Remarks<a
-                            href="#remarks"
-                            aria-label="Permalink"
-                            class="tsd-anchor-icon"
-                            ><svg viewBox="0 0 24 24" aria-hidden="true">
-                              <use
-                                href="../assets/icons.svg#icon-anchor"
-                              ></use></svg
-                          ></a>
-                        </h4>
-                        <p>
-                          The hash algorithm and format are not stable across
-                          major versions. Do not persist hashes across version
-                          upgrades.
-                        </p>
-                      </div>
-                    </div>
                     <aside class="tsd-sources">
                       <ul>
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L105"
-                            >position.ts:105</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L97"
+                            >position.ts:97</a
                           >
                         </li>
                       </ul>
@@ -728,9 +637,6 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>Whether the side to move is in check.</p>
-                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -739,8 +645,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L223"
-                            >position.ts:223</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L245"
+                            >position.ts:245</a
                           >
                         </li>
                       </ul>
@@ -774,13 +680,6 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Whether the position is a draw by insufficient material
-                        (FIDE rules): K vs K, K+B vs K, K+N vs K, or K+B vs K+B
-                        with same-color bishops.
-                      </p>
-                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -789,8 +688,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L145"
-                            >position.ts:145</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L144"
+                            >position.ts:144</a
                           >
                         </li>
                       </ul>
@@ -820,13 +719,6 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Whether the position is legally reachable: exactly one
-                        king per side, no pawns on ranks 1 or 8, and the side
-                        not to move is not in check.
-                      </p>
-                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -835,59 +727,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L184"
-                            >position.ts:184</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="turn">
-                <span>turn</span
-                ><a href="#turn" aria-label="Permalink" class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li>
-                  <div class="tsd-signature" id="turnturn">
-                    <span class="tsd-signature-keyword">get</span>
-                    <span class="tsd-kind-get-signature">turn</span
-                    ><span class="tsd-signature-symbol">()</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Color.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Color</a
-                    >
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Side to move — <code>'white'</code> or
-                        <code>'black'</code>.
-                      </p>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns
-                      <a
-                        href="../types/Color.html"
-                        class="tsd-signature-type tsd-kind-type-alias"
-                        >Color</a
-                      >
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L234"
-                            >position.ts:234</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L186"
+                            >position.ts:186</a
                           >
                         </li>
                       </ul>
@@ -912,111 +753,6 @@
             <h2>Methods</h2>
           </summary>
           <section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="attackers">
-                <span>attackers</span
-                ><a
-                  href="#attackers"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li class="">
-                  <div class="tsd-signature tsd-anchor-link" id="attackers-1">
-                    <span class="tsd-kind-call-signature">attackers</span
-                    ><span class="tsd-signature-symbol">(</span
-                    ><span class="tsd-kind-parameter">square</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Square.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Square</a
-                    ><span class="tsd-signature-symbol">,</span>
-                    <span class="tsd-kind-parameter">by</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Color.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Color</a
-                    ><span class="tsd-signature-symbol">)</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Square.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Square</a
-                    ><span class="tsd-signature-symbol">[]</span
-                    ><a
-                      href="#attackers-1"
-                      aria-label="Permalink"
-                      class="tsd-anchor-icon"
-                      ><svg viewBox="0 0 24 24" aria-hidden="true">
-                        <use href="../assets/icons.svg#icon-anchor"></use></svg
-                    ></a>
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Returns all squares occupied by pieces of the given
-                        color that attack the target square.
-                      </p>
-                    </div>
-                    <div class="tsd-parameters">
-                      <h4 class="tsd-parameters-title">Parameters</h4>
-                      <ul class="tsd-parameter-list">
-                        <li>
-                          <span
-                            ><span class="tsd-kind-parameter">square</span>:
-                            <a
-                              href="../types/Square.html"
-                              class="tsd-signature-type tsd-kind-type-alias"
-                              >Square</a
-                            ></span
-                          >
-                          <div class="tsd-comment tsd-typography">
-                            <p>The target square.</p>
-                          </div>
-                        </li>
-                        <li>
-                          <span
-                            ><span class="tsd-kind-parameter">by</span>:
-                            <a
-                              href="../types/Color.html"
-                              class="tsd-signature-type tsd-kind-type-alias"
-                              >Color</a
-                            ></span
-                          >
-                          <div class="tsd-comment tsd-typography">
-                            <p>The attacking color.</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns
-                      <a
-                        href="../types/Square.html"
-                        class="tsd-signature-type tsd-kind-type-alias"
-                        >Square</a
-                      ><span class="tsd-signature-symbol">[]</span>
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L330"
-                            >position.ts:330</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
             <section class="tsd-panel tsd-member">
               <h3 class="tsd-anchor-link" id="derive">
                 <span>derive</span
@@ -1052,13 +788,6 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Returns a new position with the given changes applied.
-                        Fields not provided are carried over from the source.
-                        Calling with no argument returns a clone.
-                      </p>
-                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -1072,9 +801,6 @@
                               >DeriveOptions</a
                             ></span
                           >
-                          <div class="tsd-comment tsd-typography">
-                            <p>Board deltas and option overrides to apply.</p>
-                          </div>
                         </li>
                       </ul>
                     </div>
@@ -1089,104 +815,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L298"
-                            >position.ts:298</a
-                          >
-                        </li>
-                      </ul>
-                    </aside>
-                  </div>
-                </li>
-              </ul>
-            </section>
-            <section class="tsd-panel tsd-member">
-              <h3 class="tsd-anchor-link" id="isattacked">
-                <span>is<wbr />Attacked</span
-                ><a
-                  href="#isattacked"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </h3>
-              <ul class="tsd-signatures">
-                <li class="">
-                  <div class="tsd-signature tsd-anchor-link" id="isattacked-1">
-                    <span class="tsd-kind-call-signature">isAttacked</span
-                    ><span class="tsd-signature-symbol">(</span
-                    ><span class="tsd-kind-parameter">square</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Square.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Square</a
-                    ><span class="tsd-signature-symbol">,</span>
-                    <span class="tsd-kind-parameter">by</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <a
-                      href="../types/Color.html"
-                      class="tsd-signature-type tsd-kind-type-alias"
-                      >Color</a
-                    ><span class="tsd-signature-symbol">)</span
-                    ><span class="tsd-signature-symbol">:</span>
-                    <span class="tsd-signature-type">boolean</span
-                    ><a
-                      href="#isattacked-1"
-                      aria-label="Permalink"
-                      class="tsd-anchor-icon"
-                      ><svg viewBox="0 0 24 24" aria-hidden="true">
-                        <use href="../assets/icons.svg#icon-anchor"></use></svg
-                    ></a>
-                  </div>
-                  <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Returns <code>true</code> if any piece of the given
-                        color attacks the target square.
-                      </p>
-                    </div>
-                    <div class="tsd-parameters">
-                      <h4 class="tsd-parameters-title">Parameters</h4>
-                      <ul class="tsd-parameter-list">
-                        <li>
-                          <span
-                            ><span class="tsd-kind-parameter">square</span>:
-                            <a
-                              href="../types/Square.html"
-                              class="tsd-signature-type tsd-kind-type-alias"
-                              >Square</a
-                            ></span
-                          >
-                          <div class="tsd-comment tsd-typography">
-                            <p>The target square.</p>
-                          </div>
-                        </li>
-                        <li>
-                          <span
-                            ><span class="tsd-kind-parameter">by</span>:
-                            <a
-                              href="../types/Color.html"
-                              class="tsd-signature-type tsd-kind-type-alias"
-                              >Color</a
-                            ></span
-                          >
-                          <div class="tsd-comment tsd-typography">
-                            <p>The attacking color.</p>
-                          </div>
-                        </li>
-                      </ul>
-                    </div>
-                    <h4 class="tsd-returns-title">
-                      Returns <span class="tsd-signature-type">boolean</span>
-                    </h4>
-                    <aside class="tsd-sources">
-                      <ul>
-                        <li>
-                          Defined in
-                          <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L355"
-                            >position.ts:355</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L331"
+                            >position.ts:331</a
                           >
                         </li>
                       </ul>
@@ -1232,12 +862,6 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Returns the piece on the given square, or
-                        <code>undefined</code> if empty.
-                      </p>
-                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -1250,9 +874,6 @@
                               >Square</a
                             ></span
                           >
-                          <div class="tsd-comment tsd-typography">
-                            <p>The square to query.</p>
-                          </div>
                         </li>
                       </ul>
                     </div>
@@ -1271,8 +892,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L378"
-                            >position.ts:378</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L380"
+                            >position.ts:380</a
                           >
                         </li>
                       </ul>
@@ -1326,12 +947,6 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
-                    <div class="tsd-comment tsd-typography">
-                      <p>
-                        Returns a map of all pieces on the board, optionally
-                        filtered by color.
-                      </p>
-                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -1345,12 +960,6 @@
                               >Color</a
                             ></span
                           >
-                          <div class="tsd-comment tsd-typography">
-                            <p>
-                              If provided, only pieces of this color are
-                              returned.
-                            </p>
-                          </div>
                         </li>
                       </ul>
                     </div>
@@ -1373,8 +982,98 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/ecc840c19c1dbd00e9ee0f945cdc1f6e96654e14/src/position.ts#L387"
-                            >position.ts:387</a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L384"
+                            >position.ts:384</a
+                          >
+                        </li>
+                      </ul>
+                    </aside>
+                  </div>
+                </li>
+              </ul>
+            </section>
+            <section class="tsd-panel tsd-member">
+              <h3 class="tsd-anchor-link" id="reach">
+                <span>reach</span
+                ><a href="#reach" aria-label="Permalink" class="tsd-anchor-icon"
+                  ><svg viewBox="0 0 24 24" aria-hidden="true">
+                    <use href="../assets/icons.svg#icon-anchor"></use></svg
+                ></a>
+              </h3>
+              <ul class="tsd-signatures">
+                <li class="">
+                  <div class="tsd-signature tsd-anchor-link" id="reach-1">
+                    <span class="tsd-kind-call-signature">reach</span
+                    ><span class="tsd-signature-symbol">(</span
+                    ><span class="tsd-kind-parameter">square</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../types/Square.html"
+                      class="tsd-signature-type tsd-kind-type-alias"
+                      >Square</a
+                    ><span class="tsd-signature-symbol">,</span>
+                    <span class="tsd-kind-parameter">move</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../interfaces/PieceMove.html"
+                      class="tsd-signature-type tsd-kind-interface"
+                      >PieceMove</a
+                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">:</span>
+                    <a
+                      href="../types/Square.html"
+                      class="tsd-signature-type tsd-kind-type-alias"
+                      >Square</a
+                    ><span class="tsd-signature-symbol">[]</span
+                    ><a
+                      href="#reach-1"
+                      aria-label="Permalink"
+                      class="tsd-anchor-icon"
+                      ><svg viewBox="0 0 24 24" aria-hidden="true">
+                        <use href="../assets/icons.svg#icon-anchor"></use></svg
+                    ></a>
+                  </div>
+                  <div class="tsd-description">
+                    <div class="tsd-parameters">
+                      <h4 class="tsd-parameters-title">Parameters</h4>
+                      <ul class="tsd-parameter-list">
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">square</span>:
+                            <a
+                              href="../types/Square.html"
+                              class="tsd-signature-type tsd-kind-type-alias"
+                              >Square</a
+                            ></span
+                          >
+                        </li>
+                        <li>
+                          <span
+                            ><span class="tsd-kind-parameter">move</span>:
+                            <a
+                              href="../interfaces/PieceMove.html"
+                              class="tsd-signature-type tsd-kind-interface"
+                              >PieceMove</a
+                            ></span
+                          >
+                        </li>
+                      </ul>
+                    </div>
+                    <h4 class="tsd-returns-title">
+                      Returns
+                      <a
+                        href="../types/Square.html"
+                        class="tsd-signature-type tsd-kind-type-alias"
+                        >Square</a
+                      ><span class="tsd-signature-symbol">[]</span>
+                    </h4>
+                    <aside class="tsd-sources">
+                      <ul>
+                        <li>
+                          Defined in
+                          <a
+                            href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/position.ts#L353"
+                            >position.ts:353</a
                           >
                         </li>
                       </ul>
@@ -1560,6 +1259,65 @@
               <details open class="tsd-accordion tsd-page-navigation-section">
                 <summary
                   class="tsd-accordion-summary"
+                  data-key="section-Properties"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden="true"
+                  >
+                    <use href="../assets/icons.svg#icon-chevronDown"></use></svg
+                  >Properties
+                </summary>
+                <div>
+                  <a href="#castlingrights"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>castling<wbr />Rights</span></a
+                  ><a href="#enpassantsquare"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>en<wbr />Passant<wbr />Square</span></a
+                  ><a href="#fullmovenumber"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>fullmove<wbr />Number</span></a
+                  ><a href="#halfmoveclock"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>halfmove<wbr />Clock</span></a
+                  ><a href="#turn"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Property"
+                    >
+                      <use href="../assets/icons.svg#icon-1024"></use></svg
+                    ><span>turn</span></a
+                  >
+                </div>
+              </details>
+              <details open class="tsd-accordion tsd-page-navigation-section">
+                <summary
+                  class="tsd-accordion-summary"
                   data-key="section-Accessors"
                 >
                   <svg
@@ -1573,39 +1331,7 @@
                   >Accessors
                 </summary>
                 <div>
-                  <a href="#castlingrights"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Accessor"
-                    >
-                      <use href="../assets/icons.svg#icon-262144"></use></svg
-                    ><span>castling<wbr />Rights</span></a
-                  ><a href="#enpassantsquare"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Accessor"
-                    >
-                      <use href="../assets/icons.svg#icon-262144"></use></svg
-                    ><span>en<wbr />Passant<wbr />Square</span></a
-                  ><a href="#fullmovenumber"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Accessor"
-                    >
-                      <use href="../assets/icons.svg#icon-262144"></use></svg
-                    ><span>fullmove<wbr />Number</span></a
-                  ><a href="#halfmoveclock"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Accessor"
-                    >
-                      <use href="../assets/icons.svg#icon-262144"></use></svg
-                    ><span>halfmove<wbr />Clock</span></a
-                  ><a href="#hash"
+                  <a href="#hash"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
@@ -1637,14 +1363,6 @@
                     >
                       <use href="../assets/icons.svg#icon-262144"></use></svg
                     ><span>is<wbr />Valid</span></a
-                  ><a href="#turn"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Accessor"
-                    >
-                      <use href="../assets/icons.svg#icon-262144"></use></svg
-                    ><span>turn</span></a
                   >
                 </div>
               </details>
@@ -1664,15 +1382,7 @@
                   >Methods
                 </summary>
                 <div>
-                  <a href="#attackers"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Method"
-                    >
-                      <use href="../assets/icons.svg#icon-2048"></use></svg
-                    ><span>attackers</span></a
-                  ><a href="#derive"
+                  <a href="#derive"
                     ><svg
                       class="tsd-kind-icon"
                       viewBox="0 0 24 24"
@@ -1680,14 +1390,6 @@
                     >
                       <use href="../assets/icons.svg#icon-2048"></use></svg
                     ><span>derive</span></a
-                  ><a href="#isattacked"
-                    ><svg
-                      class="tsd-kind-icon"
-                      viewBox="0 0 24 24"
-                      aria-label="Method"
-                    >
-                      <use href="../assets/icons.svg#icon-2048"></use></svg
-                    ><span>is<wbr />Attacked</span></a
                   ><a href="#piece"
                     ><svg
                       class="tsd-kind-icon"
@@ -1704,6 +1406,14 @@
                     >
                       <use href="../assets/icons.svg#icon-2048"></use></svg
                     ><span>pieces</span></a
+                  ><a href="#reach"
+                    ><svg
+                      class="tsd-kind-icon"
+                      viewBox="0 0 24 24"
+                      aria-label="Method"
+                    >
+                      <use href="../assets/icons.svg#icon-2048"></use></svg
+                    ><span>reach</span></a
                   >
                 </div>
               </details>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta http-equiv="x-ua-compatible" content="IE=edge" />
-    <title>canReach | @echecs/position</title>
+    <title>BISHOP_MOVES | @echecs/position</title>
     <meta name="description" content="Documentation for @echecs/position" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="../assets/style.css" />
@@ -84,143 +84,37 @@
       <div class="col-content">
         <div class="tsd-page-title">
           <ul class="tsd-breadcrumb" aria-label="Breadcrumb">
-            <li><a href="" aria-current="page">canReach</a></li>
+            <li><a href="" aria-current="page">BISHOP_MOVES</a></li>
           </ul>
-          <h1>Function canReach</h1>
+          <h1>Variable BISHOP_MOVES<code class="tsd-tag">Const</code></h1>
         </div>
-        <section class="tsd-panel">
-          <ul class="tsd-signatures">
-            <li class="">
-              <div class="tsd-signature tsd-anchor-link" id="canreach">
-                <span class="tsd-kind-call-signature">canReach</span
-                ><span class="tsd-signature-symbol">(</span
-                ><span class="tsd-kind-parameter">type</span
-                ><span class="tsd-signature-symbol">:</span>
-                <a
-                  href="../types/PieceType.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >PieceType</a
-                ><span class="tsd-signature-symbol">,</span>
-                <span class="tsd-kind-parameter">from</span
-                ><span class="tsd-signature-symbol">:</span>
-                <a
-                  href="../types/Square.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >Square</a
-                ><span class="tsd-signature-symbol">,</span>
-                <span class="tsd-kind-parameter">to</span
-                ><span class="tsd-signature-symbol">:</span>
-                <a
-                  href="../types/Square.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >Square</a
-                ><span class="tsd-signature-symbol">,</span>
-                <span class="tsd-kind-parameter">color</span
-                ><span class="tsd-signature-symbol">?:</span>
-                <a
-                  href="../types/Color.html"
-                  class="tsd-signature-type tsd-kind-type-alias"
-                  >Color</a
-                ><span class="tsd-signature-symbol">)</span
-                ><span class="tsd-signature-symbol">:</span>
-                <span class="tsd-signature-type">boolean</span
-                ><a
-                  href="#canreach"
-                  aria-label="Permalink"
-                  class="tsd-anchor-icon"
-                  ><svg viewBox="0 0 24 24" aria-hidden="true">
-                    <use href="../assets/icons.svg#icon-anchor"></use></svg
-                ></a>
-              </div>
-              <div class="tsd-description">
-                <div class="tsd-comment tsd-typography">
-                  <p>
-                    Returns <code>true</code> if the given piece type can
-                    geometrically reach <code>to</code> from <code>from</code>,
-                    ignoring all other pieces on the board.
-                  </p>
-                  <p>
-                    For pawns, <code>color</code> determines the attack
-                    direction. If omitted, either direction is accepted. For
-                    non-pawn types, <code>color</code> is ignored.
-                  </p>
-                </div>
-                <div class="tsd-parameters">
-                  <h4 class="tsd-parameters-title">Parameters</h4>
-                  <ul class="tsd-parameter-list">
-                    <li>
-                      <span
-                        ><span class="tsd-kind-parameter">type</span>:
-                        <a
-                          href="../types/PieceType.html"
-                          class="tsd-signature-type tsd-kind-type-alias"
-                          >PieceType</a
-                        ></span
-                      >
-                      <div class="tsd-comment tsd-typography">
-                        <p>The piece type to check.</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span
-                        ><span class="tsd-kind-parameter">from</span>:
-                        <a
-                          href="../types/Square.html"
-                          class="tsd-signature-type tsd-kind-type-alias"
-                          >Square</a
-                        ></span
-                      >
-                      <div class="tsd-comment tsd-typography">
-                        <p>The source square.</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span
-                        ><span class="tsd-kind-parameter">to</span>:
-                        <a
-                          href="../types/Square.html"
-                          class="tsd-signature-type tsd-kind-type-alias"
-                          >Square</a
-                        ></span
-                      >
-                      <div class="tsd-comment tsd-typography">
-                        <p>The target square.</p>
-                      </div>
-                    </li>
-                    <li>
-                      <span
-                        ><code class="tsd-tag">Optional</code
-                        ><span class="tsd-kind-parameter">color</span>:
-                        <a
-                          href="../types/Color.html"
-                          class="tsd-signature-type tsd-kind-type-alias"
-                          >Color</a
-                        ></span
-                      >
-                      <div class="tsd-comment tsd-typography">
-                        <p>Pawn attack direction (required only for pawns).</p>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <h4 class="tsd-returns-title">
-                  Returns <span class="tsd-signature-type">boolean</span>
-                </h4>
-                <aside class="tsd-sources">
-                  <ul>
-                    <li>
-                      Defined in
-                      <a
-                        href="https://github.com/mormubis/position/blob/42c1a1836369aa0c101d66e8890e5258e18c04fd/src/geometry.ts#L18"
-                        >geometry.ts:18</a
-                      >
-                    </li>
-                  </ul>
-                </aside>
-              </div>
+        <div class="tsd-signature">
+          <span class="tsd-kind-variable">BISHOP_MOVES</span
+          ><span class="tsd-signature-symbol">:</span>
+          <span class="tsd-signature-keyword">readonly</span>
+          <a
+            href="../interfaces/PieceMove.html"
+            class="tsd-signature-type tsd-kind-interface"
+            >PieceMove</a
+          ><span class="tsd-signature-symbol">[]</span
+          ><span class="tsd-signature-symbol"> = ...</span>
+        </div>
+        <div class="tsd-comment tsd-typography">
+          <p>
+            Bishop move directions on the 0x88 board — 4 diagonals, sliding.
+          </p>
+        </div>
+        <aside class="tsd-sources">
+          <ul>
+            <li>
+              Defined in
+              <a
+                href="https://github.com/mormubis/position/blob/d85699296ac826e4a0510e79cbaf15059563b63c/src/moves.ts#L16"
+                >moves.ts:16</a
+              >
             </li>
           </ul>
-        </section>
+        </aside>
       </div>
       <div class="col-sidebar">
         <div class="page-menu">
