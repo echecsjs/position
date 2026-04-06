@@ -125,19 +125,69 @@ describe('reach', () => {
   });
 
   describe('pawn', () => {
-    it('white pawn returns capture diagonals', () => {
+    it('white pawn pushes one square forward on empty board', () => {
       const pos = new Position(minBoard);
       const squares = pos.reach('e4', { color: 'white', type: 'pawn' });
-      expect(squares.toSorted()).toEqual(['d5', 'f5'].toSorted());
+      expect(squares).toEqual(['e5']);
     });
 
-    it('black pawn returns capture diagonals in opposite direction', () => {
+    it('white pawn double pushes from starting rank', () => {
+      const pos = new Position(minBoard);
+      const squares = pos.reach('e2', { color: 'white', type: 'pawn' });
+      expect(squares).toContain('e3');
+      expect(squares).toContain('e4');
+    });
+
+    it('black pawn pushes in opposite direction', () => {
       const pos = new Position(minBoard);
       const squares = pos.reach('e5', { color: 'black', type: 'pawn' });
-      expect(squares.toSorted()).toEqual(['d4', 'f4'].toSorted());
+      expect(squares).toEqual(['e4']);
     });
 
-    it('filters out same-color pieces on capture squares', () => {
+    it('black pawn double pushes from starting rank', () => {
+      const pos = new Position(minBoard);
+      const squares = pos.reach('e7', { color: 'black', type: 'pawn' });
+      expect(squares).toContain('e6');
+      expect(squares).toContain('e5');
+    });
+
+    it('push is blocked by any piece', () => {
+      const board = new Map<Square, Piece>([
+        ['e1', { color: 'white', type: 'king' }],
+        ['e8', { color: 'black', type: 'king' }],
+        ['e3', { color: 'black', type: 'pawn' }],
+      ]);
+      const pos = new Position(board);
+      const squares = pos.reach('e2', { color: 'white', type: 'pawn' });
+      expect(squares).not.toContain('e3');
+      expect(squares).not.toContain('e4');
+    });
+
+    it('double push blocked when intermediate square occupied', () => {
+      const board = new Map<Square, Piece>([
+        ['e1', { color: 'white', type: 'king' }],
+        ['e8', { color: 'black', type: 'king' }],
+        ['e3', { color: 'white', type: 'knight' }],
+      ]);
+      const pos = new Position(board);
+      const squares = pos.reach('e2', { color: 'white', type: 'pawn' });
+      expect(squares).not.toContain('e3');
+      expect(squares).not.toContain('e4');
+    });
+
+    it('captures diagonally when enemy piece present', () => {
+      const board = new Map<Square, Piece>([
+        ['e1', { color: 'white', type: 'king' }],
+        ['e8', { color: 'black', type: 'king' }],
+        ['d5', { color: 'black', type: 'pawn' }],
+      ]);
+      const pos = new Position(board);
+      const squares = pos.reach('e4', { color: 'white', type: 'pawn' });
+      expect(squares).toContain('d5');
+      expect(squares).toContain('e5');
+    });
+
+    it('does not capture same-color piece', () => {
       const board = new Map<Square, Piece>([
         ['e1', { color: 'white', type: 'king' }],
         ['e8', { color: 'black', type: 'king' }],
@@ -145,13 +195,31 @@ describe('reach', () => {
       ]);
       const pos = new Position(board);
       const squares = pos.reach('e4', { color: 'white', type: 'pawn' });
-      expect(squares).toEqual(['f5']);
+      expect(squares).not.toContain('d5');
     });
 
-    it('pawn on edge has only one capture diagonal', () => {
+    it('does not capture on empty diagonal', () => {
+      const pos = new Position(minBoard);
+      const squares = pos.reach('e4', { color: 'white', type: 'pawn' });
+      expect(squares).not.toContain('d5');
+      expect(squares).not.toContain('f5');
+    });
+
+    it('captures en passant square', () => {
+      const board = new Map<Square, Piece>([
+        ['e1', { color: 'white', type: 'king' }],
+        ['e8', { color: 'black', type: 'king' }],
+        ['d5', { color: 'black', type: 'pawn' }],
+      ]);
+      const pos = new Position(board, { enPassantSquare: 'f6' });
+      const squares = pos.reach('e5', { color: 'white', type: 'pawn' });
+      expect(squares).toContain('f6');
+    });
+
+    it('pawn on edge has one push direction', () => {
       const pos = new Position(minBoard);
       const squares = pos.reach('a4', { color: 'white', type: 'pawn' });
-      expect(squares).toEqual(['b5']);
+      expect(squares).toEqual(['a5']);
     });
   });
 });

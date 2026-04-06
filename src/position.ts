@@ -37,6 +37,15 @@ import type {
   Square,
 } from './types.js';
 
+const PIECE_MOVES: Record<PieceType, readonly PieceMove[]> = {
+  bishop: BISHOP_MOVES,
+  king: KING_MOVES,
+  knight: KNIGHT_MOVES,
+  pawn: [],
+  queen: QUEEN_MOVES,
+  rook: ROOK_MOVES,
+};
+
 const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   Pick<PositionOptions, 'enPassantSquare'> = {
   castlingRights: {
@@ -307,31 +316,6 @@ export class Position {
     return false;
   }
 
-  #movesForType(type: PieceType, color: Color): readonly PieceMove[] {
-    switch (type) {
-      case 'bishop': {
-        return BISHOP_MOVES;
-      }
-      case 'king': {
-        return KING_MOVES;
-      }
-      case 'knight': {
-        return KNIGHT_MOVES;
-      }
-      case 'pawn': {
-        return color === 'white'
-          ? PAWN_MOVES.white.captures
-          : PAWN_MOVES.black.captures;
-      }
-      case 'queen': {
-        return QUEEN_MOVES;
-      }
-      case 'rook': {
-        return ROOK_MOVES;
-      }
-    }
-  }
-
   derive(changes?: DeriveOptions): Position {
     const board = [...this.#board];
 
@@ -357,9 +341,51 @@ export class Position {
   reach(square: Square, piece: Piece): Square[] {
     const fromIndex = squareToIndex(square);
     const friendlyColor = piece.color === 'black' ? BLACK : WHITE;
-    const moves = this.#movesForType(piece.type, piece.color);
     const result: Square[] = [];
 
+    if (piece.type === 'pawn') {
+      const pawnMoves =
+        piece.color === 'white' ? PAWN_MOVES.white : PAWN_MOVES.black;
+      const startingRank = piece.color === 'white' ? 6 : 1;
+      const rank = (fromIndex >> 4) & 0x07;
+
+      const pushIndex = fromIndex + pawnMoves.push.offset;
+      if (!(pushIndex & OFF_BOARD) && (this.#board[pushIndex] ?? 0) === 0) {
+        result.push(indexToSquare(pushIndex));
+
+        if (rank === startingRank) {
+          const doublePushIndex = pushIndex + pawnMoves.push.offset;
+          if (
+            !(doublePushIndex & OFF_BOARD) &&
+            (this.#board[doublePushIndex] ?? 0) === 0
+          ) {
+            result.push(indexToSquare(doublePushIndex));
+          }
+        }
+      }
+
+      const epIndex =
+        this.enPassantSquare === undefined
+          ? -1
+          : squareToIndex(this.enPassantSquare);
+      for (const capture of pawnMoves.captures) {
+        const captureIndex = fromIndex + capture.offset;
+        if (captureIndex & OFF_BOARD) {
+          continue;
+        }
+        const value = this.#board[captureIndex] ?? 0;
+        if (
+          (value !== 0 && (value & COLOR_MASK) !== friendlyColor) ||
+          captureIndex === epIndex
+        ) {
+          result.push(indexToSquare(captureIndex));
+        }
+      }
+
+      return result;
+    }
+
+    const moves = PIECE_MOVES[piece.type];
     for (const move of moves) {
       let index = fromIndex + move.offset;
 
