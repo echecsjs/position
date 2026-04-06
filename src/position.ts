@@ -1,4 +1,11 @@
 import { OFF_BOARD, boardFromMap, squareToIndex } from './board.js';
+import {
+  BISHOP_MOVES,
+  KING_MOVES,
+  KNIGHT_MOVES,
+  PAWN_MOVES,
+  ROOK_MOVES,
+} from './moves.js';
 import { squareColor } from './squares.js';
 import { startingBoard } from './starting-board.js';
 import { ATTACKS, DIFF_OFFSET, PIECE_MASKS, RAYS } from './tables.js';
@@ -56,6 +63,7 @@ export class Position {
   readonly #halfmoveClock: number;
   #board0x88: (Piece | undefined)[] | undefined;
   #hash: string | undefined;
+  #isCheckCache: boolean | undefined;
   readonly #turn: Color;
 
   /**
@@ -211,14 +219,8 @@ export class Position {
 
     // Side not to move must not be in check
     const opponent: Color = this.#turn === 'white' ? 'black' : 'white';
-    for (const [square, p] of this.#board) {
-      if (
-        p.type === 'king' &&
-        p.color === opponent &&
-        this.isAttacked(square, this.#turn)
-      ) {
-        return false;
-      }
+    if (this.#computeIsAttacked(opponent)) {
+      return false;
     }
 
     return true;
@@ -226,13 +228,11 @@ export class Position {
 
   /** Whether the side to move is in check. */
   get isCheck(): boolean {
-    for (const [square, p] of this.#board) {
-      if (p.type === 'king' && p.color === this.#turn) {
-        const opponent: Color = this.#turn === 'white' ? 'black' : 'white';
-        return this.isAttacked(square, opponent);
-      }
+    if (this.#isCheckCache !== undefined) {
+      return this.#isCheckCache;
     }
-    return false;
+    this.#isCheckCache = this.#computeIsAttacked(this.#turn);
+    return this.#isCheckCache;
   }
 
   /** Side to move — `'white'` or `'black'`. */
@@ -246,6 +246,98 @@ export class Position {
     }
     this.#board0x88 = boardFromMap(this.#board);
     return this.#board0x88;
+  }
+
+  #computeIsAttacked(kingColor: Color): boolean {
+    // Find king
+    let kingSquare: Square | undefined;
+    for (const [sq, p] of this.#board) {
+      if (p.type === 'king' && p.color === kingColor) {
+        kingSquare = sq;
+        break;
+      }
+    }
+
+    if (kingSquare === undefined) {
+      return false;
+    }
+
+    const opponent: Color = kingColor === 'white' ? 'black' : 'white';
+
+    // Knight attacks
+    for (const move of KNIGHT_MOVES) {
+      const [target] = this.reach(kingSquare, move);
+      if (target !== undefined) {
+        const piece = this.#board.get(target);
+        if (piece?.color === opponent && piece.type === 'knight') {
+          return true;
+        }
+      }
+    }
+
+    // Rook/Queen attacks (rank and file)
+    for (const move of ROOK_MOVES) {
+      const squares = this.reach(kingSquare, move);
+      for (const sq of squares) {
+        const piece = this.#board.get(sq);
+        if (piece !== undefined) {
+          if (
+            piece.color === opponent &&
+            (piece.type === 'rook' || piece.type === 'queen')
+          ) {
+            return true;
+          }
+          break;
+        }
+      }
+    }
+
+    // Bishop/Queen attacks (diagonals)
+    for (const move of BISHOP_MOVES) {
+      const squares = this.reach(kingSquare, move);
+      for (const sq of squares) {
+        const piece = this.#board.get(sq);
+        if (piece !== undefined) {
+          if (
+            piece.color === opponent &&
+            (piece.type === 'bishop' || piece.type === 'queen')
+          ) {
+            return true;
+          }
+          break;
+        }
+      }
+    }
+
+    // King attacks (adjacent)
+    for (const move of KING_MOVES) {
+      const [target] = this.reach(kingSquare, move);
+      if (target !== undefined) {
+        const piece = this.#board.get(target);
+        if (piece?.color === opponent && piece.type === 'king') {
+          return true;
+        }
+      }
+    }
+
+    // Pawn attacks — from king's perspective, look for enemy pawns
+    // If king is white, look in the directions black pawns would capture FROM
+    // Black pawns capture with offsets +15, +17 — so from white king, look at +15, +17
+    const pawnMoves =
+      kingColor === 'white'
+        ? PAWN_MOVES.black.captures
+        : PAWN_MOVES.white.captures;
+    for (const move of pawnMoves) {
+      const [target] = this.reach(kingSquare, move);
+      if (target !== undefined) {
+        const piece = this.#board.get(target);
+        if (piece?.color === opponent && piece.type === 'pawn') {
+          return true;
+        }
+      }
+    }
+
+    return false;
   }
 
   #isAttackedByPiece(
