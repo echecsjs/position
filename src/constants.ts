@@ -1,6 +1,29 @@
-import { startingBoard } from './starting-board.js';
+import type { Piece, Square } from './types.js';
 
-/** The standard chess starting board — 32 pieces in their initial squares. */
-const STARTING_POSITION = startingBoard;
+const BACK_RANK_TYPES = [
+  'rook',
+  'knight',
+  'bishop',
+  'queen',
+  'king',
+  'bishop',
+  'knight',
+  'rook',
+] as const;
+const BACK_RANK_FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'] as const;
+
+const board = new Map<Square, Piece>();
+for (const [index, type] of BACK_RANK_TYPES.entries()) {
+  const file = BACK_RANK_FILES[index];
+  if (file === undefined) {
+    continue;
+  }
+  board.set(`${file}1` as Square, { color: 'white', type });
+  board.set(`${file}2` as Square, { color: 'white', type: 'pawn' });
+  board.set(`${file}7` as Square, { color: 'black', type: 'pawn' });
+  board.set(`${file}8` as Square, { color: 'black', type });
+}
+
+const STARTING_POSITION: ReadonlyMap<Square, Piece> = board;
 
 export { STARTING_POSITION };

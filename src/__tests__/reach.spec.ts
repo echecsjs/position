@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
+import { STARTING_POSITION } from '../constants.js';
 import { Position } from '../position.js';
-import { startingBoard } from '../starting-board.js';
 
 import type { Piece, Square } from '../types.js';
 
@@ -27,7 +27,7 @@ describe('reach', () => {
     });
 
     it('filters out same-color pieces', () => {
-      const pos = new Position(startingBoard);
+      const pos = new Position(STARTING_POSITION);
       const squares = pos.reach('g1', { color: 'white', type: 'knight' });
       expect(squares.toSorted()).toEqual(['f3', 'h3'].toSorted());
     });
@@ -55,7 +55,7 @@ describe('reach', () => {
     });
 
     it('stops before same-color piece', () => {
-      const pos = new Position(startingBoard);
+      const pos = new Position(STARTING_POSITION);
       const squares = pos.reach('c1', { color: 'white', type: 'bishop' });
       expect(squares).toEqual([]);
     });
@@ -118,7 +118,7 @@ describe('reach', () => {
     });
 
     it('filters out same-color pieces', () => {
-      const pos = new Position(startingBoard);
+      const pos = new Position(STARTING_POSITION);
       const squares = pos.reach('e1', { color: 'white', type: 'king' });
       expect(squares).toEqual([]);
     });

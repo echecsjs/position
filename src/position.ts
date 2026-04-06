@@ -69,7 +69,7 @@ export class Position {
   #hash: string | undefined;
   #isCheck: boolean | undefined;
 
-  constructor(board?: Map<Square, Piece>, options?: PositionOptions) {
+  constructor(board?: ReadonlyMap<Square, Piece>, options?: PositionOptions) {
     this.#board = Array.from<unknown, number>({ length: 128 }, () => 0);
 
     if (board !== undefined) {
