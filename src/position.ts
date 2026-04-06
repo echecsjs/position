@@ -16,9 +16,18 @@ import type {
   EnPassantSquare,
   File,
   Piece,
+  PieceMove,
   PositionOptions,
   Square,
 } from './types.js';
+
+const FILES = 'abcdefgh';
+
+function indexToSquare(index: number): Square {
+  const file = index & 0x07;
+  const rank = 8 - ((index >> 4) & 0x07);
+  return `${FILES[file]}${rank}` as Square;
+}
 
 const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   Pick<PositionOptions, 'enPassantSquare'> = {
@@ -45,6 +54,7 @@ export class Position {
   readonly #enPassantSquare: EnPassantSquare | undefined;
   readonly #fullmoveNumber: number;
   readonly #halfmoveClock: number;
+  #board0x88: (Piece | undefined)[] | undefined;
   #hash: string | undefined;
   readonly #turn: Color;
 
@@ -230,6 +240,14 @@ export class Position {
     return this.#turn;
   }
 
+  #getBoard0x88(): (Piece | undefined)[] {
+    if (this.#board0x88 !== undefined) {
+      return this.#board0x88;
+    }
+    this.#board0x88 = boardFromMap(this.#board);
+    return this.#board0x88;
+  }
+
   #isAttackedByPiece(
     board: (Piece | undefined)[],
     targetIndex: number,
@@ -313,6 +331,47 @@ export class Position {
       halfmoveClock: changes?.halfmoveClock ?? this.#halfmoveClock,
       turn: changes?.turn ?? this.#turn,
     });
+  }
+
+  /**
+   * From `square`, apply the move descriptor and return the squares reached.
+   *
+   * For single-hop moves, returns the target square if it is on the board
+   * (regardless of occupancy), or an empty array if off-board.
+   *
+   * For sliding moves, walks step by step collecting every square until
+   * hitting off-board or an occupied square. The first occupied square is
+   * included (it could be a capture target).
+   *
+   * @param square - The source square.
+   * @param move - A {@link PieceMove} descriptor with offset and optional slide flag.
+   */
+  reach(square: Square, move: PieceMove): Square[] {
+    const board = this.#getBoard0x88();
+    const fromIndex = squareToIndex(square);
+    let index = fromIndex + move.offset;
+
+    if ((index & OFF_BOARD) !== 0) {
+      return [];
+    }
+
+    if (!move.slide) {
+      return [indexToSquare(index)];
+    }
+
+    const result: Square[] = [];
+
+    while ((index & OFF_BOARD) === 0) {
+      result.push(indexToSquare(index));
+
+      if (board[index] !== undefined) {
+        break;
+      }
+
+      index += move.offset;
+    }
+
+    return result;
   }
 
   /**
