@@ -83,6 +83,14 @@ interface Piece {
   type: PieceType;
 }
 
+/** Describes a piece movement on the 0x88 board. */
+interface PieceMove {
+  /** 0x88 offset for this move direction. */
+  offset: number;
+  /** Whether the piece slides along this direction (bishop, rook, queen). */
+  slide?: boolean;
+}
+
 export type {
   CastlingRights,
   Color,
@@ -90,6 +98,7 @@ export type {
   EnPassantSquare,
   File,
   Piece,
+  PieceMove,
   PieceType,
   PositionOptions,
   Rank,
