@@ -1,20 +1,5 @@
 import type { Color, File, PieceType, Square } from './types.js';
 
-const COLORS: Color[] = ['black', 'white'];
-const FILES: File[] = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
-const PIECE_TYPES: PieceType[] = [
-  'bishop',
-  'king',
-  'knight',
-  'pawn',
-  'queen',
-  'rook',
-];
-const RANKS = ['1', '2', '3', '4', '5', '6', '7', '8'] as const;
-const SQUARES: Square[] = FILES.flatMap((f) =>
-  RANKS.toReversed().map((r) => `${f}${r}` as Square),
-);
-
 // Seeded LCG for deterministic random numbers (no Math.random — must be stable across runs)
 function lcg(seed: number): () => bigint {
   let s = BigInt(seed);
@@ -28,36 +13,51 @@ function lcg(seed: number): () => bigint {
 
 const next = lcg(0xde_ad_be_ef);
 
-// Piece table: PIECE_TABLE[square][pieceType][color]
-const PIECE_TABLE: Record<
-  Square,
-  Partial<Record<PieceType, Record<Color, bigint>>>
-> = Object.fromEntries(
-  SQUARES.map((sq) => [
-    sq,
-    Object.fromEntries(
-      PIECE_TYPES.map((pt) => [
-        pt,
-        Object.fromEntries(COLORS.map((c) => [c, next()])),
-      ]),
-    ),
-  ]),
-) as Record<Square, Partial<Record<PieceType, Record<Color, bigint>>>>;
+// Pre-compute all hash values. The order of next() calls must stay fixed —
+// changing it would produce different hashes for the same position.
 
-const TURN_TABLE: Record<Color, bigint> = {
-  black: next(),
-  white: next(),
-};
+const pieces = new Map<string, bigint>();
+for (const sq of 'abcdefgh') {
+  for (const rank of '87654321') {
+    for (const type of ['bishop', 'king', 'knight', 'pawn', 'queen', 'rook']) {
+      for (const color of ['black', 'white']) {
+        pieces.set(`${sq}${rank}.${type}.${color}`, next());
+      }
+    }
+  }
+}
 
-const CASTLING_TABLE: Record<string, bigint> = {
-  'black.king': next(),
-  'black.queen': next(),
-  'white.king': next(),
-  'white.queen': next(),
-};
+const turns = new Map<Color, bigint>([
+  ['black', next()],
+  ['white', next()],
+]);
 
-const EP_TABLE: Record<File, bigint> = Object.fromEntries(
-  FILES.map((f) => [f, next()]),
-) as Record<File, bigint>;
+const castling = new Map<string, bigint>([
+  ['black.king', next()],
+  ['black.queen', next()],
+  ['white.king', next()],
+  ['white.queen', next()],
+]);
 
-export { CASTLING_TABLE, EP_TABLE, PIECE_TABLE, TURN_TABLE };
+const ep = new Map<File, bigint>();
+for (const file of 'abcdefgh') {
+  ep.set(file as File, next());
+}
+
+function pieceHash(square: Square, type: PieceType, color: Color): bigint {
+  return pieces.get(`${square}.${type}.${color}`) ?? 0n;
+}
+
+function turnHash(color: Color): bigint {
+  return turns.get(color) ?? 0n;
+}
+
+function castlingHash(color: Color, side: 'king' | 'queen'): bigint {
+  return castling.get(`${color}.${side}`) ?? 0n;
+}
+
+function epHash(file: File): bigint {
+  return ep.get(file) ?? 0n;
+}
+
+export { castlingHash, epHash, pieceHash, turnHash };

@@ -7,12 +7,7 @@ import {
   ROOK_MOVES,
 } from './moves.js';
 import { squareColor } from './squares.js';
-import {
-  CASTLING_TABLE,
-  EP_TABLE,
-  PIECE_TABLE,
-  TURN_TABLE,
-} from './zobrist.js';
+import { castlingHash, epHash, pieceHash, turnHash } from './zobrist.js';
 
 import type {
   CastlingRights,
@@ -121,28 +116,28 @@ export class Position {
     let h = 0n;
 
     for (const [sq, p] of this.#board) {
-      h ^= PIECE_TABLE[sq]?.[p.type]?.[p.color] ?? 0n;
+      h ^= pieceHash(sq, p.type, p.color);
     }
 
-    h ^= TURN_TABLE[this.#turn];
+    h ^= turnHash(this.#turn);
 
     for (const [color, sides] of Object.entries(this.#castlingRights) as [
-      string,
+      Color,
       { king: boolean; queen: boolean },
     ][]) {
       for (const [side, active] of Object.entries(sides) as [
-        string,
+        'king' | 'queen',
         boolean,
       ][]) {
         if (active) {
-          h ^= CASTLING_TABLE[`${color}.${side}`] ?? 0n;
+          h ^= castlingHash(color, side);
         }
       }
     }
 
     if (this.#enPassantSquare !== undefined) {
       const file = this.#enPassantSquare[0] as File;
-      h ^= EP_TABLE[file];
+      h ^= epHash(file);
     }
 
     this.#hash = h.toString(16).padStart(16, '0');
