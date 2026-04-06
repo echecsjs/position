@@ -10,12 +10,14 @@
   optional slide flag.
 - `KNIGHT_MOVES`, `BISHOP_MOVES`, `ROOK_MOVES`, `KING_MOVES`, `PAWN_MOVES`
   constants — piece movement descriptors for the 0x88 board.
-- Lazy 0x88 board cache inside `Position` — built on first `reach` or `isCheck`
-  call, reused after.
 - Lazy `isCheck` cache — computed once per position.
 
 ### Changed
 
+- Position internals rewritten to use bitmask 0x88 array as single source of
+  truth. `Map<Square, Piece>` no longer stored internally.
+- `castlingRights`, `enPassantSquare`, `fullmoveNumber`, `halfmoveClock`, and
+  `turn` are now public readonly fields instead of getters.
 - `new Position()` now creates an empty board. Pass `STARTING_POSITION` for the
   standard chess starting position: `new Position(STARTING_POSITION)`.
 - `STARTING_POSITION` is now a `Map<Square, Piece>` (the starting board map)
