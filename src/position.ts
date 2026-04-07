@@ -17,7 +17,6 @@ import {
   BISHOP_MOVES,
   KING_MOVES,
   KNIGHT_MOVES,
-  PAWN_MOVES,
   QUEEN_MOVES,
   ROOK_MOVES,
 } from './moves.js';
@@ -344,17 +343,16 @@ export class Position {
     const result: Square[] = [];
 
     if (piece.type === 'pawn') {
-      const pawnMoves =
-        piece.color === 'white' ? PAWN_MOVES.white : PAWN_MOVES.black;
+      const direction = piece.color === 'white' ? -16 : 16;
       const startingRank = piece.color === 'white' ? 6 : 1;
       const rank = (fromIndex >> 4) & 0x07;
 
-      const pushIndex = fromIndex + pawnMoves.push.offset;
+      const pushIndex = fromIndex + direction;
       if (!(pushIndex & OFF_BOARD) && (this.#board[pushIndex] ?? 0) === 0) {
         result.push(indexToSquare(pushIndex));
 
         if (rank === startingRank) {
-          const doublePushIndex = pushIndex + pawnMoves.push.offset;
+          const doublePushIndex = pushIndex + direction;
           if (
             !(doublePushIndex & OFF_BOARD) &&
             (this.#board[doublePushIndex] ?? 0) === 0
@@ -368,8 +366,8 @@ export class Position {
         this.enPassantSquare === undefined
           ? -1
           : squareToIndex(this.enPassantSquare);
-      for (const capture of pawnMoves.captures) {
-        const captureIndex = fromIndex + capture.offset;
+      for (const captureOffset of [direction - 1, direction + 1]) {
+        const captureIndex = fromIndex + captureOffset;
         if (captureIndex & OFF_BOARD) {
           continue;
         }
