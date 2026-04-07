@@ -62,6 +62,13 @@ const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
   turn: 'white',
 };
 
+/**
+ * An immutable chess position — board state, turn, castling rights,
+ * en passant square, and move counters.
+ *
+ * Query the position with getters and methods. Produce new positions
+ * with {@link Position.derive | derive}.
+ */
 export class Position {
   // 128-element 0x88 board. Each element is 0 (empty) or a bitmask encoding
   // piece type (bits 0-2) and color (bit 3). See board.ts for the scheme.
@@ -69,12 +76,21 @@ export class Position {
   #hash: string | undefined;
   #isCheck: boolean | undefined;
 
+  /** Which castling moves remain available. */
   readonly castlingRights: CastlingRights;
+  /** En passant target square (rank 3 or 6), if any. */
   readonly enPassantSquare: EnPassantSquare | undefined;
+  /** Game turn counter — increments after each black move. */
   readonly fullmoveNumber: number;
+  /** Half-moves since last pawn advance or capture (fifty-move rule). */
   readonly halfmoveClock: number;
+  /** Side to move. */
   readonly turn: Color;
 
+  /**
+   * @param board - Piece placement. Defaults to an empty board.
+   * @param options - Turn, castling rights, en passant, and move counters.
+   */
   constructor(board?: ReadonlyMap<Square, Piece>, options?: PositionOptions) {
     this.#board = Array.from<unknown, number>({ length: 128 }, () => 0);
 
@@ -92,6 +108,10 @@ export class Position {
     this.turn = options_.turn;
   }
 
+  /**
+   * Zobrist hash of the position as a 16-character hex string. Computed once
+   * and cached. Uses the Polyglot standard keys from `@echecs/zobrist`.
+   */
   get hash(): string {
     if (this.#hash !== undefined) {
       return this.#hash;
@@ -141,6 +161,7 @@ export class Position {
     return this.#hash;
   }
 
+  /** Whether the side to move is in check. Computed once and cached. */
   get isCheck(): boolean {
     if (this.#isCheck !== undefined) {
       return this.#isCheck;
@@ -171,6 +192,10 @@ export class Position {
     return this.#isCheck;
   }
 
+  /**
+   * Whether the position is a draw by insufficient material (FIDE rules):
+   * K vs K, K+B vs K, K+N vs K, or K+B(s) vs K+B(s) with same-color bishops.
+   */
   get isInsufficientMaterial(): boolean {
     const nonKingPieces: { index: number; type: number }[] = [];
 
@@ -216,6 +241,10 @@ export class Position {
     return false;
   }
 
+  /**
+   * Whether the position is legally reachable: exactly one king per side,
+   * no pawns on ranks 1 or 8, and the side not to move is not in check.
+   */
   get isValid(): boolean {
     let blackKings = 0;
     let whiteKings = 0;
@@ -315,7 +344,7 @@ export class Position {
     ] as PieceType[]) {
       const squares = this.reach(square, { color: friendlyColor, type });
       for (const sq of squares) {
-        const p = this.piece(sq);
+        const p = this.at(sq);
         if (p === undefined || p.color !== enemyColor) {
           continue;
         }
@@ -333,6 +362,15 @@ export class Position {
     return false;
   }
 
+  /** Returns the piece on the given square, or `undefined` if empty. */
+  at(square: Square): Piece | undefined {
+    return bitmaskToPiece(this.#board[squareToIndex(square)] ?? 0);
+  }
+
+  /**
+   * Returns a new position with the given changes applied. Fields not
+   * provided are carried over from the source.
+   */
   derive(changes?: DeriveOptions): Position {
     const board = [...this.#board];
 
@@ -355,10 +393,7 @@ export class Position {
     });
   }
 
-  piece(square: Square): Piece | undefined {
-    return bitmaskToPiece(this.#board[squareToIndex(square)] ?? 0);
-  }
-
+  /** Returns a map of all pieces on the board, optionally filtered by color. */
   pieces(color?: Color): Map<Square, Piece> {
     const result = new Map<Square, Piece>();
     const colorFilter =
@@ -385,6 +420,12 @@ export class Position {
     return result;
   }
 
+  /**
+   * From `square`, return all squares the given `piece` can reach on the
+   * current board. Filters out same-color pieces. For sliding pieces, stops
+   * before friendlies and includes enemy pieces. For pawns, includes pushes
+   * (blocked by any piece), captures (enemy only), and en passant.
+   */
   reach(square: Square, piece: Piece): Square[] {
     const fromIndex = squareToIndex(square);
     const friendlyColor = piece.color === 'black' ? BLACK : WHITE;

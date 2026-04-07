@@ -88,13 +88,25 @@
           </ul>
           <h1>Class Position</h1>
         </div>
+        <section class="tsd-panel tsd-comment">
+          <div class="tsd-comment tsd-typography">
+            <p>
+              An immutable chess position — board state, turn, castling rights,
+              en passant square, and move counters.
+            </p>
+            <p>
+              Query the position with getters and methods. Produce new positions
+              with <a href="#derive" class="tsd-kind-method">derive</a>.
+            </p>
+          </div>
+        </section>
         <aside class="tsd-sources">
           <ul>
             <li>
               Defined in
               <a
-                href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L52"
-                >position.ts:52</a
+                href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L72"
+                >position.ts:72</a
               >
             </li>
           </ul>
@@ -301,10 +313,11 @@
                   >
                     <span class="tsd-signature-keyword">new</span>
                     <span class="tsd-kind-constructor-signature">Position</span
-                    ><span class="tsd-signature-symbol">(</span
-                    ><span class="tsd-kind-parameter">board</span
+                    ><span class="tsd-signature-symbol">(</span><br />    <span
+                      class="tsd-kind-parameter"
+                      >board</span
                     ><span class="tsd-signature-symbol">?:</span>
-                    <span class="tsd-signature-type">Map</span
+                    <span class="tsd-signature-type">ReadonlyMap</span
                     ><span class="tsd-signature-symbol">&lt;</span
                     ><a
                       href="../types/Square.html"
@@ -316,14 +329,17 @@
                       class="tsd-signature-type tsd-kind-interface"
                       >Piece</a
                     ><span class="tsd-signature-symbol">&gt;</span
-                    ><span class="tsd-signature-symbol">,</span>
-                    <span class="tsd-kind-parameter">options</span
+                    ><span class="tsd-signature-symbol">,</span><br />    <span
+                      class="tsd-kind-parameter"
+                      >options</span
                     ><span class="tsd-signature-symbol">?:</span>
                     <a
                       href="../interfaces/PositionOptions.html"
                       class="tsd-signature-type tsd-kind-interface"
                       >PositionOptions</a
-                    ><span class="tsd-signature-symbol">)</span
+                    ><span class="tsd-signature-symbol">,</span><br /><span
+                      class="tsd-signature-symbol"
+                      >)</span
                     ><span class="tsd-signature-symbol">:</span>
                     <a href="" class="tsd-signature-type tsd-kind-class"
                       >Position</a
@@ -343,7 +359,7 @@
                           <span
                             ><code class="tsd-tag">Optional</code
                             ><span class="tsd-kind-parameter">board</span>:
-                            <span class="tsd-signature-type">Map</span
+                            <span class="tsd-signature-type">ReadonlyMap</span
                             ><span class="tsd-signature-symbol">&lt;</span
                             ><a
                               href="../types/Square.html"
@@ -358,6 +374,9 @@
                               >&gt;</span
                             ></span
                           >
+                          <div class="tsd-comment tsd-typography">
+                            <p>Piece placement. Defaults to an empty board.</p>
+                          </div>
                         </li>
                         <li>
                           <span
@@ -369,6 +388,12 @@
                               >PositionOptions</a
                             ></span
                           >
+                          <div class="tsd-comment tsd-typography">
+                            <p>
+                              Turn, castling rights, en passant, and move
+                              counters.
+                            </p>
+                          </div>
                         </li>
                       </ul>
                     </div>
@@ -383,8 +408,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L63"
-                            >position.ts:63</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L94"
+                            >position.ts:94</a
                           >
                         </li>
                       </ul>
@@ -430,13 +455,16 @@
                   >CastlingRights</a
                 >
               </div>
+              <div class="tsd-comment tsd-typography">
+                <p>Which castling moves remain available.</p>
+              </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L53"
-                      >position.ts:53</a
+                      href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L80"
+                      >position.ts:80</a
                     >
                   </li>
                 </ul>
@@ -465,13 +493,16 @@
                 <span class="tsd-signature-symbol">|</span>
                 <span class="tsd-signature-type">undefined</span>
               </div>
+              <div class="tsd-comment tsd-typography">
+                <p>En passant target square (rank 3 or 6), if any.</p>
+              </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L54"
-                      >position.ts:54</a
+                      href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L82"
+                      >position.ts:82</a
                     >
                   </li>
                 </ul>
@@ -494,13 +525,16 @@
                 ><span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">number</span>
               </div>
+              <div class="tsd-comment tsd-typography">
+                <p>Game turn counter — increments after each black move.</p>
+              </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L55"
-                      >position.ts:55</a
+                      href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L84"
+                      >position.ts:84</a
                     >
                   </li>
                 </ul>
@@ -523,13 +557,19 @@
                 ><span class="tsd-signature-symbol">:</span>
                 <span class="tsd-signature-type">number</span>
               </div>
+              <div class="tsd-comment tsd-typography">
+                <p>
+                  Half-moves since last pawn advance or capture (fifty-move
+                  rule).
+                </p>
+              </div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L56"
-                      >position.ts:56</a
+                      href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L86"
+                      >position.ts:86</a
                     >
                   </li>
                 </ul>
@@ -552,13 +592,14 @@
                   >Color</a
                 >
               </div>
+              <div class="tsd-comment tsd-typography"><p>Side to move.</p></div>
               <aside class="tsd-sources">
                 <ul>
                   <li>
                     Defined in
                     <a
-                      href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L57"
-                      >position.ts:57</a
+                      href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L88"
+                      >position.ts:88</a
                     >
                   </li>
                 </ul>
@@ -598,6 +639,13 @@
                     <span class="tsd-signature-type">string</span>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Zobrist hash of the position as a 16-character hex
+                        string. Computed once and cached. Uses the Polyglot
+                        standard keys from <code>@echecs/zobrist</code>.
+                      </p>
+                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">string</span>
                     </h4>
@@ -606,8 +654,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L97"
-                            >position.ts:97</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L115"
+                            >position.ts:115</a
                           >
                         </li>
                       </ul>
@@ -637,6 +685,12 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Whether the side to move is in check. Computed once and
+                        cached.
+                      </p>
+                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -645,8 +699,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L247"
-                            >position.ts:247</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L165"
+                            >position.ts:165</a
                           >
                         </li>
                       </ul>
@@ -680,6 +734,13 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Whether the position is a draw by insufficient material
+                        (FIDE rules): K vs K, K+B vs K, K+N vs K, or K+B(s) vs
+                        K+B(s) with same-color bishops.
+                      </p>
+                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -688,8 +749,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L144"
-                            >position.ts:144</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L199"
+                            >position.ts:199</a
                           >
                         </li>
                       </ul>
@@ -719,6 +780,13 @@
                     <span class="tsd-signature-type">boolean</span>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Whether the position is legally reachable: exactly one
+                        king per side, no pawns on ranks 1 or 8, and the side
+                        not to move is not in check.
+                      </p>
+                    </div>
                     <h4 class="tsd-returns-title">
                       Returns <span class="tsd-signature-type">boolean</span>
                     </h4>
@@ -727,8 +795,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L186"
-                            >position.ts:186</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L248"
+                            >position.ts:248</a
                           >
                         </li>
                       </ul>
@@ -788,6 +856,12 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Returns a new position with the given changes applied.
+                        Fields not provided are carried over from the source.
+                      </p>
+                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -815,8 +889,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L335"
-                            >position.ts:335</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L369"
+                            >position.ts:369</a
                           >
                         </li>
                       </ul>
@@ -862,6 +936,12 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Returns the piece on the given square, or
+                        <code>undefined</code> if empty.
+                      </p>
+                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -892,8 +972,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L391"
-                            >position.ts:391</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L392"
+                            >position.ts:392</a
                           >
                         </li>
                       </ul>
@@ -947,6 +1027,12 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        Returns a map of all pieces on the board, optionally
+                        filtered by color.
+                      </p>
+                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -982,8 +1068,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L395"
-                            >position.ts:395</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L397"
+                            >position.ts:397</a
                           >
                         </li>
                       </ul>
@@ -1034,6 +1120,16 @@
                     ></a>
                   </div>
                   <div class="tsd-description">
+                    <div class="tsd-comment tsd-typography">
+                      <p>
+                        From <code>square</code>, return all squares the given
+                        <code>piece</code> can reach on the current board.
+                        Filters out same-color pieces. For sliding pieces, stops
+                        before friendlies and includes enemy pieces. For pawns,
+                        includes pushes (blocked by any piece), captures (enemy
+                        only), and en passant.
+                      </p>
+                    </div>
                     <div class="tsd-parameters">
                       <h4 class="tsd-parameters-title">Parameters</h4>
                       <ul class="tsd-parameter-list">
@@ -1072,8 +1168,8 @@
                         <li>
                           Defined in
                           <a
-                            href="https://github.com/mormubis/position/blob/37ec006df0f379a1606131ffa9e874f073a321d9/src/position.ts#L357"
-                            >position.ts:357</a
+                            href="https://github.com/mormubis/position/blob/765138593c64dd483e1a7021b04d1164ac0bca43/src/position.ts#L429"
+                            >position.ts:429</a
                           >
                         </li>
                       </ul>

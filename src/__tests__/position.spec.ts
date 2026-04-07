@@ -58,12 +58,12 @@ describe('Position constructor', () => {
 describe('piece', () => {
   it('returns piece on occupied square', () => {
     const pos = new Position(STARTING_POSITION);
-    expect(pos.piece('e1')).toEqual({ color: 'white', type: 'king' });
+    expect(pos.at('e1')).toEqual({ color: 'white', type: 'king' });
   });
 
   it('returns undefined for empty square', () => {
     const pos = new Position(STARTING_POSITION);
-    expect(pos.piece('e4')).toBeUndefined();
+    expect(pos.at('e4')).toBeUndefined();
   });
 });
 
@@ -380,8 +380,8 @@ describe('derive', () => {
         ['e4', { color: 'white', type: 'pawn' }],
       ],
     });
-    expect(derived.piece('e2')).toBeUndefined();
-    expect(derived.piece('e4')).toEqual({ color: 'white', type: 'pawn' });
+    expect(derived.at('e2')).toBeUndefined();
+    expect(derived.at('e4')).toEqual({ color: 'white', type: 'pawn' });
   });
 
   it('does not modify the original position', () => {
@@ -389,7 +389,7 @@ describe('derive', () => {
     pos.derive({
       changes: [['e2', undefined]],
     });
-    expect(pos.piece('e2')).toEqual({ color: 'white', type: 'pawn' });
+    expect(pos.at('e2')).toEqual({ color: 'white', type: 'pawn' });
   });
 
   it('overrides turn', () => {
@@ -440,8 +440,8 @@ describe('derive', () => {
       fullmoveNumber: 1,
       enPassantSquare: 'e3',
     });
-    expect(derived.piece('e2')).toBeUndefined();
-    expect(derived.piece('e4')).toEqual({ color: 'white', type: 'pawn' });
+    expect(derived.at('e2')).toBeUndefined();
+    expect(derived.at('e4')).toEqual({ color: 'white', type: 'pawn' });
     expect(derived.turn).toBe('black');
     expect(derived.enPassantSquare).toBe('e3');
   });
@@ -454,7 +454,7 @@ describe('derive', () => {
         ['e4', { color: 'black', type: 'queen' }],
       ],
     });
-    expect(derived.piece('e4')).toEqual({ color: 'black', type: 'queen' });
+    expect(derived.at('e4')).toEqual({ color: 'black', type: 'queen' });
   });
 
   it('supports chained derive calls', () => {
@@ -462,8 +462,8 @@ describe('derive', () => {
     const derived = pos
       .derive({ changes: [['e2', undefined]], turn: 'black' })
       .derive({ changes: [['e4', { color: 'white', type: 'pawn' }]] });
-    expect(derived.piece('e2')).toBeUndefined();
-    expect(derived.piece('e4')).toEqual({ color: 'white', type: 'pawn' });
+    expect(derived.at('e2')).toBeUndefined();
+    expect(derived.at('e4')).toEqual({ color: 'white', type: 'pawn' });
     expect(derived.turn).toBe('black');
   });
 

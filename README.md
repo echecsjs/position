@@ -31,7 +31,7 @@ console.log(pos.fullmoveNumber); // 1
 console.log(pos.isCheck); // false
 
 // Query the board
-const piece = pos.piece('e1'); // { color: 'white', type: 'king' }
+const piece = pos.at('e1'); // { color: 'white', type: 'king' }
 const whites = pos.pieces('white'); // Map<Square, Piece> of all white pieces
 
 // Board queries
@@ -118,13 +118,13 @@ pos.reach('e4', { color: 'white', type: 'rook' }); // all rank/file squares unti
 pos.reach('e4', { color: 'white', type: 'pawn' }); // ['d5', 'f5'] (capture diagonals)
 ```
 
-#### `piece(square): Piece | undefined`
+#### `at(square): Piece | undefined`
 
 Returns the piece on `square`, or `undefined` if the square is empty.
 
 ```typescript
-pos.piece('e1'); // { color: 'white', type: 'king' }
-pos.piece('e5'); // undefined (empty in starting position)
+pos.at('e1'); // { color: 'white', type: 'king' }
+pos.at('e5'); // undefined (empty in starting position)
 ```
 
 #### `pieces(color?): Map<Square, Piece>`
