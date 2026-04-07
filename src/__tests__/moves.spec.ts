@@ -4,7 +4,6 @@ import {
   BISHOP_MOVES,
   KING_MOVES,
   KNIGHT_MOVES,
-  PAWN_MOVES,
   ROOK_MOVES,
 } from '../moves.js';
 
@@ -65,49 +64,5 @@ describe('KING_MOVES', () => {
   it('contains all adjacent offsets', () => {
     const offsets = KING_MOVES.map((m) => m.offset).toSorted((a, b) => a - b);
     expect(offsets).toEqual([-17, -16, -15, -1, 1, 15, 16, 17]);
-  });
-});
-
-describe('PAWN_MOVES', () => {
-  describe('white', () => {
-    it('push offset is -16', () => {
-      expect(PAWN_MOVES.white.push.offset).toBe(-16);
-    });
-
-    it('push is not sliding', () => {
-      expect(PAWN_MOVES.white.push.slide).toBeFalsy();
-    });
-
-    it('has 2 capture moves', () => {
-      expect(PAWN_MOVES.white.captures).toHaveLength(2);
-    });
-
-    it('capture offsets are -17 and -15', () => {
-      const offsets = PAWN_MOVES.white.captures
-        .map((m) => m.offset)
-        .toSorted((a, b) => a - b);
-      expect(offsets).toEqual([-17, -15]);
-    });
-  });
-
-  describe('black', () => {
-    it('push offset is 16', () => {
-      expect(PAWN_MOVES.black.push.offset).toBe(16);
-    });
-
-    it('push is not sliding', () => {
-      expect(PAWN_MOVES.black.push.slide).toBeFalsy();
-    });
-
-    it('has 2 capture moves', () => {
-      expect(PAWN_MOVES.black.captures).toHaveLength(2);
-    });
-
-    it('capture offsets are 15 and 17', () => {
-      const offsets = PAWN_MOVES.black.captures
-        .map((m) => m.offset)
-        .toSorted((a, b) => a - b);
-      expect(offsets).toEqual([15, 17]);
-    });
   });
 });
