@@ -69,6 +69,8 @@ export class Position {
   readonly halfmoveClock: number;
   readonly turn: Color;
 
+  // 128-element 0x88 board. Each element is 0 (empty) or a bitmask encoding
+  // piece type (bits 0-2) and color (bit 3). See board.ts for the scheme.
   #board: number[];
   #hash: string | undefined;
   #isCheck: boolean | undefined;
@@ -90,6 +92,8 @@ export class Position {
     this.turn = options_.turn;
   }
 
+  // Bypasses the constructor to create a Position from a raw 0x88 array.
+  // Used by derive() to avoid converting back to a Map.
   static #from(
     board: number[],
     options: {
@@ -114,6 +118,8 @@ export class Position {
 
     let h = 0n;
 
+    // 0x88 iteration: indices 0-127, skip off-board slots (index & 0x88 !== 0)
+    // by jumping ahead 7 positions to the next valid rank.
     for (let index = 0; index < 128; index++) {
       if (index & OFF_BOARD) {
         index += 7;
@@ -186,6 +192,8 @@ export class Position {
     if (allBishops) {
       const firstPiece = nonKingPieces[0];
       if (firstPiece === undefined) return false;
+      // Square color from 0x88 index: file = index & 7, rank = index >> 4.
+      // (file + rank) & 1 gives the parity — same parity = same color square.
       const firstParity =
         ((firstPiece.index & 0x07) + ((firstPiece.index >> 4) & 0x07)) & 1;
       return nonKingPieces.every(
@@ -288,6 +296,10 @@ export class Position {
     return this.#isCheck;
   }
 
+  // Color trick: from the target square, call reach() pretending a friendly
+  // piece of each type is there. reach() skips friendly pieces and stops at
+  // enemies. If the enemy piece found matches the type we're checking, it
+  // means that piece attacks the target square.
   #isSquareAttackedBy(
     square: Square,
     friendlyColor: Color,
@@ -372,6 +384,7 @@ export class Position {
         this.enPassantSquare === undefined
           ? -1
           : squareToIndex(this.enPassantSquare);
+      // Capture offsets: direction +/- 1 gives the two diagonals
       for (const captureOffset of [direction - 1, direction + 1]) {
         const captureIndex = fromIndex + captureOffset;
         if (captureIndex & OFF_BOARD) {
