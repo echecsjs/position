@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@echecs/zobrist':
+        specifier: ^1.0.0
+        version: 1.0.0
     devDependencies:
       '@eslint/js':
         specifier: ^10.0.1
@@ -103,6 +107,10 @@ packages:
   '@bcoe/v8-coverage@1.0.2':
     resolution: {integrity: sha512-6zABk/ECA/QYSCQ1NGiVwwbQerUCZ+TQbp64Q3AgmfNvurHH0j8TtXa1qbShXA6qqkpAj4V5W8pP6mLe1mcMqA==}
     engines: {node: '>=18'}
+
+  '@echecs/zobrist@1.0.0':
+    resolution: {integrity: sha512-DYAs10AA42r6p4/hNMVAX0L6CzqOI6VZ0Vasu6mDpNHsLnnSiCBdcg5mInWA58NKJxTthpEka8ZzdKeemN6izQ==}
+    engines: {node: '>=20'}
 
   '@emnapi/core@1.9.0':
     resolution: {integrity: sha512-0DQ98G9ZQZOxfUcQn1waV2yS8aWdZ6kJMbYCJB3oUBecjWYO1fqJ+a1DRfPF3O5JEkwqwP1A9QEN/9mYm2Yd0w==}
@@ -1562,6 +1570,8 @@ snapshots:
       '@babel/helper-validator-identifier': 8.0.0-rc.2
 
   '@bcoe/v8-coverage@1.0.2': {}
+
+  '@echecs/zobrist@1.0.0': {}
 
   '@emnapi/core@1.9.0':
     dependencies:

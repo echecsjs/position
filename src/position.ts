@@ -1,4 +1,11 @@
 import {
+  castling as castlingHash,
+  enPassant as epHash,
+  piece as pieceHash,
+  turn as turnHash,
+} from '@echecs/zobrist';
+
+import {
   BISHOP,
   BLACK,
   COLOR_MASK,
@@ -21,7 +28,6 @@ import {
   ROOK_MOVES,
 } from './moves.js';
 import { squareColor } from './squares.js';
-import { castlingHash, epHash, pieceHash, turnHash } from './zobrist.js';
 
 import type {
   CastlingRights,
