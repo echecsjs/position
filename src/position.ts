@@ -63,17 +63,17 @@ const DEFAULT_OPTIONS: Required<Omit<PositionOptions, 'enPassantSquare'>> &
 };
 
 export class Position {
-  readonly castlingRights: CastlingRights;
-  readonly enPassantSquare: EnPassantSquare | undefined;
-  readonly fullmoveNumber: number;
-  readonly halfmoveClock: number;
-  readonly turn: Color;
-
   // 128-element 0x88 board. Each element is 0 (empty) or a bitmask encoding
   // piece type (bits 0-2) and color (bit 3). See board.ts for the scheme.
   #board: number[];
   #hash: string | undefined;
   #isCheck: boolean | undefined;
+
+  readonly castlingRights: CastlingRights;
+  readonly enPassantSquare: EnPassantSquare | undefined;
+  readonly fullmoveNumber: number;
+  readonly halfmoveClock: number;
+  readonly turn: Color;
 
   constructor(board?: ReadonlyMap<Square, Piece>, options?: PositionOptions) {
     this.#board = Array.from<unknown, number>({ length: 128 }, () => 0);
@@ -90,25 +90,6 @@ export class Position {
     this.fullmoveNumber = options_.fullmoveNumber;
     this.halfmoveClock = options_.halfmoveClock;
     this.turn = options_.turn;
-  }
-
-  // Bypasses the constructor to create a Position from a raw 0x88 array.
-  // Used by derive() to avoid converting back to a Map.
-  static #from(
-    board: number[],
-    options: {
-      castlingRights: CastlingRights;
-      enPassantSquare: EnPassantSquare | undefined;
-      fullmoveNumber: number;
-      halfmoveClock: number;
-      turn: Color;
-    },
-  ): Position {
-    const pos = new Position(undefined, options);
-    pos.#board = board;
-    pos.#hash = undefined;
-    pos.#isCheck = undefined;
-    return pos;
   }
 
   get hash(): string {
@@ -158,6 +139,36 @@ export class Position {
 
     this.#hash = h.toString(16).padStart(16, '0');
     return this.#hash;
+  }
+
+  get isCheck(): boolean {
+    if (this.#isCheck !== undefined) {
+      return this.#isCheck;
+    }
+
+    const kingColor = this.turn;
+    const opponent: Color = kingColor === 'white' ? 'black' : 'white';
+
+    let kingSquare: Square | undefined;
+    const kingBitmask = (kingColor === 'white' ? WHITE : BLACK) | KING;
+    for (let index = 0; index < 128; index++) {
+      if (index & OFF_BOARD) {
+        index += 7;
+        continue;
+      }
+      if (this.#board[index] === kingBitmask) {
+        kingSquare = indexToSquare(index);
+        break;
+      }
+    }
+
+    if (kingSquare === undefined) {
+      this.#isCheck = false;
+      return false;
+    }
+
+    this.#isCheck = this.#isSquareAttackedBy(kingSquare, kingColor, opponent);
+    return this.#isCheck;
   }
 
   get isInsufficientMaterial(): boolean {
@@ -266,34 +277,23 @@ export class Position {
     );
   }
 
-  get isCheck(): boolean {
-    if (this.#isCheck !== undefined) {
-      return this.#isCheck;
-    }
-
-    const kingColor = this.turn;
-    const opponent: Color = kingColor === 'white' ? 'black' : 'white';
-
-    let kingSquare: Square | undefined;
-    const kingBitmask = (kingColor === 'white' ? WHITE : BLACK) | KING;
-    for (let index = 0; index < 128; index++) {
-      if (index & OFF_BOARD) {
-        index += 7;
-        continue;
-      }
-      if (this.#board[index] === kingBitmask) {
-        kingSquare = indexToSquare(index);
-        break;
-      }
-    }
-
-    if (kingSquare === undefined) {
-      this.#isCheck = false;
-      return false;
-    }
-
-    this.#isCheck = this.#isSquareAttackedBy(kingSquare, kingColor, opponent);
-    return this.#isCheck;
+  // Bypasses the constructor to create a Position from a raw 0x88 array.
+  // Used by derive() to avoid converting back to a Map.
+  static #from(
+    board: number[],
+    options: {
+      castlingRights: CastlingRights;
+      enPassantSquare: EnPassantSquare | undefined;
+      fullmoveNumber: number;
+      halfmoveClock: number;
+      turn: Color;
+    },
+  ): Position {
+    const pos = new Position(undefined, options);
+    pos.#board = board;
+    pos.#hash = undefined;
+    pos.#isCheck = undefined;
+    return pos;
   }
 
   // Color trick: from the target square, call reach() pretending a friendly
@@ -353,6 +353,36 @@ export class Position {
       halfmoveClock: changes?.halfmoveClock ?? this.halfmoveClock,
       turn: changes?.turn ?? this.turn,
     });
+  }
+
+  piece(square: Square): Piece | undefined {
+    return bitmaskToPiece(this.#board[squareToIndex(square)] ?? 0);
+  }
+
+  pieces(color?: Color): Map<Square, Piece> {
+    const result = new Map<Square, Piece>();
+    const colorFilter =
+      color === undefined ? undefined : color === 'black' ? BLACK : WHITE;
+
+    for (let index = 0; index < 128; index++) {
+      if (index & OFF_BOARD) {
+        index += 7;
+        continue;
+      }
+      const value = this.#board[index] ?? 0;
+      if (value === 0) {
+        continue;
+      }
+      if (colorFilter !== undefined && (value & COLOR_MASK) !== colorFilter) {
+        continue;
+      }
+      const p = bitmaskToPiece(value);
+      if (p !== undefined) {
+        result.set(indexToSquare(index), p);
+      }
+    }
+
+    return result;
   }
 
   reach(square: Square, piece: Piece): Square[] {
@@ -425,36 +455,6 @@ export class Position {
             result.push(indexToSquare(index));
           }
         }
-      }
-    }
-
-    return result;
-  }
-
-  piece(square: Square): Piece | undefined {
-    return bitmaskToPiece(this.#board[squareToIndex(square)] ?? 0);
-  }
-
-  pieces(color?: Color): Map<Square, Piece> {
-    const result = new Map<Square, Piece>();
-    const colorFilter =
-      color === undefined ? undefined : color === 'black' ? BLACK : WHITE;
-
-    for (let index = 0; index < 128; index++) {
-      if (index & OFF_BOARD) {
-        index += 7;
-        continue;
-      }
-      const value = this.#board[index] ?? 0;
-      if (value === 0) {
-        continue;
-      }
-      if (colorFilter !== undefined && (value & COLOR_MASK) !== colorFilter) {
-        continue;
-      }
-      const p = bitmaskToPiece(value);
-      if (p !== undefined) {
-        result.set(indexToSquare(index), p);
       }
     }
 
