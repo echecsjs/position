@@ -10,7 +10,6 @@ export type {
   Rank,
   SideCastlingRights,
   Square,
-  SquareColor,
 } from './types.js';
 
 export { STARTING_POSITION } from './constants.js';

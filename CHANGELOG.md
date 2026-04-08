@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.3] - 2026-04-08
+
+### Fixed
+
+- `derive()` constructor fast path — skips board allocation entirely via
+  internal `Array.isArray` branch. ~2x faster than 3.0.2.
+
+### Removed
+
+- `SquareColor` type export — unused across all `@echecs` packages.
+
 ## [3.0.2] - 2026-04-08
 
 ### Fixed

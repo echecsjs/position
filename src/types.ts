@@ -20,9 +20,6 @@ type EnPassantSquare = `${File}${'3' | '6'}`;
  */
 type Square = `${File}${Rank}`;
 
-/** Square color on the board — `'dark'` or `'light'`. */
-type SquareColor = 'dark' | 'light';
-
 /** Castling availability for one side. */
 interface SideCastlingRights {
   /** Can castle kingside. */
@@ -104,5 +101,4 @@ export type {
   Rank,
   SideCastlingRights,
   Square,
-  SquareColor,
 };

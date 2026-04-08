@@ -166,6 +166,5 @@ import type {
   Rank, // '1' | '2' | ... | '8'
   SideCastlingRights, // { king: boolean; queen: boolean }
   Square, // 'a1' | 'a2' | ... | 'h8'
-  SquareColor, // 'dark' | 'light'
 } from '@echecs/position';
 ```
