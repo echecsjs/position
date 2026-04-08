@@ -42,8 +42,6 @@
   "keywords": [
     "board",
     "chess",
-    "fen",
-    "no-dependencies",
     "position",
     "typescript"
   ],
@@ -71,7 +69,7 @@
   },
   "type": "module",
   "types": "dist/index.d.ts",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "dependencies": {
     "@echecs/zobrist": "^1.0.0"
   }

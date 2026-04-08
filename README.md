@@ -9,8 +9,7 @@
 **Position** is a TypeScript library representing a complete chess position —
 the board, turn, castling rights, en passant square, halfmove clock, and
 fullmove number — as an immutable value object with a clean query API. It is the
-foundational package in the `@echecs` family of chess libraries. Zero runtime
-dependencies.
+foundational package in the `@echecs` family of chess libraries.
 
 ## Installation
 

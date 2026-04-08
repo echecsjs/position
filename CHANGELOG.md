@@ -1,5 +1,22 @@
 # Changelog
 
+## [3.0.1] - 2026-04-08
+
+### Fixed
+
+- `Position` constructor board allocation — replaced `Array.from` with
+  `new Array(128).fill(0)`, ~12x faster `derive()` calls.
+
+### Changed
+
+- Removed "Zero runtime dependencies" claim from README — package depends on
+  `@echecs/zobrist` since 3.0.0.
+- Removed `fen` and `no-dependencies` npm keywords.
+
+### Removed
+
+- `BACKLOG.md` — all items completed.
+
 ## [3.0.0] - 2026-04-06
 
 ### Added

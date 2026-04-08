@@ -92,7 +92,8 @@ export class Position {
    * @param options - Turn, castling rights, en passant, and move counters.
    */
   constructor(board?: ReadonlyMap<Square, Piece>, options?: PositionOptions) {
-    this.#board = Array.from<unknown, number>({ length: 128 }, () => 0);
+    // eslint-disable-next-line unicorn/no-new-array -- Array.from is ~24x slower; this is a hot path
+    this.#board = new Array<number>(128).fill(0);
 
     if (board !== undefined) {
       for (const [square, p] of board) {
