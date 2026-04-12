@@ -9,7 +9,7 @@ type and board utilities in the `@echecs` family of chess libraries.
 See the root `AGENTS.md` for workspace-wide conventions.
 
 **Backlog:** tracked in
-[GitHub Issues](https://github.com/mormubis/position/issues).
+[GitHub Issues](https://github.com/echecsjs/position/issues).
 
 ---
 

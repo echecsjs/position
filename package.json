@@ -1,7 +1,7 @@
 {
   "author": "Adrian de la Rosa <adrian@delarosab.me>",
   "bugs": {
-    "url": "https://github.com/mormubis/position/issues"
+    "url": "https://github.com/echecsjs/position/issues"
   },
   "description": "Chess position type and board utilities. Foundation for @echecs/fen, @echecs/san, and @echecs/game.",
   "devDependencies": {
@@ -38,7 +38,7 @@
     "README.md",
     "CHANGELOG.md"
   ],
-  "homepage": "https://github.com/mormubis/position#readme",
+  "homepage": "https://github.com/echecsjs/position#readme",
   "keywords": [
     "board",
     "chess",
@@ -52,7 +52,7 @@
   "name": "@echecs/position",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mormubis/position.git"
+    "url": "https://github.com/echecsjs/position.git"
   },
   "sideEffects": false,
   "scripts": {
