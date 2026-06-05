@@ -5,10 +5,11 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![API Docs](https://img.shields.io/badge/API-docs-blue.svg)](https://position.echecs.dev/)
 
-**Position** is a TypeScript library representing a complete chess position —
-the board, turn, castling rights, en passant square, halfmove clock, and
-fullmove number — as an immutable value object with a clean query API. It is the
-foundational package in the `@echecs` family of chess libraries.
+**Position** models a complete chess position as an immutable TypeScript object.
+It holds the board, turn, castling rights (which sides can still castle), en
+passant square (the target square behind a pawn that just advanced two ranks),
+halfmove clock (half-moves since the last pawn advance or capture), and fullmove
+number. Other `@echecs` packages build on it.
 
 ## Installation
 
@@ -58,8 +59,8 @@ new Position(data: PositionData)
 ```
 
 The no-argument form creates an empty position with default options. Pass
-`{ board: STARTING_POSITION }` for the standard chess opening. Pass any
-`PositionData` object to construct an arbitrary position.
+`{ board: STARTING_POSITION }` to place all 32 pieces in their opening squares.
+Pass any `PositionData` object to construct an arbitrary position.
 
 ```typescript
 // From a FEN string (with @echecs/fen)
@@ -78,19 +79,19 @@ const pos = new Position(parse(fen));
 
 ### Getters
 
-| Getter                   | Type      | Description                                                  |
-| ------------------------ | --------- | ------------------------------------------------------------ |
-| `hash`                   | `string`  | Zobrist hash string for position identity                    |
-| `isCheck`                | `boolean` | Whether the side to move is in check                         |
-| `isInsufficientMaterial` | `boolean` | Whether the position is a FIDE draw by insufficient material |
-| `isValid`                | `boolean` | Whether the position is legally reachable                    |
+| Getter                   | Type      | Description                                                           |
+| ------------------------ | --------- | --------------------------------------------------------------------- |
+| `hash`                   | `string`  | Zobrist hash (a fixed-size integer fingerprint) for position identity |
+| `isCheck`                | `boolean` | Whether the side to move is in check                                  |
+| `isInsufficientMaterial` | `boolean` | Whether the position is a FIDE draw by insufficient material          |
+| `isValid`                | `boolean` | Whether the position is legally reachable                             |
 
 ### Methods
 
 #### `derive(changes?): Position`
 
-Returns a new `Position` with the given changes applied. The original is not
-modified. Fields not provided are carried over from the source.
+Returns a new `Position` with the given changes applied. The original stays
+unchanged. Fields not provided copy forward from the source.
 
 ```typescript
 // move e2 pawn to e4
@@ -109,11 +110,14 @@ const clone = pos.derive();
 
 #### `reach(square, piece): Square[]`
 
-From `square`, return all squares the given `piece` can reach on the current
-board. Filters out same-color pieces. For sliding pieces, stops before
-friendlies and includes enemy pieces (capture targets). For pawns, includes
-pushes (single and double from starting rank, blocked by any piece), captures
-(enemy pieces only), and en passant.
+Returns all squares the given `piece` can reach from `square` on the current
+board. Filters out same-color pieces.
+
+For sliding pieces (bishops, rooks, queens — pieces that move any number of
+squares in a line), stops before friendlies and includes enemy pieces as capture
+targets. For pawns, includes single and double pushes from the starting rank
+(blocked by any piece), diagonal captures of enemy pieces, and en passant
+captures.
 
 ```typescript
 pos.reach('g1', { color: 'white', type: 'knight' }); // ['f3', 'h3']
@@ -145,8 +149,8 @@ pos.pieces('white'); // 16 white pieces
 import { STARTING_POSITION } from '@echecs/position';
 ```
 
-`STARTING_POSITION` is a `Map<Square, Piece>` with the 32 pieces in their
-standard starting squares. Pass it to the `Position` constructor:
+`STARTING_POSITION` is a `Map<Square, Piece>` with all 32 pieces on their
+opening squares. Pass it to the `Position` constructor:
 
 ```typescript
 const pos = new Position({ board: STARTING_POSITION });
@@ -154,7 +158,7 @@ const pos = new Position({ board: STARTING_POSITION });
 
 ### Types
 
-All types are exported for use in consuming code and companion packages.
+All types export for use in consuming code and companion packages.
 
 ```typescript
 import type {
