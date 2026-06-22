@@ -85,13 +85,14 @@ export default typescript.config(
         {
           default: {
             memberTypes: [
+              '#private-static-method',
               '#private-field',
               'public-readonly-field',
               'public-field',
               'constructor',
               '#private-get',
-              'public-get',
               '#private-method',
+              'public-get',
               ['public-static-method', 'public-method'],
             ],
             order: 'alphabetically',

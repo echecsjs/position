@@ -15,21 +15,27 @@ describe('reach', () => {
     it('returns all 8 squares from center of empty board', () => {
       const pos = new Position({ board: minBoard });
       const squares = pos.reach('e4', { color: 'white', type: 'knight' });
-      expect(squares.toSorted()).toEqual(
-        ['c3', 'c5', 'd2', 'd6', 'f2', 'f6', 'g3', 'g5'].toSorted(),
+      expect(squares.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        ['c3', 'c5', 'd2', 'd6', 'f2', 'f6', 'g3', 'g5'].toSorted((a, b) =>
+          a.localeCompare(b),
+        ),
       );
     });
 
     it('returns fewer squares from corner', () => {
       const pos = new Position({ board: minBoard });
       const squares = pos.reach('a1', { color: 'white', type: 'knight' });
-      expect(squares.toSorted()).toEqual(['b3', 'c2'].toSorted());
+      expect(squares.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        ['b3', 'c2'].toSorted((a, b) => a.localeCompare(b)),
+      );
     });
 
     it('filters out same-color pieces', () => {
       const pos = new Position({ board: STARTING_POSITION });
       const squares = pos.reach('g1', { color: 'white', type: 'knight' });
-      expect(squares.toSorted()).toEqual(['f3', 'h3'].toSorted());
+      expect(squares.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        ['f3', 'h3'].toSorted((a, b) => a.localeCompare(b)),
+      );
     });
 
     it('includes enemy pieces', () => {
@@ -112,8 +118,10 @@ describe('reach', () => {
     it('returns all adjacent squares on empty board', () => {
       const pos = new Position({ board: minBoard });
       const squares = pos.reach('d4', { color: 'white', type: 'king' });
-      expect(squares.toSorted()).toEqual(
-        ['c3', 'c4', 'c5', 'd3', 'd5', 'e3', 'e4', 'e5'].toSorted(),
+      expect(squares.toSorted((a, b) => a.localeCompare(b))).toEqual(
+        ['c3', 'c4', 'c5', 'd3', 'd5', 'e3', 'e4', 'e5'].toSorted((a, b) =>
+          a.localeCompare(b),
+        ),
       );
     });
 

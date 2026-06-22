@@ -82,26 +82,37 @@ function collapse(type, makeReference) {
     return makeReference(exact.name);
   }
 
-  if (type.type === 'union') {
-    collapseUnionMembers(type, makeReference);
-    type.types = type.types.map((t) => collapse(t, makeReference));
-  }
-  if (type.type === 'intersection') {
-    type.types = type.types.map((t) => collapse(t, makeReference));
-  }
-  if (type.type === 'array') {
-    type.elementType = collapse(type.elementType, makeReference);
-  }
-  if (type.type === 'tuple') {
-    type.elements = type.elements?.map((t) => collapse(t, makeReference));
-  }
-  if (type.type === 'reference' && type.typeArguments) {
-    type.typeArguments = type.typeArguments.map((t) =>
-      collapse(t, makeReference),
-    );
-  }
-  if (type.type === 'mapped') {
-    type.templateType = collapse(type.templateType, makeReference);
+  switch (type.type) {
+    case 'union': {
+      collapseUnionMembers(type, makeReference);
+      type.types = type.types.map((t) => collapse(t, makeReference));
+
+      break;
+    }
+    case 'intersection': {
+      type.types = type.types.map((t) => collapse(t, makeReference));
+
+      break;
+    }
+    case 'array': {
+      type.elementType = collapse(type.elementType, makeReference);
+
+      break;
+    }
+    case 'tuple': {
+      type.elements = type.elements?.map((t) => collapse(t, makeReference));
+
+      break;
+    }
+    default: {
+      if (type.type === 'reference' && type.typeArguments) {
+        type.typeArguments = type.typeArguments.map((t) =>
+          collapse(t, makeReference),
+        );
+      } else if (type.type === 'mapped') {
+        type.templateType = collapse(type.templateType, makeReference);
+      }
+    }
   }
 
   return type;
@@ -150,7 +161,8 @@ export function load(app) {
         if (sig.type) {
           sig.type = collapse(sig.type, makeReference);
         }
-        for (const parameter of sig.parameters ?? []) {
+        const parameters = sig.parameters ?? [];
+        for (const parameter of parameters) {
           if (parameter.type) {
             parameter.type = collapse(parameter.type, makeReference);
           }
