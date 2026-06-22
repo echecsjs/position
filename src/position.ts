@@ -72,6 +72,17 @@ const DEFAULT_OPTIONS: Required<
  * with {@link Position.derive | derive}.
  */
 export class Position {
+  // Passes the raw 0x88 array directly to the constructor's internal fast
+  // path (Array.isArray branch), skipping the 128-element allocation.
+  static #from(
+    board: number[],
+    options: Omit<Required<PositionData>, 'board' | 'enPassantSquare'> &
+      Pick<PositionData, 'enPassantSquare'>,
+  ): Position {
+    // @ts-expect-error -- internal: board is number[] not Map, caught by Array.isArray in constructor
+    return new Position({ board, ...options });
+  }
+
   // 128-element 0x88 board. Each element is 0 (empty) or a bitmask encoding
   // piece type (bits 0-2) and color (bit 3). See board.ts for the scheme.
   #board: number[];
@@ -117,6 +128,68 @@ export class Position {
     this.turn = options.turn;
   }
 
+  // Color trick: from the target square, call reach() pretending a friendly
+  // piece of each type is there. reach() skips friendly pieces and stops at
+  // enemies. If the enemy piece found matches the type we're checking, it
+  // means that piece attacks the target square.
+  #isSquareAttackedBy(
+    square: Square,
+    friendlyColor: Color,
+    enemyColor: Color,
+  ): boolean {
+    for (const type of [
+      'knight',
+      'bishop',
+      'rook',
+      'queen',
+      'king',
+      'pawn',
+    ] as PieceType[]) {
+      const squares = this.reach(square, { color: friendlyColor, type });
+      for (const sq of squares) {
+        const p = this.at(sq);
+        if (p !== undefined && p.color === enemyColor) {
+          if (type === 'rook' && (p.type === 'rook' || p.type === 'queen')) {
+            return true;
+          }
+          if (
+            type === 'bishop' &&
+            (p.type === 'bishop' || p.type === 'queen')
+          ) {
+            return true;
+          }
+          if (p.type === type) {
+            return true;
+          }
+        }
+      }
+    }
+    return false;
+  }
+
+  // Slides along a ray from startIndex by offset, collecting reachable squares
+  // until hitting the board edge or a piece. Stops at a friendly piece (not
+  // added) or captures an enemy piece (added, then stops).
+  #slideRay(
+    startIndex: number,
+    offset: number,
+    friendlyColor: number,
+    result: Square[],
+  ): void {
+    let index = startIndex;
+    while (!(index & OFF_BOARD)) {
+      const value = this.#board[index] ?? 0;
+      if (value !== 0) {
+        if ((value & COLOR_MASK) !== friendlyColor) {
+          result.push(indexToSquare(index));
+        }
+        return;
+      }
+      result.push(indexToSquare(index));
+      index += offset;
+    }
+  }
+
   /**
    * Zobrist hash of the position as a 16-character hex string. Computed once
    * and cached. Uses the Polyglot standard keys from `@echecs/zobrist`.
@@ -151,18 +224,18 @@ export class Position {
       Color,
       { king: boolean; queen: boolean },
     ][]) {
-      for (const [side, active] of Object.entries(sides) as [
+      for (const [side, isActive] of Object.entries(sides) as [
         'king' | 'queen',
         boolean,
       ][]) {
-        if (active) {
+        if (isActive) {
           h ^= castlingHash(color, side);
         }
       }
     }
 
     if (this.enPassantSquare !== undefined) {
-      const file = this.enPassantSquare[0] as File;
+      const file = this.enPassantSquare.at(0) as File;
       h ^= epHash(file);
     }
 
@@ -233,8 +306,8 @@ export class Position {
       return first.type === BISHOP || first.type === KNIGHT;
     }
 
-    const allBishops = nonKingPieces.every((p) => p.type === BISHOP);
-    if (allBishops) {
+    const isAllBishops = nonKingPieces.every((p) => p.type === BISHOP);
+    if (isAllBishops) {
       const firstPiece = nonKingPieces[0];
       if (firstPiece === undefined) return false;
       // Square color from 0x88 index: file = index & 7, rank = index >> 4.
@@ -313,54 +386,6 @@ export class Position {
       opponentColor,
       this.turn,
     );
-  }
-
-  // Passes the raw 0x88 array directly to the constructor's internal fast
-  // path (Array.isArray branch), skipping the 128-element allocation.
-  static #from(
-    board: number[],
-    options: Omit<Required<PositionData>, 'board' | 'enPassantSquare'> &
-      Pick<PositionData, 'enPassantSquare'>,
-  ): Position {
-    // @ts-expect-error -- internal: board is number[] not Map, caught by Array.isArray in constructor
-    return new Position({ board, ...options });
-  }
-
-  // Color trick: from the target square, call reach() pretending a friendly
-  // piece of each type is there. reach() skips friendly pieces and stops at
-  // enemies. If the enemy piece found matches the type we're checking, it
-  // means that piece attacks the target square.
-  #isSquareAttackedBy(
-    square: Square,
-    friendlyColor: Color,
-    enemyColor: Color,
-  ): boolean {
-    for (const type of [
-      'knight',
-      'bishop',
-      'rook',
-      'queen',
-      'king',
-      'pawn',
-    ] as PieceType[]) {
-      const squares = this.reach(square, { color: friendlyColor, type });
-      for (const sq of squares) {
-        const p = this.at(sq);
-        if (p === undefined || p.color !== enemyColor) {
-          continue;
-        }
-        if (type === 'rook' && (p.type === 'rook' || p.type === 'queen')) {
-          return true;
-        }
-        if (type === 'bishop' && (p.type === 'bishop' || p.type === 'queen')) {
-          return true;
-        }
-        if (p.type === type) {
-          return true;
-        }
-      }
-    }
-    return false;
   }
 
   /** Returns the piece on the given square, or `undefined` if empty. */
@@ -476,20 +501,10 @@ export class Position {
 
     const moves = PIECE_MOVES[piece.type];
     for (const move of moves) {
-      let index = fromIndex + move.offset;
+      const index = fromIndex + move.offset;
 
       if (move.slide) {
-        while (!(index & OFF_BOARD)) {
-          const value = this.#board[index] ?? 0;
-          if (value !== 0) {
-            if ((value & COLOR_MASK) !== friendlyColor) {
-              result.push(indexToSquare(index));
-            }
-            break;
-          }
-          result.push(indexToSquare(index));
-          index += move.offset;
-        }
+        this.#slideRay(index, move.offset, friendlyColor, result);
       } else {
         if (!(index & OFF_BOARD)) {
           const value = this.#board[index] ?? 0;

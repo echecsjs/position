@@ -37,7 +37,7 @@ const NUM_TO_PIECE_TYPE: PieceType[] = [
 
 function squareToIndex(square: Square): number {
   const file = (square.codePointAt(0) ?? 0) - ('a'.codePointAt(0) ?? 0);
-  const rank = Number.parseInt(square[1] ?? '1', 10);
+  const rank = Number(square.at(1) ?? '1');
   return (8 - rank) * 16 + file;
 }
 
