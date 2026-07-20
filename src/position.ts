@@ -489,8 +489,8 @@ export class Position {
         }
         const value = this.#board[captureIndex] ?? 0;
         if (
-          (value !== 0 && (value & COLOR_MASK) !== friendlyColor) ||
-          captureIndex === epIndex
+          captureIndex === epIndex ||
+          (value !== 0 && (value & COLOR_MASK) !== friendlyColor)
         ) {
           result.push(indexToSquare(captureIndex));
         }
