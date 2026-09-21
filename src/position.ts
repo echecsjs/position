@@ -89,15 +89,25 @@ export class Position {
   #hash: string | undefined;
   #isCheck: boolean | undefined;
 
-  /** Which castling moves remain available. */
+  /**
+  Which castling moves remain available.
+  */
   readonly castlingRights: CastlingRights;
-  /** En passant target square (rank 3 or 6), if any. */
+  /**
+  En passant target square (rank 3 or 6), if any.
+  */
   readonly enPassantSquare: EnPassantSquare | undefined;
-  /** Game turn counter — increments after each black move. */
+  /**
+  Game turn counter — increments after each black move.
+  */
   readonly fullmoveNumber: number;
-  /** Half-moves since last pawn advance or capture (fifty-move rule). */
+  /**
+  Half-moves since last pawn advance or capture (fifty-move rule).
+  */
   readonly halfmoveClock: number;
-  /** Side to move. */
+  /**
+  Side to move.
+  */
   readonly turn: Color;
 
   /**
@@ -128,6 +138,30 @@ export class Position {
     this.turn = options.turn;
   }
 
+  #isAttackedByPieceType(
+    square: Square,
+    friendlyColor: Color,
+    enemyColor: Color,
+    type: PieceType,
+  ): boolean {
+    const squares = this.reach(square, { color: friendlyColor, type });
+    for (const sq of squares) {
+      const p = this.at(sq);
+      if (p === undefined || p.color !== enemyColor) {
+        continue;
+      }
+
+      if (
+        (type === 'rook' && (p.type === 'rook' || p.type === 'queen')) ||
+        (type === 'bishop' && (p.type === 'bishop' || p.type === 'queen')) ||
+        p.type === type
+      ) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   // Color trick: from the target square, call reach() pretending a friendly
   // piece of each type is there. reach() skips friendly pieces and stops at
   // enemies. If the enemy piece found matches the type we're checking, it
@@ -145,23 +179,10 @@ export class Position {
       'king',
       'pawn',
     ] as PieceType[]) {
-      const squares = this.reach(square, { color: friendlyColor, type });
-      for (const sq of squares) {
-        const p = this.at(sq);
-        if (p !== undefined && p.color === enemyColor) {
-          if (type === 'rook' && (p.type === 'rook' || p.type === 'queen')) {
-            return true;
-          }
-          if (
-            type === 'bishop' &&
-            (p.type === 'bishop' || p.type === 'queen')
-          ) {
-            return true;
-          }
-          if (p.type === type) {
-            return true;
-          }
-        }
+      if (
+        this.#isAttackedByPieceType(square, friendlyColor, enemyColor, type)
+      ) {
+        return true;
       }
     }
     return false;
@@ -243,7 +264,9 @@ export class Position {
     return this.#hash;
   }
 
-  /** Whether the side to move is in check. Computed once and cached. */
+  /**
+  Whether the side to move is in check. Computed once and cached.
+  */
   get isCheck(): boolean {
     if (this.#isCheck !== undefined) {
       return this.#isCheck;
@@ -302,8 +325,9 @@ export class Position {
 
     if (nonKingPieces.length === 1) {
       const first = nonKingPieces[0];
-      if (first === undefined) return false;
-      return first.type === BISHOP || first.type === KNIGHT;
+      return first === undefined
+        ? false
+        : first.type === BISHOP || first.type === KNIGHT;
     }
 
     const isAllBishops = nonKingPieces.every((p) => p.type === BISHOP);
@@ -350,11 +374,13 @@ export class Position {
         }
       }
 
-      if (type === PAWN) {
-        const rank = 8 - ((index >> 4) & 0x07);
-        if (rank === 1 || rank === 8) {
-          return false;
-        }
+      if (type !== PAWN) {
+        continue;
+      }
+
+      const rank = 8 - ((index >> 4) & 0x07);
+      if (rank === 1 || rank === 8) {
+        return false;
       }
     }
 
@@ -377,18 +403,14 @@ export class Position {
       }
     }
 
-    if (opponentKingSquare === undefined) {
-      return false;
-    }
-
-    return !this.#isSquareAttackedBy(
-      opponentKingSquare,
-      opponentColor,
-      this.turn,
-    );
+    return opponentKingSquare === undefined
+      ? false
+      : !this.#isSquareAttackedBy(opponentKingSquare, opponentColor, this.turn);
   }
 
-  /** Returns the piece on the given square, or `undefined` if empty. */
+  /**
+  Returns the piece on the given square, or `undefined` if empty.
+  */
   at(square: Square): Piece | undefined {
     return bitmaskToPiece(this.#board[squareToIndex(square)] ?? 0);
   }
@@ -419,7 +441,9 @@ export class Position {
     });
   }
 
-  /** Returns a map of all pieces on the board, optionally filtered by color. */
+  /**
+  Returns a map of all pieces on the board, optionally filtered by color.
+  */
   pieces(color?: Color): Map<Square, Piece> {
     const result = new Map<Square, Piece>();
     const colorFilter =
@@ -431,10 +455,10 @@ export class Position {
         continue;
       }
       const value = this.#board[index] ?? 0;
-      if (value === 0) {
-        continue;
-      }
-      if (colorFilter !== undefined && (value & COLOR_MASK) !== colorFilter) {
+      if (
+        value === 0 ||
+        (colorFilter !== undefined && (value & COLOR_MASK) !== colorFilter)
+      ) {
         continue;
       }
       const p = bitmaskToPiece(value);

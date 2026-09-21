@@ -35,8 +35,7 @@ function matchCollapsible(members) {
  * If a union is exactly an expanded type alias, replace it entirely.
  */
 function isExactExpansion(type) {
-  if (type?.type !== 'union') return;
-  return matchCollapsible(type.types);
+  return type?.type === 'union' ? matchCollapsible(type.types) : undefined;
 }
 
 /**
@@ -118,7 +117,9 @@ function collapse(type, makeReference) {
   return type;
 }
 
-/** @param {import('typedoc').Application} app */
+/**
+@param {import('typedoc').Application} app
+*/
 export function load(app) {
   app.converter.on(Converter.EVENT_RESOLVE_END, (context) => {
     const project = context.project;
@@ -144,7 +145,9 @@ export function load(app) {
 
     // Walk all reflections and replace expanded unions
     for (const reflection of Object.values(project.reflections)) {
-      /** @type {any} */
+      /**
+      @type {any}
+      */
       const r = reflection;
 
       if (r.type) {
