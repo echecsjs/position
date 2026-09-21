@@ -59,10 +59,7 @@ function bitmaskToPiece(value: number): Piece | undefined {
   }
   const color: Color = (value & COLOR_MASK) === 0 ? 'white' : 'black';
   const type = NUM_TO_PIECE_TYPE[value & TYPE_MASK];
-  if (type === undefined) {
-    return undefined;
-  }
-  return { color, type };
+  return type === undefined ? undefined : { color, type };
 }
 
 export {

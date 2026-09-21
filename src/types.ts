@@ -1,16 +1,26 @@
-/** Side to move — `'white'` or `'black'`. */
+/**
+Side to move — `'white'` or `'black'`.
+*/
 type Color = 'black' | 'white';
 
-/** Board file (column), `'a'` through `'h'`. */
+/**
+Board file (column), `'a'` through `'h'`.
+*/
 type File = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h';
 
-/** Chess piece type: bishop, king, knight, pawn, queen, or rook. */
+/**
+Chess piece type: bishop, king, knight, pawn, queen, or rook.
+*/
 type PieceType = 'bishop' | 'king' | 'knight' | 'pawn' | 'queen' | 'rook';
 
-/** Board rank (row), `'1'` through `'8'`. */
+/**
+Board rank (row), `'1'` through `'8'`.
+*/
 type Rank = '1' | '2' | '3' | '4' | '5' | '6' | '7' | '8';
 
-/** En passant target square — always on rank 3 or rank 6. */
+/**
+En passant target square — always on rank 3 or rank 6.
+*/
 type EnPassantSquare = `${File}${'3' | '6'}`;
 
 /**
@@ -20,19 +30,31 @@ type EnPassantSquare = `${File}${'3' | '6'}`;
  */
 type Square = `${File}${Rank}`;
 
-/** Castling availability for one side. */
+/**
+Castling availability for one side.
+*/
 interface SideCastlingRights {
-  /** Can castle kingside. */
+  /**
+  Can castle kingside.
+  */
   king: boolean;
-  /** Can castle queenside. */
+  /**
+  Can castle queenside.
+  */
   queen: boolean;
 }
 
-/** Which castling moves remain available for each side. */
+/**
+Which castling moves remain available for each side.
+*/
 interface CastlingRights {
-  /** Black's castling rights. */
+  /**
+  Black's castling rights.
+  */
   black: SideCastlingRights;
-  /** White's castling rights. */
+  /**
+  White's castling rights.
+  */
   white: SideCastlingRights;
 }
 
@@ -54,11 +76,17 @@ interface DeriveOptions extends Omit<PositionData, 'board'> {
  * omitted fields use defaults (standard starting position values).
  */
 interface PositionData {
-  /** Piece placement as a map from square to piece. Defaults to an empty board. */
+  /**
+  Piece placement as a map from square to piece. Defaults to an empty board.
+  */
   board?: ReadonlyMap<Square, Piece>;
-  /** Castling availability. Defaults to all four castling moves available. */
+  /**
+  Castling availability. Defaults to all four castling moves available.
+  */
   castlingRights?: CastlingRights;
-  /** En passant target square, if any. */
+  /**
+  En passant target square, if any.
+  */
   enPassantSquare?: EnPassantSquare;
   /**
    * Game turn counter — starts at `1` and increments after each black move.
@@ -71,36 +99,60 @@ interface PositionData {
    * per side) either player may claim a draw. Defaults to `0`.
    */
   halfmoveClock?: number;
-  /** Side to move. Defaults to `'white'`. */
+  /**
+  Side to move. Defaults to `'white'`.
+  */
   turn?: Color;
 }
 
-/** A piece type that a pawn can promote to — bishop, knight, queen, or rook. */
+/**
+A piece type that a pawn can promote to — bishop, knight, queen, or rook.
+*/
 type PromotionPieceType = Exclude<PieceType, 'king' | 'pawn'>;
 
-/** A chess move — origin square, target square, and optional promotion. */
+/**
+A chess move — origin square, target square, and optional promotion.
+*/
 interface Move {
-  /** The square the piece moves from. */
+  /**
+  The square the piece moves from.
+  */
   from: Square;
-  /** The piece type to promote to, if this is a promotion move. */
+  /**
+  The piece type to promote to, if this is a promotion move.
+  */
   promotion?: PromotionPieceType;
-  /** The square the piece moves to. */
+  /**
+  The square the piece moves to.
+  */
   to: Square;
 }
 
-/** A chess piece — color and type. */
+/**
+A chess piece — color and type.
+*/
 interface Piece {
-  /** The piece's color. */
+  /**
+  The piece's color.
+  */
   color: Color;
-  /** The piece's type. */
+  /**
+  The piece's type.
+  */
   type: PieceType;
 }
 
-/** Describes a piece movement on the 0x88 board. */
+/**
+Describes a piece movement on the 0x88 board.
+*/
 interface PieceMove {
-  /** 0x88 offset for this move direction. */
+  /**
+  0x88 offset for this move direction.
+  */
   offset: number;
-  /** Whether the piece slides along this direction (bishop, rook, queen). */
+  /**
+  Whether the piece slides along this direction (bishop, rook, queen).
+  */
   slide?: boolean;
 }
 
