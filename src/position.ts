@@ -325,9 +325,9 @@ export class Position {
 
     if (nonKingPieces.length === 1) {
       const first = nonKingPieces[0];
-      return first === undefined
-        ? false
-        : first.type === BISHOP || first.type === KNIGHT;
+      return (
+        first !== undefined && (first.type === BISHOP || first.type === KNIGHT)
+      );
     }
 
     const isAllBishops = nonKingPieces.every((p) => p.type === BISHOP);
@@ -403,9 +403,10 @@ export class Position {
       }
     }
 
-    return opponentKingSquare === undefined
-      ? false
-      : !this.#isSquareAttackedBy(opponentKingSquare, opponentColor, this.turn);
+    return (
+      opponentKingSquare !== undefined &&
+      !this.#isSquareAttackedBy(opponentKingSquare, opponentColor, this.turn)
+    );
   }
 
   /**
